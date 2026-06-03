@@ -25,412 +25,145 @@
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html {
-    scroll-behavior: smooth;
-    background-color: #000000;
-    overflow-x: hidden;
-  }
-
-  body {
-    background-color: #000000;
-    color: var(--white);
-    font-family: 'Figtree', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-  }
+  html { scroll-behavior: smooth; background-color: #000000; overflow-x: hidden; }
+  body { background-color: #000000; color: var(--white); font-family: 'Figtree', sans-serif; font-size: 16px; line-height: 1.6; }
 
   /* -- NAV -- */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 16px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #000000;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 40px; display: flex; justify-content: space-between;
+    align-items: center; background: #000000;
     border-bottom: 1px solid rgba(255,255,255,0.08);
   }
 
-  .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 3px;
-    color: var(--white);
-    text-decoration: none;
+  .nav-left { display: flex; align-items: center; gap: 24px; }
+
+  .nav-logo { text-decoration: none; display: flex; align-items: center; }
+
+  /* -- NAV MENU -- */
+  .nav-menu { display: flex; align-items: center; gap: 4px; }
+  .nav-menu a {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--grey); font-family: 'Figtree', sans-serif;
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    padding: 7px 12px; border-radius: 6px;
+    transition: all 0.2s; white-space: nowrap;
   }
-  .nav-logo span { color: var(--gold); }
+  .nav-menu a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+  .nav-menu a.active { color: var(--gold); }
 
   .nav-cta {
-    background: var(--gold);
-    color: var(--black);
-    font-family: 'Figtree', sans-serif;
-    font-weight: 800;
-    font-size: 13px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    padding: 11px 22px;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: all 0.2s;
+    background: var(--gold); color: var(--black);
+    font-family: 'Figtree', sans-serif; font-weight: 800;
+    font-size: 13px; letter-spacing: 0.5px; text-transform: uppercase;
+    padding: 11px 22px; border-radius: 4px; text-decoration: none; transition: all 0.2s;
   }
   .nav-cta:hover { background: var(--gold-bright); transform: translateY(-1px); }
 
   /* -- HERO -- */
   .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 120px 40px 80px;
-    position: relative;
-    overflow: hidden;
-    background-color: #000000 !important;
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; padding: 120px 40px 80px;
+    position: relative; overflow: hidden; background-color: #000000 !important;
   }
-
   .hero-glow {
-    position: absolute;
-    top: -20%; right: -10%;
-    width: 700px; height: 700px;
+    position: absolute; top: -20%; right: -10%; width: 700px; height: 700px;
     background: radial-gradient(ellipse, rgba(245,166,35,0.08) 0%, rgba(245,166,35,0.02) 40%, transparent 70%);
     pointer-events: none;
   }
   .hero-glow-2 {
-    position: absolute;
-    bottom: 10%; left: -15%;
-    width: 500px; height: 500px;
+    position: absolute; bottom: 10%; left: -15%; width: 500px; height: 500px;
     background: radial-gradient(ellipse, rgba(79,195,247,0.05) 0%, transparent 65%);
     pointer-events: none;
   }
-
   .hero-eyebrow {
-    font-family: 'Figtree', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 24px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.2s;
+    font-family: 'Figtree', sans-serif; font-size: 12px; font-weight: 700;
+    letter-spacing: 4px; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 24px; opacity: 0; animation: fadeUp 0.6s ease forwards 0.2s;
   }
-
   .hero h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(72px, 12vw, 160px);
-    line-height: 0.92;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.35s;
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(72px, 12vw, 160px);
+    line-height: 0.92; letter-spacing: 2px; text-transform: uppercase;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.35s;
   }
   .hero h1 .gold { color: var(--gold); }
   .hero h1 .outline { -webkit-text-stroke: 2px var(--white); color: transparent; }
-
   .hero-sub {
-    margin-top: 32px;
-    font-size: clamp(18px, 2.5vw, 24px);
-    font-weight: 300;
-    color: var(--off-white);
-    max-width: 560px;
-    line-height: 1.55;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.5s;
+    margin-top: 32px; font-size: clamp(18px, 2.5vw, 24px); font-weight: 300;
+    color: var(--off-white); max-width: 560px; line-height: 1.55;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.5s;
   }
   .hero-sub strong { color: var(--gold); font-weight: 600; }
-
   .hero-actions {
-    margin-top: 48px;
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.65s;
+    margin-top: 48px; display: flex; gap: 16px; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.65s;
   }
-
   .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: #25D366;
-    color: var(--black);
-    font-family: 'Figtree', sans-serif;
-    font-weight: 800;
-    font-size: 15px;
-    padding: 18px 32px;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: all 0.25s;
-    border: none;
-    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #25D366; color: var(--black); font-family: 'Figtree', sans-serif;
+    font-weight: 800; font-size: 15px; padding: 18px 32px; border-radius: 6px;
+    text-decoration: none; transition: all 0.25s; border: none; cursor: pointer;
   }
-  .btn-primary:hover {
-    background: #20BC5A;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 40px rgba(37,211,102,0.35);
-  }
-
+  .btn-primary:hover { background: #20BC5A; transform: translateY(-2px); box-shadow: 0 8px 40px rgba(37,211,102,0.35); }
   .btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: transparent;
-    color: var(--white);
-    font-family: 'Figtree', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    padding: 18px 28px;
-    border-radius: 6px;
-    border: 1px solid rgba(255,255,255,0.15);
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.25s;
+    display: inline-flex; align-items: center; gap: 8px; background: transparent;
+    color: var(--white); font-family: 'Figtree', sans-serif; font-weight: 700;
+    font-size: 14px; padding: 18px 28px; border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.15); text-decoration: none; cursor: pointer; transition: all 0.25s;
   }
   .btn-ghost:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.04); }
-
   .hero-stat-row {
-    margin-top: 72px;
-    display: flex;
-    gap: 48px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.8s;
+    margin-top: 72px; display: flex; gap: 48px; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.8s;
   }
-  .hero-stat .num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 48px;
-    color: var(--gold);
-    line-height: 1;
-    display: block;
-  }
-  .hero-stat .label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--grey);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-top: 4px;
-  }
+  .hero-stat .num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--gold); line-height: 1; display: block; }
+  .hero-stat .label { font-size: 12px; font-weight: 600; color: var(--grey); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; }
 
   /* -- DIVIDER -- */
-  .divider {
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(245,166,35,0.25), transparent);
-    margin: 0 40px;
-  }
+  .divider { height: 1px; background: linear-gradient(to right, transparent, rgba(245,166,35,0.25), transparent); margin: 0 40px; }
 
   /* -- SECTIONS -- */
   .section { padding: 100px 40px; max-width: 1200px; margin: 0 auto; background-color: #000000; }
-
-  .section-tag {
-    font-family: 'Figtree', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 16px;
-  }
-
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(48px, 7vw, 88px);
-    line-height: 0.95;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-  }
-
-  .section-intro {
-    font-size: 18px;
-    font-weight: 300;
-    color: var(--off-white);
-    max-width: 560px;
-    line-height: 1.7;
-    margin-bottom: 64px;
-  }
+  .section-tag { font-family: 'Figtree', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 7vw, 88px); line-height: 0.95; text-transform: uppercase; margin-bottom: 24px; }
+  .section-intro { font-size: 18px; font-weight: 300; color: var(--off-white); max-width: 560px; line-height: 1.7; margin-bottom: 64px; }
 
   /* -- STEPS -- */
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-
-  .step {
-    background: #1E1E1E;
-    padding: 48px 40px;
-    position: relative;
-    transition: background 0.3s;
-  }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2px; background: rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; }
+  .step { background: #1E1E1E; padding: 48px 40px; position: relative; transition: background 0.3s; }
   .step:hover { background: #272727; }
-
-  .step-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 80px;
-    color: rgba(245,166,35,0.1);
-    line-height: 1;
-    position: absolute;
-    top: 24px; right: 28px;
-    pointer-events: none;
-  }
-
-  .step-icon {
-    width: 48px; height: 48px;
-    background: rgba(245,166,35,0.08);
-    border: 1px solid rgba(245,166,35,0.2);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 24px;
-    font-size: 22px;
-  }
-
-  .step h3 {
-    font-family: 'Figtree', sans-serif;
-    font-size: 20px;
-    font-weight: 800;
-    margin-bottom: 12px;
-  }
+  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 80px; color: rgba(245,166,35,0.1); line-height: 1; position: absolute; top: 24px; right: 28px; pointer-events: none; }
+  .step-icon { width: 48px; height: 48px; background: rgba(245,166,35,0.08); border: 1px solid rgba(245,166,35,0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; font-size: 22px; }
+  .step h3 { font-family: 'Figtree', sans-serif; font-size: 20px; font-weight: 800; margin-bottom: 12px; }
   .step p { font-size: 14px; color: #A0A0A0; line-height: 1.7; }
   .step p strong { color: var(--gold); font-weight: 600; }
 
   /* -- WHATSAPP -- */
-  .whatsapp-section {
-    padding: 100px 40px;
-    background: var(--black);
-    position: relative;
-    overflow: hidden;
-  }
-  .whatsapp-section::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(245,166,35,0.35), transparent);
-  }
-  .whatsapp-section::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(245,166,35,0.35), transparent);
-  }
-
-  .whatsapp-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-
-  .chat-mockup {
-    background: #0D0D0D;
-    border-radius: 20px;
-    padding: 28px;
-    border: 1px solid rgba(255,255,255,0.07);
-    box-shadow: 0 32px 80px rgba(0,0,0,0.6);
-  }
-  .chat-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    margin-bottom: 20px;
-  }
-  .chat-avatar {
-    width: 40px; height: 40px;
-    background: linear-gradient(135deg, var(--gold), #FF8C00);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px;
-    color: var(--black);
-    flex-shrink: 0;
-  }
+  .whatsapp-section { padding: 100px 40px; background: var(--black); position: relative; overflow: hidden; }
+  .whatsapp-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(245,166,35,0.35), transparent); }
+  .whatsapp-section::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(245,166,35,0.35), transparent); }
+  .whatsapp-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .chat-mockup { background: #0D0D0D; border-radius: 20px; padding: 28px; border: 1px solid rgba(255,255,255,0.07); box-shadow: 0 32px 80px rgba(0,0,0,0.6); }
+  .chat-header { display: flex; align-items: center; gap: 12px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 20px; }
+  .chat-avatar { width: 40px; height: 40px; background: linear-gradient(135deg, var(--gold), #FF8C00); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 16px; color: var(--black); flex-shrink: 0; }
   .chat-header-name { font-family: 'Figtree', sans-serif; font-size: 14px; font-weight: 700; }
   .chat-header-status { font-size: 11px; color: var(--green); font-weight: 500; }
-
   .chat-messages { display: flex; flex-direction: column; gap: 12px; }
-
-  .msg {
-    max-width: 82%;
-    padding: 10px 14px;
-    border-radius: 12px;
-    font-size: 14px;
-    line-height: 1.55;
-    font-family: 'Figtree', sans-serif;
-  }
-  .msg-user {
-    background: #162A1E;
-    border: 1px solid rgba(0,230,118,0.12);
-    align-self: flex-end;
-    border-bottom-right-radius: 4px;
-    color: var(--off-white);
-  }
-  .msg-charged {
-    background: var(--black-4);
-    border: 1px solid rgba(245,166,35,0.12);
-    align-self: flex-start;
-    border-bottom-left-radius: 4px;
-    color: var(--off-white);
-  }
+  .msg { max-width: 82%; padding: 10px 14px; border-radius: 12px; font-size: 14px; line-height: 1.55; font-family: 'Figtree', sans-serif; }
+  .msg-user { background: #162A1E; border: 1px solid rgba(0,230,118,0.12); align-self: flex-end; border-bottom-right-radius: 4px; color: var(--off-white); }
+  .msg-charged { background: var(--black-4); border: 1px solid rgba(245,166,35,0.12); align-self: flex-start; border-bottom-left-radius: 4px; color: var(--off-white); }
   .msg-charged .brand { color: var(--gold); font-weight: 700; }
   .msg-charged .cashback { color: var(--green); font-weight: 700; }
   .msg-time { font-size: 10px; color: var(--grey); margin-top: 4px; text-align: right; font-weight: 400; }
-
-  .link-bubble {
-    background: rgba(245,166,35,0.07);
-    border: 1px solid rgba(245,166,35,0.22);
-    border-radius: 8px;
-    padding: 10px 14px;
-    margin-top: 8px;
-    font-size: 13px;
-    color: var(--gold);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 600;
-  }
+  .link-bubble { background: rgba(245,166,35,0.07); border: 1px solid rgba(245,166,35,0.22); border-radius: 8px; padding: 10px 14px; margin-top: 8px; font-size: 13px; color: var(--gold); display: flex; align-items: center; gap: 8px; font-weight: 600; }
 
   /* -- SAVINGS -- */
   .savings-section { padding: 100px 40px; background-color: #000000; }
   .savings-inner { max-width: 1200px; margin: 0 auto; }
-
-  .savings-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 16px;
-    margin-top: 64px;
-  }
-
-  .saving-card {
-    background: var(--black-3);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 12px;
-    padding: 32px 28px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s, border-color 0.3s;
-  }
+  .savings-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 64px; }
+  .saving-card { background: var(--black-3); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 32px 28px; position: relative; overflow: hidden; transition: transform 0.3s, border-color 0.3s; }
   .saving-card:hover { transform: translateY(-4px); border-color: rgba(245,166,35,0.25); }
-  .saving-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(to right, var(--gold), var(--gold-bright));
-  }
-
+  .saving-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, var(--gold), var(--gold-bright)); }
   .saving-card .emoji { font-size: 28px; margin-bottom: 16px; display: block; }
   .saving-card .spend { font-size: 12px; color: var(--grey); margin-bottom: 8px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
   .saving-card .amount { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--gold); line-height: 1; }
@@ -439,52 +172,19 @@
   .saving-card .brand-tag { font-size: 11px; color: var(--grey); margin-top: 6px; font-weight: 500; letter-spacing: 0.5px; }
 
   /* -- QUOTE -- */
-  .quote-section {
-    padding: 80px 40px;
-    background: var(--black-2);
-    text-align: center;
-    position: relative;
-    border-top: 1px solid rgba(255,255,255,0.04);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-  }
-  .big-quote {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(36px, 6vw, 72px);
-    line-height: 1.1;
-    max-width: 900px;
-    margin: 0 auto;
-    text-transform: uppercase;
-  }
+  .quote-section { padding: 80px 40px; background: var(--black-2); text-align: center; position: relative; border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .big-quote { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 6vw, 72px); line-height: 1.1; max-width: 900px; margin: 0 auto; text-transform: uppercase; }
   .big-quote .gold { color: var(--gold); }
   .big-quote .dim { color: rgba(255,255,255,0.25); }
 
   /* -- NO FAFF -- */
   .nofaff-section { padding: 100px 40px; background-color: #000000; }
   .nofaff-inner { max-width: 1200px; margin: 0 auto; }
-
-  .compare-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 48px;
-  }
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
   .compare-card { border-radius: 12px; padding: 40px; }
-  .compare-card.theirs {
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.05);
-  }
-  .compare-card.ours {
-    background: rgba(245,166,35,0.05);
-    border: 1px solid rgba(245,166,35,0.18);
-  }
-  .compare-label {
-    font-family: 'Figtree', sans-serif;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-  }
+  .compare-card.theirs { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); }
+  .compare-card.ours { background: rgba(245,166,35,0.05); border: 1px solid rgba(245,166,35,0.18); }
+  .compare-label { font-family: 'Figtree', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 24px; }
   .compare-card.theirs .compare-label { color: var(--grey); }
   .compare-card.ours .compare-label { color: var(--gold); }
   .compare-item { display: flex; gap: 12px; margin-bottom: 16px; font-size: 15px; line-height: 1.5; }
@@ -493,237 +193,112 @@
   /* -- BRANDS TICKER -- */
   .brands-section { padding: 80px 40px; overflow: hidden; background: var(--black); }
   .brands-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
-
-  .brands-scroll {
-    display: flex;
-    gap: 12px;
-    margin-top: 48px;
-    overflow: hidden;
-    position: relative;
-  }
-  .brands-scroll::before, .brands-scroll::after {
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0;
-    width: 120px;
-    z-index: 2;
-  }
+  .brands-scroll { display: flex; gap: 12px; margin-top: 48px; overflow: hidden; position: relative; }
+  .brands-scroll::before, .brands-scroll::after { content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; }
   .brands-scroll::before { left: 0; background: linear-gradient(to right, var(--black), transparent); }
   .brands-scroll::after { right: 0; background: linear-gradient(to left, var(--black), transparent); }
-
-  .brands-track {
-    display: flex;
-    gap: 12px;
-    animation: scroll 30s linear infinite;
-    flex-shrink: 0;
-  }
-
-  .brand-pill {
-    background: var(--black-3);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 100px;
-    padding: 11px 22px;
-    font-family: 'Figtree', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    white-space: nowrap;
-    color: var(--off-white);
-    flex-shrink: 0;
-    transition: border-color 0.2s;
-  }
+  .brands-track { display: flex; gap: 12px; animation: scroll 30s linear infinite; flex-shrink: 0; }
+  .brand-pill { background: var(--black-3); border: 1px solid rgba(255,255,255,0.07); border-radius: 100px; padding: 11px 22px; font-family: 'Figtree', sans-serif; font-size: 13px; font-weight: 700; white-space: nowrap; color: var(--off-white); flex-shrink: 0; transition: border-color 0.2s; }
   .brand-pill:hover { border-color: rgba(245,166,35,0.3); }
   .brand-pill .rate { color: var(--gold); font-size: 12px; margin-left: 6px; font-weight: 500; }
   .brand-pill .link-rate { color: var(--electric); font-size: 11px; margin-left: 6px; font-weight: 500; }
-
-  @keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
+  @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
   /* -- WAITLIST -- */
-  .waitlist-section {
-    padding: 120px 40px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    background-color: #000000;
-  }
-  .waitlist-glow {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 800px; height: 400px;
-    background: radial-gradient(ellipse, rgba(245,166,35,0.1) 0%, transparent 70%);
-    pointer-events: none;
-  }
+  .waitlist-section { padding: 120px 40px; text-align: center; position: relative; overflow: hidden; background-color: #000000; }
+  .waitlist-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 800px; height: 400px; background: radial-gradient(ellipse, rgba(245,166,35,0.1) 0%, transparent 70%); pointer-events: none; }
   .waitlist-section .section-title { font-size: clamp(52px, 8vw, 96px); }
   .waitlist-subtitle { font-size: 18px; color: var(--grey); max-width: 480px; margin: 16px auto 48px; font-weight: 300; }
-
-  .whatsapp-btn-large {
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-    background: #25D366;
-    color: #000;
-    font-family: 'Figtree', sans-serif;
-    font-weight: 800;
-    font-size: 17px;
-    padding: 22px 44px;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: all 0.25s;
-    position: relative;
-    z-index: 1;
-  }
-  .whatsapp-btn-large:hover {
-    background: #20BC5A;
-    transform: translateY(-3px);
-    box-shadow: 0 16px 50px rgba(37,211,102,0.28);
-  }
-
+  .whatsapp-btn-large { display: inline-flex; align-items: center; gap: 14px; background: #25D366; color: #000; font-family: 'Figtree', sans-serif; font-weight: 800; font-size: 17px; padding: 22px 44px; border-radius: 8px; text-decoration: none; transition: all 0.25s; position: relative; z-index: 1; }
+  .whatsapp-btn-large:hover { background: #20BC5A; transform: translateY(-3px); box-shadow: 0 16px 50px rgba(37,211,102,0.28); }
   .waitlist-note { margin-top: 20px; font-size: 13px; color: var(--grey); font-style: italic; position: relative; z-index: 1; }
-
-  .tester-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(245,166,35,0.08);
-    border: 1px solid rgba(245,166,35,0.22);
-    border-radius: 100px;
-    padding: 8px 18px;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--gold);
-    margin-bottom: 32px;
-    font-family: 'Figtree', sans-serif;
-    letter-spacing: 0.5px;
-  }
-  .tester-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--gold);
-    border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.8); }
-  }
+  .tester-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,166,35,0.08); border: 1px solid rgba(245,166,35,0.22); border-radius: 100px; padding: 8px 18px; font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 32px; font-family: 'Figtree', sans-serif; letter-spacing: 0.5px; }
+  .tester-badge::before { content: ''; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } }
 
   /* -- FOOTER -- */
-  footer {
-    padding: 48px 40px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    background: var(--black-2);
-  }
-  footer .logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--white); }
-  footer .logo span { color: var(--gold); }
+  footer { padding: 48px 40px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; background: var(--black-2); }
   footer .links { display: flex; gap: 24px; flex-wrap: wrap; }
   footer .links a { font-size: 13px; font-weight: 500; color: var(--grey); text-decoration: none; transition: color 0.2s; }
   footer .links a:hover { color: var(--white); }
   footer .copy { font-size: 12px; color: rgba(255,255,255,0.18); font-weight: 400; }
 
   /* -- T&C MODAL -- */
-  .modal-overlay {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.9);
-    backdrop-filter: blur(6px);
-    z-index: 500;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(6px); z-index: 500; display: none; align-items: center; justify-content: center; padding: 20px; }
   .modal-overlay.open { display: flex; }
-
-  .modal {
-    background: #0D0D0D;
-    border: 1px solid rgba(245,166,35,0.18);
-    border-radius: 16px;
-    max-width: 680px;
-    width: 100%;
-    max-height: 85vh;
-    overflow-y: auto;
-    position: relative;
-  }
-  .modal-header {
-    padding: 32px 36px 24px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    position: sticky;
-    top: 0;
-    background: #0D0D0D;
-    z-index: 1;
-  }
-  .modal-header h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
-    letter-spacing: 2px;
-    color: var(--gold);
-  }
+  .modal { background: #0D0D0D; border: 1px solid rgba(245,166,35,0.18); border-radius: 16px; max-width: 680px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; }
+  .modal-header { padding: 32px 36px 24px; border-bottom: 1px solid rgba(255,255,255,0.06); position: sticky; top: 0; background: #0D0D0D; z-index: 1; }
+  .modal-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px; color: var(--gold); }
   .modal-header .subtitle { font-size: 13px; color: var(--grey); margin-top: 4px; font-weight: 400; }
-
-  .modal-close {
-    position: absolute;
-    top: 28px; right: 28px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.08);
-    color: var(--white);
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    font-size: 18px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-    font-family: 'Figtree', sans-serif;
-  }
+  .modal-close { position: absolute; top: 28px; right: 28px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: var(--white); width: 36px; height: 36px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-family: 'Figtree', sans-serif; }
   .modal-close:hover { background: rgba(255,255,255,0.1); }
-
   .modal-body { padding: 32px 36px; }
   .tc-section { margin-bottom: 32px; }
-  .tc-section h3 {
-    font-family: 'Figtree', sans-serif;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 12px;
-  }
-  .tc-section p, .tc-section li {
-    font-size: 14px;
-    color: rgba(255,255,255,0.6);
-    line-height: 1.8;
-    margin-bottom: 8px;
-    font-weight: 400;
-  }
+  .tc-section h3 { font-family: 'Figtree', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .tc-section p, .tc-section li { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 8px; font-weight: 400; }
   .tc-section ul { padding-left: 20px; }
-
-  .tc-highlight {
-    background: rgba(245,166,35,0.05);
-    border-left: 3px solid var(--gold);
-    border-radius: 0 8px 8px 0;
-    padding: 16px 20px;
-    margin: 16px 0;
-    font-size: 14px;
-    color: var(--off-white);
-    line-height: 1.7;
-    font-weight: 400;
-  }
+  .tc-highlight { background: rgba(245,166,35,0.05); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 16px 0; font-size: 14px; color: var(--off-white); line-height: 1.7; font-weight: 400; }
 
   /* -- ANIMATIONS -- */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* -- HAMBURGER -- */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px; height: 36px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 200;
   }
+  .hamburger span {
+    display: block; width: 100%; height: 2px;
+    background: var(--white); border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* -- MOBILE DRAWER -- */
+  .mobile-drawer {
+    display: none;
+    position: fixed;
+    top: 65px; left: 0; right: 0;
+    background: #0A0A0A;
+    border-bottom: 1px solid rgba(245,166,35,0.15);
+    z-index: 99;
+    padding: 12px 20px 20px;
+    flex-direction: column;
+    gap: 4px;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: all 0.25s ease;
+  }
+  .mobile-drawer.open {
+    display: flex;
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .mobile-drawer a {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--off-white); font-family: 'Figtree', sans-serif;
+    font-size: 15px; font-weight: 600; text-decoration: none;
+    padding: 12px 16px; border-radius: 8px;
+    transition: all 0.2s;
+  }
+  .mobile-drawer a:hover { background: rgba(255,255,255,0.06); color: var(--gold); }
 
   /* -- RESPONSIVE -- */
+  @media (max-width: 900px) {
+    .nav-menu { display: none; }
+    .hamburger { display: flex; }
+  }
   @media (max-width: 768px) {
     nav { padding: 16px 20px; }
     .hero { padding: 100px 20px 60px; }
@@ -743,11 +318,32 @@
 
 <!-- NAV -->
 <nav>
-<a href="#" class="nav-logo-link">
-  <img src="https://raw.githubusercontent.com/megans832/charged/main/charged%20horizontal%20logo-2.png" alt="charged logo" style="height: 36px; width: auto;">
-</a> 
-  <a class="nav-cta" href="https://wa.me/447763375105?text=I%27d%20like%20to%20join%20the%20charged%20waitlist" target="_blank">join waitlist</a>
+  <div class="nav-left">
+    <a href="#" class="nav-logo">
+      <img src="https://raw.githubusercontent.com/megans832/charged/main/charged%20horizontal%20logo-2.png" alt="charged logo" style="height: 36px; width: auto;">
+    </a>
+    <nav class="nav-menu">
+      <a href="https://getcharged.energy/demo">🎮 demo</a>
+      <a href="https://getcharged.energy/timeline">📅 timeline</a>
+      <a href="https://getcharged.energy/merchants">🛍️ merchants</a>
+      <a href="https://getcharged.energy/providers">⚡ providers</a>
+    </nav>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="menu">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="nav-cta" href="https://wa.me/447763375105?text=I%27d%20like%20to%20join%20the%20charged%20waitlist" target="_blank">join waitlist</a>
+  </div>
 </nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <a href="https://getcharged.energy/demo" onclick="closeMenu()">🎮 demo</a>
+  <a href="https://getcharged.energy/timeline" onclick="closeMenu()">📅 timeline</a>
+  <a href="https://getcharged.energy/merchants" onclick="closeMenu()">🛍️ merchants</a>
+  <a href="https://getcharged.energy/providers" onclick="closeMenu()">⚡ providers</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -772,18 +368,9 @@
     </button>
   </div>
   <div class="hero-stat-row">
-    <div class="hero-stat">
-      <span class="num">£100s</span>
-      <span class="label">in big brand savings</span>
-    </div>
-    <div class="hero-stat">
-      <span class="num">500+</span>
-      <span class="label">brands & retailers</span>
-    </div>
-    <div class="hero-stat">
-      <span class="num">£0</span>
-      <span class="label">cost to you</span>
-    </div>
+    <div class="hero-stat"><span class="num">£100s</span><span class="label">in big brand savings</span></div>
+    <div class="hero-stat"><span class="num">500+</span><span class="label">brands & retailers</span></div>
+    <div class="hero-stat"><span class="num">£0</span><span class="label">cost to you</span></div>
   </div>
 </section>
 
@@ -795,7 +382,6 @@
   <p class="section-tag">zero complexity</p>
   <h2 class="section-title">three steps.<br>then forget about it.</h2>
   <p class="section-intro">there's nothing to remember. no logins to visit, no points to chase, no cashback wallet to drain. charged does the work while you live your life.</p>
-
   <div class="steps">
     <div class="step">
       <span class="step-num">01</span>
@@ -839,24 +425,10 @@
         </div>
       </div>
       <div class="chat-messages">
-        <div class="msg msg-user">
-          got anything for new trainers?
-          <div class="msg-time">14:32</div>
-        </div>
-        <div class="msg msg-charged">
-          yes ⚡ <span class="brand">Nike</span> are paying <span class="cashback">8% cashback</span> right now. on a £100 order that's <span class="cashback">£8 straight to your energy.</span>
-          <div class="link-bubble">🔗 shop Nike with cashback</div>
-          <div class="msg-time">14:32</div>
-        </div>
-        <div class="msg msg-user">
-          also booking a summer holiday — lastminute?
-          <div class="msg-time">14:33</div>
-        </div>
-        <div class="msg msg-charged">
-          🙌 <span class="brand">Lastminute.com</span> pays <span class="cashback">5% on hotels</span> and flight+hotel bundles. book a £1,400 trip and that's <span class="cashback">£70 off your energy bill.</span>
-          <div class="link-bubble">🔗 book with cashback via charged</div>
-          <div class="msg-time">14:33</div>
-        </div>
+        <div class="msg msg-user">got anything for new trainers?<div class="msg-time">14:32</div></div>
+        <div class="msg msg-charged">yes ⚡ <span class="brand">Nike</span> are paying <span class="cashback">8% cashback</span> right now. on a £100 order that's <span class="cashback">£8 straight to your energy.</span><div class="link-bubble">🔗 shop Nike with cashback</div><div class="msg-time">14:32</div></div>
+        <div class="msg msg-user">also booking a summer holiday — lastminute?<div class="msg-time">14:33</div></div>
+        <div class="msg msg-charged">🙌 <span class="brand">Lastminute.com</span> pays <span class="cashback">5% on hotels</span> and flight+hotel bundles. book a £1,400 trip and that's <span class="cashback">£70 off your energy bill.</span><div class="link-bubble">🔗 book with cashback via charged</div><div class="msg-time">14:33</div></div>
       </div>
     </div>
   </div>
@@ -868,36 +440,11 @@
     <p class="section-tag">the maths hits different</p>
     <h2 class="section-title">real money.<br><span style="color: var(--gold);">real bills.</span></h2>
     <p class="section-intro">these aren't vouchers or points. they're cash-value credits — landing directly on your energy account, reducing what you owe.</p>
-
     <div class="savings-grid">
-      <div class="saving-card">
-        <span class="emoji">🛒</span>
-        <p class="spend">grocery shop — £300/mo</p>
-        <div class="amount">£30</div>
-        <p class="off">off your energy bill every month at <span>10% cashback</span></p>
-        <p class="brand-tag">Amazon Fresh · Morrisons · Co-op · Iceland</p>
-      </div>
-      <div class="saving-card">
-        <span class="emoji">✈️</span>
-        <p class="spend">£1,400 package holiday</p>
-        <div class="amount">£70</div>
-        <p class="off">off your annual energy bill at <span>5% cashback</span></p>
-        <p class="brand-tag">Lastminute.com · Loveholidays · Expedia</p>
-      </div>
-      <div class="saving-card">
-        <span class="emoji">🏃</span>
-        <p class="spend">£120 sports kit order</p>
-        <div class="amount">£9.60</div>
-        <p class="off">off your energy bill at <span>8% cashback</span></p>
-        <p class="brand-tag">Canterbury · Tiso · American Golf</p>
-      </div>
-      <div class="saving-card">
-        <span class="emoji">🍕</span>
-        <p class="spend">nights out — £80/mo</p>
-        <div class="amount">£8</div>
-        <p class="off">every month just from eating out at <span>10%</span></p>
-        <p class="brand-tag">Inamo · Plan Burrito · Middletons · Origin Coffee</p>
-      </div>
+      <div class="saving-card"><span class="emoji">🛒</span><p class="spend">grocery shop — £300/mo</p><div class="amount">£30</div><p class="off">off your energy bill every month at <span>10% cashback</span></p><p class="brand-tag">Amazon Fresh · Morrisons · Co-op · Iceland</p></div>
+      <div class="saving-card"><span class="emoji">✈️</span><p class="spend">£1,400 package holiday</p><div class="amount">£70</div><p class="off">off your annual energy bill at <span>5% cashback</span></p><p class="brand-tag">Lastminute.com · Loveholidays · Expedia</p></div>
+      <div class="saving-card"><span class="emoji">🏃</span><p class="spend">£120 sports kit order</p><div class="amount">£9.60</div><p class="off">off your energy bill at <span>8% cashback</span></p><p class="brand-tag">Canterbury · Tiso · American Golf</p></div>
+      <div class="saving-card"><span class="emoji">🍕</span><p class="spend">nights out — £80/mo</p><div class="amount">£8</div><p class="off">every month just from eating out at <span>10%</span></p><p class="brand-tag">Inamo · Plan Burrito · Middletons · Origin Coffee</p></div>
     </div>
   </div>
 </section>
@@ -917,7 +464,6 @@
     <p class="section-tag">vs everything else</p>
     <h2 class="section-title">tired of<br>cashback faff?</h2>
     <p class="section-intro">cashback sites, employee portals, voucher sites. the savings exist — you just can't be bothered. charged is different by design.</p>
-
     <div class="compare-grid">
       <div class="compare-card theirs">
         <p class="compare-label">👎 everyone else</p>
@@ -979,7 +525,6 @@
         <span class="brand-pill">Hilton Hotels <span class="link-rate">via link</span></span>
         <span class="brand-pill">Expedia <span class="link-rate">via link</span></span>
         <span class="brand-pill">Europcar <span class="link-rate">via link</span></span>
-        <!-- duplicate for seamless loop -->
         <span class="brand-pill">Amazon Fresh <span class="rate">10%</span></span>
         <span class="brand-pill">Canterbury <span class="rate">8%</span></span>
         <span class="brand-pill">Wild Nutrition <span class="rate">7%</span></span>
@@ -1032,9 +577,9 @@
 
 <!-- FOOTER -->
 <footer>
-<a href="#" class="nav-logo-link">
-  <img src="https://raw.githubusercontent.com/megans832/charged/main/charged%20horizontal%20logo-2.png" alt="charged logo" style="height: 36px; width: auto;">
-</a>  
+  <a href="#" class="nav-logo">
+    <img src="https://raw.githubusercontent.com/megans832/charged/main/charged%20horizontal%20logo-2.png" alt="charged logo" style="height: 28px; width: auto;">
+  </a>
   <div class="links">
     <a href="#" onclick="openModal(); return false;">cashback credit terms</a>
     <a href="#">privacy policy</a>
@@ -1054,9 +599,7 @@
     <div class="modal-body">
       <div class="tc-section">
         <h3>the big one — non-refundable credit</h3>
-        <div class="tc-highlight">
-          all cashback you earn through charged is applied to your energy account as <strong>non-refundable credit</strong>. this means it's real money working directly against your energy costs — but it cannot be cashed out, transferred, or paid to a bank account. it lives on your energy account and that's where it does its job.
-        </div>
+        <div class="tc-highlight">all cashback you earn through charged is applied to your energy account as <strong>non-refundable credit</strong>. this means it's real money working directly against your energy costs — but it cannot be cashed out, transferred, or paid to a bank account. it lives on your energy account and that's where it does its job.</div>
         <p>think of it like a voucher that's already been added to your account, rather than cash in your pocket. the upside? it gets there automatically, with no action from you.</p>
       </div>
       <div class="tc-section">
@@ -1101,28 +644,30 @@
 </div>
 
 <script>
-  function openModal() {
-    document.getElementById('tcModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
+  function toggleMenu() {
+    var h = document.getElementById('hamburger');
+    var d = document.getElementById('mobileDrawer');
+    h.classList.toggle('open');
+    d.classList.toggle('open');
   }
-  function closeModal() {
-    document.getElementById('tcModal').classList.remove('open');
-    document.body.style.overflow = '';
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobileDrawer').classList.remove('open');
   }
+  document.addEventListener('click', function(e) {
+    var h = document.getElementById('hamburger');
+    var d = document.getElementById('mobileDrawer');
+    if (!h.contains(e.target) && !d.contains(e.target)) closeMenu();
+  });
+
+  function openModal() { document.getElementById('tcModal').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeModal() { document.getElementById('tcModal').classList.remove('open'); document.body.style.overflow = ''; }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-      }
-    });
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; } });
   }, { threshold: 0.1 });
-
   document.querySelectorAll('.step, .saving-card, .compare-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(24px)';
+    el.style.opacity = '0'; el.style.transform = 'translateY(24px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
   });
