@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+<title>charged ⚡ — the countdown is on</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Figtree:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<style>
+  :root {
+    --black: #000000;
+    --black-2: #0A0A0A;
+    --black-3: #111111;
+    --black-4: #1A1A1A;
+    --gold: #F5A623;
+    --gold-bright: #FFD166;
+    --gold-dim: #B87A10;
+    --white: #FFFFFF;
+    --off-white: #E8E8E8;
+    --grey: #777777;
+    --electric: #4FC3F7;
+    --green: #00E676;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; background-color: #000; overflow-x: hidden; }
+  body { background-color: #000; color: var(--white); font-family: 'Figtree', sans-serif; font-size: 16px; line-height: 1.6; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 40px; display: flex; justify-content: space-between;
+    align-items: center; background: #000000;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-menu { display: flex; align-items: center; gap: 4px; flex: 0 0 auto; }
+  .nav-menu a {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--grey); font-family: 'Figtree', sans-serif;
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    padding: 7px 12px; border-radius: 6px;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .nav-menu a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+  .nav-menu a.active { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold); color: var(--black);
+    font-family: 'Figtree', sans-serif; font-weight: 800;
+    font-size: 13px; letter-spacing: 0.5px; text-transform: uppercase;
+    padding: 11px 22px; border-radius: 4px; text-decoration: none; transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-bright); transform: translateY(-1px); }
+
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none; flex-direction: column; justify-content: center; gap: 5px;
+    width: 36px; height: 36px; background: transparent;
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 6px;
+    cursor: pointer; padding: 8px; z-index: 200;
+  }
+  .hamburger span { display: block; width: 100%; height: 2px; background: var(--white); border-radius: 2px; transition: all 0.3s ease; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── MOBILE DRAWER ── */
+  .mobile-drawer {
+    display: none; position: fixed; top: 65px; left: 0; right: 0;
+    background: #0A0A0A; border-bottom: 1px solid rgba(245,166,35,0.15);
+    z-index: 99; padding: 12px 20px 20px; flex-direction: column; gap: 4px;
+    transform: translateY(-10px); opacity: 0; transition: all 0.25s ease;
+  }
+  .mobile-drawer.open { display: flex; transform: translateY(0); opacity: 1; }
+  .mobile-drawer a {
+    display: flex; align-items: center; gap: 10px; color: var(--off-white);
+    font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 600;
+    text-decoration: none; padding: 12px 16px; border-radius: 8px; transition: all 0.2s;
+  }
+  .mobile-drawer a:hover { background: rgba(255,255,255,0.06); color: var(--gold); }
+  @media (max-width: 900px) { .nav-menu { display: none; } .hamburger { display: flex; } }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 140px 40px 80px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -10%; left: 50%;
+    transform: translateX(-50%); width: 800px; height: 500px;
+    background: radial-gradient(ellipse, rgba(245,166,35,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 10vw, 120px);
+    line-height: 0.95; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 24px; opacity: 0; animation: fadeUp 0.7s ease forwards 0.35s;
+  }
+  .hero h1 .gold { color: var(--gold); }
+  .hero h1 .outline { -webkit-text-stroke: 2px var(--white); color: transparent; }
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 20px); font-weight: 300; color: var(--off-white);
+    max-width: 560px; margin: 0 auto 0; line-height: 1.6;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.5s;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline-section { padding: 80px 40px 120px; max-width: 860px; margin: 0 auto; }
+
+  .timeline { position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 148px; top: 0; bottom: 0; width: 2px;
+    background: linear-gradient(to bottom, transparent, rgba(245,166,35,0.3) 5%, rgba(245,166,35,0.3) 95%, transparent);
+  }
+
+  .tl-item {
+    display: flex; gap: 0; margin-bottom: 4px;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .tl-item.visible { opacity: 1; transform: translateY(0); }
+
+  /* month label */
+  .tl-month {
+    width: 148px; min-width: 148px; padding: 28px 24px 28px 0;
+    text-align: right; font-family: 'Figtree', sans-serif;
+    font-size: 12px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--grey);
+    position: relative; flex-shrink: 0;
+  }
+  .tl-item.past .tl-month { color: var(--gold); }
+  .tl-item.now .tl-month { color: var(--gold-bright); }
+  .tl-item.future .tl-month { color: var(--grey); }
+  .tl-item.secret .tl-month { color: rgba(255,255,255,0.2); }
+
+  /* dot */
+  .tl-dot {
+    width: 14px; min-width: 14px; display: flex;
+    flex-direction: column; align-items: center; padding-top: 32px; position: relative;
+  }
+  .tl-dot::after {
+    content: ''; width: 14px; height: 14px; border-radius: 50%;
+    background: var(--black-3); border: 2px solid var(--grey); flex-shrink: 0;
+  }
+  .tl-item.past .tl-dot::after { background: var(--gold); border-color: var(--gold); }
+  .tl-item.now .tl-dot::after {
+    background: var(--gold-bright); border-color: var(--gold-bright);
+    box-shadow: 0 0 0 4px rgba(245,166,35,0.2), 0 0 0 8px rgba(245,166,35,0.08);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  .tl-item.secret .tl-dot::after { background: var(--black-3); border-color: rgba(255,255,255,0.15); border-style: dashed; }
+
+  @keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(245,166,35,0.2), 0 0 0 8px rgba(245,166,35,0.08); }
+    50% { box-shadow: 0 0 0 6px rgba(245,166,35,0.3), 0 0 0 12px rgba(245,166,35,0.05); }
+  }
+
+  /* card */
+  .tl-card {
+    flex: 1; margin-left: 24px; background: var(--black-3);
+    border: 1px solid rgba(255,255,255,0.05); border-radius: 12px;
+    padding: 22px 28px; margin-bottom: 4px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .tl-card:hover { border-color: rgba(245,166,35,0.2); transform: translateX(4px); }
+  .tl-item.past .tl-card { border-left: 3px solid rgba(245,166,35,0.4); }
+  .tl-item.now .tl-card {
+    border: 1px solid rgba(245,166,35,0.35);
+    border-left: 3px solid var(--gold);
+    background: rgba(245,166,35,0.04);
+  }
+  .tl-item.secret .tl-card {
+    border: 1px dashed rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.01);
+  }
+
+  .tl-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 100px; margin-bottom: 10px;
+  }
+  .badge-done { background: rgba(245,166,35,0.1); color: var(--gold); }
+  .badge-live { background: rgba(245,166,35,0.15); color: var(--gold-bright); }
+  .badge-building { background: rgba(79,195,247,0.1); color: var(--electric); }
+  .badge-coming { background: rgba(255,255,255,0.05); color: var(--grey); }
+  .badge-secret { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.2); }
+
+  .tl-badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+  .tl-title {
+    font-family: 'Figtree', sans-serif; font-size: 17px; font-weight: 800;
+    color: var(--white); margin-bottom: 6px; line-height: 1.3;
+  }
+  .tl-item.secret .tl-title { color: rgba(255,255,255,0.2); filter: blur(4px); user-select: none; }
+
+  .tl-desc {
+    font-size: 14px; color: var(--grey); line-height: 1.65;
+  }
+  .tl-desc strong { color: var(--off-white); font-weight: 600; }
+  .tl-item.secret .tl-desc { color: rgba(255,255,255,0.15); filter: blur(5px); user-select: none; }
+
+  .tl-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .chip {
+    font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 100px;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+    color: var(--grey);
+  }
+  .chip-gold { background: rgba(245,166,35,0.06); border-color: rgba(245,166,35,0.15); color: var(--gold); }
+  .chip-blue { background: rgba(79,195,247,0.06); border-color: rgba(79,195,247,0.15); color: var(--electric); }
+  .chip-green { background: rgba(0,230,118,0.06); border-color: rgba(0,230,118,0.15); color: var(--green); }
+
+  /* ── CTA BLOCK ── */
+  .cta-block {
+    margin-top: 64px; text-align: center; padding: 56px 40px;
+    background: var(--black-3); border: 1px solid rgba(245,166,35,0.15);
+    border-radius: 16px; position: relative; overflow: hidden;
+  }
+  .cta-block::before {
+    content: ''; position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(245,166,35,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-block h2 {
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 72px);
+    text-transform: uppercase; line-height: 0.95; margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .cta-block h2 .gold { color: var(--gold); }
+  .cta-block p { font-size: 16px; color: var(--grey); max-width: 420px; margin: 0 auto 32px; font-weight: 300; position: relative; z-index: 1; }
+  .whatsapp-btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: #25D366; color: #000; font-family: 'Figtree', sans-serif;
+    font-weight: 800; font-size: 16px; padding: 18px 40px; border-radius: 8px;
+    text-decoration: none; transition: all 0.25s; position: relative; z-index: 1;
+  }
+  .whatsapp-btn:hover { background: #20BC5A; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(37,211,102,0.25); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 48px 40px; border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px; background: var(--black-2);
+  }
+  footer .links { display: flex; gap: 24px; flex-wrap: wrap; }
+  footer .links a { font-size: 13px; font-weight: 500; color: var(--grey); text-decoration: none; transition: color 0.2s; }
+  footer .links a:hover { color: var(--white); }
+  footer .copy { font-size: 12px; color: rgba(255,255,255,0.18); font-weight: 400; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .hero { padding: 110px 20px 60px; }
+    .timeline-section { padding: 60px 20px 80px; }
+    .timeline::before { left: 80px; }
+    .tl-month { width: 80px; min-width: 80px; font-size: 10px; padding: 24px 16px 24px 0; }
+    .tl-card { padding: 16px 18px; }
+    footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://getcharged.energy" style="text-decoration:none;font-family:Figtree,sans-serif;font-size:20px;font-weight:700;color:#FFFFFF;white-space:nowrap;flex-shrink:0;">charged ⚡</a>
+  <nav class="nav-menu">
+    <a href="https://getcharged.energy/demo">🎮 demo</a>
+    <a href="https://getcharged.energy/timeline" class="active">📅 timeline</a>
+    <a href="https://getcharged.energy/merchants">🛍️ merchants</a>
+    <a href="https://getcharged.energy/providers">⚡ providers</a>
+  </nav>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="menu">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="nav-cta" href="https://wa.me/447763375105?text=I%27d%20like%20to%20join%20the%20charged%20waitlist" target="_blank">join waitlist</a>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <a href="https://getcharged.energy/demo" onclick="closeMenu()">🎮 demo</a>
+  <a href="https://getcharged.energy/timeline" onclick="closeMenu()">📅 timeline</a>
+  <a href="https://getcharged.energy/merchants" onclick="closeMenu()">🛍️ merchants</a>
+  <a href="https://getcharged.energy/providers" onclick="closeMenu()">⚡ providers</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">📅 build progress</p>
+  <h1>the countdown<br>is <span class="gold">on.</span> <span class="outline">⚡</span></h1>
+  <p class="hero-sub">we're building fast. here's exactly where we are — and where we're headed. no fluff, no filler. just the real roadmap.</p>
+</div>
+
+<!-- TIMELINE -->
+<div class="timeline-section">
+  <div class="timeline">
+
+    <!-- APRIL -->
+    <div class="tl-item past">
+      <div class="tl-month">apr<br>2026</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <span class="tl-badge badge-done">✓ done</span>
+        <div class="tl-title">the spark 💡</div>
+        <div class="tl-desc">innovation session with <strong>E.ON Next</strong> lit the fuse. the idea: route everyday cashback directly onto energy bills. simple, powerful, long overdue.</div>
+        <div class="tl-chips">
+          <span class="chip chip-gold">e.on next</span>
+          <span class="chip">innovation session</span>
+          <span class="chip">concept validated</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAY -->
+    <div class="tl-item past">
+      <div class="tl-month">may<br>2026</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <span class="tl-badge badge-done">✓ done</span>
+        <div class="tl-title">prototype built. rails laid. brands in. 🛍️</div>
+        <div class="tl-desc">prototype in users' hands. <strong>payment rails identified</strong> as Kraken API. first major retailers onboarded with live cashback rates ready to go.</div>
+        <div class="tl-chips">
+          <span class="chip chip-gold">prototype live</span>
+          <span class="chip chip-blue">kraken api</span>
+          <span class="chip chip-green">retailers onboarded</span>
+          <span class="chip">fidel card-linking</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- JUNE -->
+    <div class="tl-item now">
+      <div class="tl-month">jun<br>2026</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <span class="tl-badge badge-live">● you are here</span>
+        <div class="tl-title">dev under way. waitlist building. 🚀</div>
+        <div class="tl-desc">we're in the build. engineering in full swing, waitlist growing daily. <strong>this is exactly where you want to be</strong> — the founding tester window is open right now.</div>
+        <div class="tl-chips">
+          <span class="chip chip-blue">in development</span>
+          <span class="chip chip-green">waitlist open</span>
+          <span class="chip">founding testers</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- JULY -->
+    <div class="tl-item future">
+      <div class="tl-month">jul<br>2026</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <span class="tl-badge badge-coming">phase 1</span>
+        <div class="tl-title">link your card — live to testers 💳</div>
+        <div class="tl-desc">phase 1 drops. founding testers get access to <strong>card-linking</strong> — connect your card once and cashback starts tracking automatically at every partner brand.</div>
+        <div class="tl-chips">
+          <span class="chip">card-linking</span>
+          <span class="chip">tester access</span>
+          <span class="chip">auto-tracking</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUGUST -->
+    <div class="tl-item future">
+      <div class="tl-month">aug<br>2026</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <span class="tl-badge badge-coming">phase 2</span>
+        <div class="tl-title">balance & notifications — live to testers 📲</div>
+        <div class="tl-desc">phase 2 drops. testers get <strong>live balance tracking</strong> and WhatsApp notifications every time cashback lands. watch the savings stack up in real time.</div>
+        <div class="tl-chips">
+          <span class="chip">balance dashboard</span>
+          <span class="chip chip-blue">whatsapp alerts</span>
+          <span class="chip">real-time tracking</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEPTEMBER -->
+    <div class="tl-item future">
+      <div class="tl-month">sep<br>2026</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <span class="tl-badge badge-coming">phase 3</span>
+        <div class="tl-title">'send to bill' — tested with providers ⚡</div>
+        <div class="tl-desc">the big one. <strong>cashback routing direct to energy accounts</strong> tested live with provider partners. this is what charged was built for — bills actually getting smaller.</div>
+        <div class="tl-chips">
+          <span class="chip chip-gold">bill credit live</span>
+          <span class="chip">provider testing</span>
+          <span class="chip">kraken transfer</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- OCTOBER -->
+    <div class="tl-item future">
+      <div class="tl-month">oct<br>2026</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <span class="tl-badge badge-coming">🎉 launch</span>
+        <div class="tl-title">charged launches to the public 🌍</div>
+        <div class="tl-desc">doors open. charged goes live for everyone. founding testers get <strong>priority access, better rates, and early features</strong> — this is why joining the waitlist now matters.</div>
+        <div class="tl-chips">
+          <span class="chip chip-gold">public launch</span>
+          <span class="chip chip-green">founding benefits</span>
+          <span class="chip">500+ brands live</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOVEMBER -->
+    <div class="tl-item future">
+      <div class="tl-month">nov<br>2026</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <span class="tl-badge badge-coming">secret drop</span>
+        <div class="tl-title">mystery UX update 🤫</div>
+        <div class="tl-desc">we're working on something that'll change how you interact with charged entirely. <strong>can't say more yet</strong> — but founding testers will be the first to see it.</div>
+        <div class="tl-chips">
+          <span class="chip">tester exclusive</span>
+          <span class="chip">ux overhaul</span>
+          <span class="chip">🤐 tbd</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECRET -->
+    <div class="tl-item secret">
+      <div class="tl-month">???</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <span class="tl-badge badge-secret">🔒 classified</span>
+        <div class="tl-title">something big is coming. we can't share it yet.</div>
+        <div class="tl-desc">there's more to come that we can't share here 🤐 you'll be the first to know if you join our early waitlist. trust us — it's worth the wait.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <h2>be first.<br><span class="gold">get charged.</span></h2>
+    <p>founding testers shape the product, get early access, and start earning cashback from day one. the window is open right now.</p>
+    <a class="whatsapp-btn" href="https://wa.me/447763375105?text=I%27d%20like%20to%20join%20the%20charged%20waitlist%20as%20a%20founding%20tester%20%E2%9A%A1" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      join the waitlist
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="https://getcharged.energy" style="text-decoration:none;font-family:Figtree,sans-serif;font-size:20px;font-weight:700;color:#FFFFFF;white-space:nowrap;">charged ⚡</a>
+  <div class="links">
+    <a href="https://getcharged.energy">home</a>
+    <a href="https://getcharged.energy/demo">demo</a>
+    <a href="https://getcharged.energy/merchants">merchants</a>
+    <a href="#">privacy policy</a>
+    <a href="#">contact</a>
+  </div>
+  <p class="copy">© 2026 charged. all rights reserved.</p>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobileDrawer').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobileDrawer').classList.remove('open');
+  }
+  document.addEventListener('click', function(e) {
+    var h = document.getElementById('hamburger');
+    var d = document.getElementById('mobileDrawer');
+    if (h && d && !h.contains(e.target) && !d.contains(e.target)) closeMenu();
+  });
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.tl-item').forEach(function(el, i) {
+    el.style.transitionDelay = (i * 0.06) + 's';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
