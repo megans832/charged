@@ -35,9 +35,15 @@
     align-items: center; background: #000000;
     border-bottom: 1px solid rgba(255,255,255,0.08);
   }
+  nav > a:first-child {
+    font-family: Figtree, sans-serif; font-size: 20px; font-weight: 700;
+    color: #FFFFFF !important; text-decoration: none !important;
+    white-space: nowrap; flex-shrink: 0; display: block !important;
+    visibility: visible !important; opacity: 1 !important;
+  }
 
   .nav-left { display: flex; align-items: center; gap: 24px; }
-  .nav-logo { text-decoration: none; display: flex; align-items: center; }
+  .nav-logo { text-decoration: none; display: flex !important; align-items: center; }
 
   /* -- NAV MENU -- */
   .nav-menu { display: flex; align-items: center; gap: 4px; }
@@ -289,17 +295,14 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-left">
-    <a href="#" class="nav-logo">
-      <span style="font-family:'Figtree',sans-serif;font-size:20px;font-weight:700;color:#FFFFFF;letter-spacing:0;">charged ⚡</span>
-    </a>
-    <nav class="nav-menu">
+  <a href="#" style="text-decoration:none;font-family:Figtree,sans-serif;font-size:20px;font-weight:700;color:#FFFFFF;white-space:nowrap;flex-shrink:0;">charged ⚡</a>
+  <nav class="nav-menu">
+      <a href="https://getcharged.energy">🏠 home</a>
       <a href="https://getcharged.energy/demo">🎮 demo</a>
       <a href="https://getcharged.energy/timeline">📅 timeline</a>
       <a href="https://getcharged.energy/merchants">🛍️ merchants</a>
       <a href="https://getcharged.energy/providers">⚡ providers</a>
     </nav>
-  </div>
   <div style="display:flex;align-items:center;gap:12px;">
     <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="menu">
       <span></span><span></span><span></span>
@@ -412,7 +415,7 @@
     <h2 class="section-title">real money.<br><span style="color: var(--gold);">real bills.</span></h2>
     <p class="section-intro">these aren't vouchers or points. they're cash-value credits — landing directly on your energy account, reducing what you owe.</p>
     <div class="savings-grid">
-      <div class="saving-card"><span class="emoji">🛒</span><p class="spend">grocery shop — £300/mo</p><div class="amount">£30</div><p class="off">off your energy bill every month at <span>10% cashback</span></p><p class="brand-tag">Amazon Fresh · Morrisons · Co-op · Iceland</p></div>
+      <div class="saving-card"><span class="emoji">🛒</span><p class="spend">grocery shop — £300/mo</p><div class="amount">£15</div><p class="off">off your energy bill every month at <span>5% cashback</span></p><p class="brand-tag">Amazon Fresh · Morrisons · Co-op · Iceland</p></div>
       <div class="saving-card"><span class="emoji">✈️</span><p class="spend">£1,400 package holiday</p><div class="amount">£70</div><p class="off">off your annual energy bill at <span>5% cashback</span></p><p class="brand-tag">Lastminute.com · Loveholidays · Expedia</p></div>
       <div class="saving-card"><span class="emoji">🏃</span><p class="spend">£120 sports kit order</p><div class="amount">£9.60</div><p class="off">off your energy bill at <span>8% cashback</span></p><p class="brand-tag">Canterbury · Tiso · American Golf</p></div>
       <div class="saving-card"><span class="emoji">🍕</span><p class="spend">nights out — £80/mo</p><div class="amount">£8</div><p class="off">every month just from eating out at <span>10%</span></p><p class="brand-tag">Inamo · Plan Burrito · Middletons · Origin Coffee</p></div>
@@ -549,7 +552,7 @@
 <!-- FOOTER -->
 <footer>
   <a href="#" class="nav-logo">
-    <span style="font-family:'Figtree',sans-serif;font-size:20px;font-weight:700;color:#FFFFFF;letter-spacing:0;">charged ⚡</span>
+    <span style="font-family:Figtree,sans-serif;font-size:20px;font-weight:700;color:#FFFFFF;letter-spacing:0;display:inline-block;flex-shrink:0;">charged ⚡</span>
   </a>
   <div class="links">
     <a href="#" onclick="openModal(); return false;">cashback credit terms</a>
