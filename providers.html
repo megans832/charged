@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+<title>charged ⚡ — for energy providers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Figtree:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<style>
+  :root {
+    --black: #000000;
+    --black-2: #0A0A0A;
+    --black-3: #111111;
+    --black-4: #1A1A1A;
+    --gold: #F5A623;
+    --gold-bright: #FFD166;
+    --gold-dim: #B87A10;
+    --white: #FFFFFF;
+    --off-white: #E8E8E8;
+    --grey: #777777;
+    --electric: #4FC3F7;
+    --green: #00E676;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; background-color: #000; overflow-x: hidden; }
+  body { background-color: #000; color: var(--white); font-family: 'Figtree', sans-serif; font-size: 16px; line-height: 1.6; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 40px; display: flex; justify-content: space-between;
+    align-items: center; background: #000000;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-left { display: flex; align-items: center; gap: 24px; }
+  .nav-logo { text-decoration: none; display: flex; align-items: center; }
+  .nav-menu { display: flex; align-items: center; gap: 4px; }
+  .nav-menu a {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--grey); font-family: 'Figtree', sans-serif;
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    padding: 7px 12px; border-radius: 6px;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .nav-menu a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+  .nav-menu a.active { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold); color: var(--black);
+    font-family: 'Figtree', sans-serif; font-weight: 800;
+    font-size: 13px; letter-spacing: 0.5px; text-transform: uppercase;
+    padding: 11px 22px; border-radius: 4px; text-decoration: none; transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-bright); transform: translateY(-1px); }
+
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none; flex-direction: column; justify-content: center; gap: 5px;
+    width: 36px; height: 36px; background: transparent;
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 6px;
+    cursor: pointer; padding: 8px; z-index: 200;
+  }
+  .hamburger span { display: block; width: 100%; height: 2px; background: var(--white); border-radius: 2px; transition: all 0.3s ease; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── MOBILE DRAWER ── */
+  .mobile-drawer {
+    display: none; position: fixed; top: 65px; left: 0; right: 0;
+    background: #0A0A0A; border-bottom: 1px solid rgba(245,166,35,0.15);
+    z-index: 99; padding: 12px 20px 20px; flex-direction: column; gap: 4px;
+    transform: translateY(-10px); opacity: 0; transition: all 0.25s ease;
+  }
+  .mobile-drawer.open { display: flex; transform: translateY(0); opacity: 1; }
+  .mobile-drawer a {
+    display: flex; align-items: center; gap: 10px; color: var(--off-white);
+    font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 600;
+    text-decoration: none; padding: 12px 16px; border-radius: 8px; transition: all 0.2s;
+  }
+  .mobile-drawer a:hover { background: rgba(255,255,255,0.06); color: var(--gold); }
+  @media (max-width: 900px) { .nav-menu { display: none; } .hamburger { display: flex; } }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; padding: 120px 40px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute; top: -20%; right: -10%; width: 700px; height: 700px;
+    background: radial-gradient(ellipse, rgba(245,166,35,0.08) 0%, rgba(245,166,35,0.02) 40%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-glow-2 {
+    position: absolute; bottom: 5%; left: -15%; width: 600px; height: 600px;
+    background: radial-gradient(ellipse, rgba(79,195,247,0.04) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 24px;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(72px, 11vw, 140px);
+    line-height: 0.92; letter-spacing: 2px; text-transform: uppercase;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.35s;
+  }
+  .hero h1 .gold { color: var(--gold); }
+  .hero h1 .outline { -webkit-text-stroke: 2px var(--white); color: transparent; }
+
+  .hero-sub {
+    margin-top: 32px; font-size: clamp(18px, 2.2vw, 22px); font-weight: 300;
+    color: var(--off-white); max-width: 600px; line-height: 1.6;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.5s;
+  }
+  .hero-sub strong { color: var(--gold); font-weight: 700; }
+
+  /* bill stat */
+  .bill-stat {
+    margin-top: 48px; max-width: 640px;
+    background: var(--black-3); border: 1px solid rgba(245,166,35,0.18);
+    border-left: 3px solid var(--gold); border-radius: 10px;
+    padding: 22px 28px;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.65s;
+  }
+  .bill-stat p { font-size: 15px; font-weight: 400; color: var(--off-white); line-height: 1.65; font-style: italic; }
+  .bill-stat .source { font-size: 11px; color: var(--grey); font-style: normal; font-weight: 600; margin-top: 10px; letter-spacing: 0.5px; text-transform: uppercase; }
+
+  /* hero stats row */
+  .hero-stat-row {
+    margin-top: 56px; display: flex; gap: 40px; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.8s;
+  }
+  .hero-stat .num { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--gold); line-height: 1; display: block; }
+  .hero-stat .label { font-size: 12px; font-weight: 600; color: var(--grey); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: linear-gradient(to right, transparent, rgba(245,166,35,0.25), transparent); margin: 0 40px; }
+
+  /* ── SECTION SHARED ── */
+  .section-tag { font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 7vw, 88px); line-height: 0.95; text-transform: uppercase; margin-bottom: 24px; }
+
+  /* scroll reveal */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── HOW IT WORKS ── */
+  .how-section { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
+  .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(255,255,255,0.06); border-radius: 14px; overflow: hidden; margin-top: 48px; }
+  .step-card {
+    background: #111; padding: 44px 36px; position: relative;
+    transition: background 0.3s;
+  }
+  .step-card:hover { background: #1a1a1a; }
+  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 80px; color: rgba(245,166,35,0.07); line-height: 1; position: absolute; top: 20px; right: 22px; }
+  .step-icon { font-size: 34px; margin-bottom: 20px; display: block; }
+  .step-card h3 { font-size: 17px; font-weight: 800; margin-bottom: 10px; color: var(--white); }
+  .step-card p { font-size: 14px; color: var(--grey); line-height: 1.65; }
+  .step-card p strong { color: var(--off-white); }
+
+  /* ── CUSTOMER BENEFIT ── */
+  .customer-section { padding: 100px 40px; background: var(--black-2); position: relative; overflow: hidden; }
+  .customer-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(245,166,35,0.3), transparent); }
+  .customer-section::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(245,166,35,0.3), transparent); }
+  .customer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+
+  .benefit-cards { display: flex; flex-direction: column; gap: 14px; margin-top: 40px; }
+  .benefit-card {
+    display: flex; align-items: flex-start; gap: 18px;
+    background: var(--black-3); border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 10px; padding: 22px 24px; transition: all 0.3s;
+  }
+  .benefit-card:hover { border-color: rgba(245,166,35,0.25); transform: translateX(4px); }
+  .benefit-card .icon { font-size: 26px; flex-shrink: 0; margin-top: 2px; }
+  .benefit-card h4 { font-size: 15px; font-weight: 800; margin-bottom: 5px; color: var(--white); }
+  .benefit-card p { font-size: 13px; color: var(--grey); line-height: 1.6; }
+  .benefit-card p strong { color: var(--gold); }
+
+  /* regulator quote */
+  .regulator-block {
+    background: var(--black-3); border: 1px solid rgba(79,195,247,0.15);
+    border-left: 3px solid var(--electric); border-radius: 10px; padding: 32px 28px;
+    margin-top: 40px;
+  }
+  .regulator-block .reg-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--electric); margin-bottom: 16px; }
+  .regulator-block blockquote { font-size: 16px; font-weight: 400; color: var(--off-white); line-height: 1.7; font-style: italic; }
+  .regulator-block .attr { font-size: 12px; color: var(--grey); margin-top: 16px; font-style: normal; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* ── NUMBERS ── */
+  .numbers-section { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
+  .numbers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
+  .number-card {
+    background: var(--black-3); border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px; padding: 36px 30px; position: relative; overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .number-card:hover { transform: translateY(-4px); border-color: rgba(245,166,35,0.2); }
+  .number-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, var(--gold), var(--gold-bright)); }
+  .number-card .big { font-family: 'Bebas Neue', sans-serif; font-size: 60px; color: var(--gold); line-height: 1; display: block; }
+  .number-card h4 { font-size: 15px; font-weight: 700; margin: 10px 0 6px; color: var(--white); }
+  .number-card p { font-size: 13px; color: var(--grey); line-height: 1.6; }
+
+  /* ── TECH ── */
+  .tech-section { padding: 100px 40px; background: var(--black-2); position: relative; }
+  .tech-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(245,166,35,0.3), transparent); }
+  .tech-inner { max-width: 1100px; margin: 0 auto; }
+  .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
+  .tech-pill {
+    display: flex; align-items: flex-start; gap: 16px;
+    background: var(--black-3); border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 10px; padding: 22px 24px; transition: border-color 0.3s;
+  }
+  .tech-pill:hover { border-color: rgba(79,195,247,0.2); }
+  .tech-pill .icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+  .tech-pill h4 { font-size: 14px; font-weight: 800; margin-bottom: 5px; color: var(--white); }
+  .tech-pill p { font-size: 13px; color: var(--grey); line-height: 1.6; }
+  .tech-pill p strong { color: var(--electric); }
+
+  /* ── CTA ── */
+  .cta-section { padding: 120px 40px; text-align: center; position: relative; overflow: hidden; }
+  .cta-glow {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 800px; height: 400px;
+    background: radial-gradient(ellipse, rgba(245,166,35,0.09) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 8vw, 96px); line-height: 0.95; text-transform: uppercase; margin-bottom: 24px; position: relative; z-index: 1; }
+  .cta-sub { font-size: 18px; color: var(--grey); max-width: 500px; margin: 0 auto 48px; font-weight: 300; position: relative; z-index: 1; }
+  .apply-btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--gold); color: var(--black);
+    font-family: 'Figtree', sans-serif; font-weight: 800; font-size: 17px;
+    padding: 22px 48px; border-radius: 8px; text-decoration: none;
+    transition: all 0.25s; position: relative; z-index: 1; border: none; cursor: pointer;
+  }
+  .apply-btn:hover { background: var(--gold-bright); transform: translateY(-3px); box-shadow: 0 16px 50px rgba(245,166,35,0.28); }
+  .apply-note { margin-top: 20px; font-size: 13px; color: var(--grey); font-style: italic; position: relative; z-index: 1; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 48px 40px; border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px; background: var(--black-2);
+  }
+  footer .links { display: flex; gap: 24px; flex-wrap: wrap; }
+  footer .links a { font-size: 13px; font-weight: 500; color: var(--grey); text-decoration: none; transition: color 0.2s; }
+  footer .links a:hover { color: var(--white); }
+  footer .copy { font-size: 12px; color: rgba(255,255,255,0.18); font-weight: 400; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .steps-grid { grid-template-columns: 1fr; }
+    .customer-inner { grid-template-columns: 1fr; gap: 48px; }
+    .numbers-grid { grid-template-columns: 1fr; }
+    .tech-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .hero { padding: 100px 20px 60px; }
+    .how-section, .customer-section, .numbers-section, .tech-section, .cta-section { padding: 72px 20px; }
+    .hero-stat-row { gap: 28px; }
+    .divider { margin: 0 20px; }
+    footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <a href="https://getcharged.energy" class="nav-logo">
+      <img src="https://raw.githubusercontent.com/megans832/charged/main/charged%20horizontal%20logo-2.png" alt="charged logo" style="height: 36px; width: auto;">
+    </a>
+    <nav class="nav-menu">
+      <a href="https://getcharged.energy/demo">🎮 demo</a>
+      <a href="https://getcharged.energy/timeline">📅 timeline</a>
+      <a href="https://getcharged.energy/merchants">🛍️ merchants</a>
+      <a href="https://getcharged.energy/providers" class="active">⚡ providers</a>
+    </nav>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="menu">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="nav-cta" href="https://wa.me/447763375105?text=I%27d%20like%20to%20join%20the%20charged%20waitlist%20as%20a%20founding%20tester%20%E2%9A%A1" target="_blank">join waitlist</a>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <a href="https://getcharged.energy/demo" onclick="closeMenu()">🎮 demo</a>
+  <a href="https://getcharged.energy/timeline" onclick="closeMenu()">📅 timeline</a>
+  <a href="https://getcharged.energy/merchants" onclick="closeMenu()">🛍️ merchants</a>
+  <a href="https://getcharged.energy/providers" onclick="closeMenu()">⚡ providers</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <p class="hero-eyebrow">⚡ for energy providers</p>
+  <h1>
+    your customers<br>
+    deserve a<br>
+    <span class="gold">break.</span>
+  </h1>
+  <p class="hero-sub">
+    bills are rising. customers are stressed. <strong>charged⚡ puts money back on their energy account</strong> — automatically, from the everyday spending they're already doing.
+    no subsidies from you. no extra cost to them.
+  </p>
+
+  <div class="bill-stat">
+    <p>"UK household energy bills are set to rise by up to £287 by January 2027 — the fourth consecutive quarterly increase since October 2025."</p>
+    <p class="source">Cornwall Insight / Ofgem price cap forecasts, May 2026</p>
+  </div>
+
+  <div class="hero-stat-row">
+    <div class="hero-stat"><span class="num">£2bn+</span><span class="label">uk cashback rewards per year</span></div>
+    <div class="hero-stat"><span class="num">£0</span><span class="label">cost to you or your customers</span></div>
+    <div class="hero-stat"><span class="num">60s</span><span class="label">to set up for a customer</span></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <span class="section-tag reveal">how it works</span>
+  <h2 class="section-title reveal">three steps.<br>bills get smaller.</h2>
+  <div class="steps-grid">
+    <div class="step-card reveal">
+      <span class="step-num">01</span>
+      <span class="step-icon">💳</span>
+      <h3>customer links their card once</h3>
+      <p>PCI-DSS compliant. Takes 60 seconds. <strong>No ongoing effort, no app to remember, no codes to enter.</strong> They link it and forget about it.</p>
+    </div>
+    <div class="step-card reveal">
+      <span class="step-num">02</span>
+      <span class="step-icon">🛍️</span>
+      <h3>they shop as normal</h3>
+      <p>cashback accrues automatically every time they spend at a partner brand — in-store or online. <strong>nothing changes about how they shop.</strong></p>
+    </div>
+    <div class="step-card reveal">
+      <span class="step-num">03</span>
+      <span class="step-icon">⚡</span>
+      <h3>credit lands on their energy bill</h3>
+      <p>cashback is routed directly to their energy account as <strong>non-refundable bill credit.</strong> they see a lower bill. that's it.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CUSTOMER BENEFIT + REGULATOR -->
+<section class="customer-section">
+  <div class="customer-inner">
+    <div>
+      <span class="section-tag reveal">why it matters</span>
+      <h2 class="section-title reveal">good for your<br>customers.<br><span style="color:var(--gold);">great for you.</span></h2>
+      <div class="benefit-cards">
+        <div class="benefit-card reveal">
+          <span class="icon">📉</span>
+          <div>
+            <h4>real, visible bill reductions</h4>
+            <p>customers see their bill go down as a direct result of being with you. that's <strong>tangible, recurring value</strong> — not a one-off discount or a voucher they'll forget.</p>
+          </div>
+        </div>
+        <div class="benefit-card reveal">
+          <span class="icon">🤝</span>
+          <div>
+            <h4>stronger loyalty, zero subsidy</h4>
+            <p>you're not funding the cashback. <strong>the rewards come from partner merchants.</strong> you simply become the provider who helped your customers earn them.</p>
+          </div>
+        </div>
+        <div class="benefit-card reveal">
+          <span class="icon">📲</span>
+          <div>
+            <h4>whatsapp-native. genuinely frictionless.</h4>
+            <p>charged lives where customers already are. <strong>96% of millennials use WhatsApp daily.</strong> no new app. no login. just a message.</p>
+          </div>
+        </div>
+        <div class="benefit-card reveal">
+          <span class="icon">🏆</span>
+          <div>
+            <h4>competitive positioning that lasts</h4>
+            <p>switching energy supplier is easy. <strong>switching away from a product that actively saves you money</strong> every month? much harder.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="section-tag reveal">the regulator agrees</span>
+      <h2 class="section-title reveal" style="font-size: clamp(36px, 5vw, 64px);">ofgem is asking for exactly this.</h2>
+      <div class="regulator-block reveal">
+        <p class="reg-eyebrow">📋 ofgem · october 2024</p>
+        <blockquote>"We want to enable innovation that delivers products and services tailored to better meet consumers' needs — and helps consumers take control of their bills."</blockquote>
+        <p class="attr">Ofgem — Innovation in the Energy Retail Market, October 2024</p>
+      </div>
+      <p style="margin-top: 24px; font-size: 15px; color: var(--grey); line-height: 1.7;" class="reveal">
+        with the market stabilising after years of turbulence, Ofgem has been explicit: it wants providers to bring <strong style="color:var(--off-white);">consumer-focused innovation</strong> to market. charged is built exactly for that moment.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- THE NUMBERS -->
+<section class="numbers-section">
+  <span class="section-tag reveal">the numbers</span>
+  <h2 class="section-title reveal">it just<br>makes sense.</h2>
+  <div class="numbers-grid">
+    <div class="number-card reveal">
+      <span class="big">£0</span>
+      <h4>zero upfront cost to you</h4>
+      <p>no integration fees, no platform costs, no subsidy required. charged is funded entirely by the merchant cashback model.</p>
+    </div>
+    <div class="number-card reveal">
+      <span class="big">£0</span>
+      <h4>zero cost to your customers</h4>
+      <p>no setup fees, no subscription, no friction. customers link their card once and charged does the rest — the only thing they'll notice is a smaller bill.</p>
+    </div>
+    <div class="number-card reveal">
+      <span class="big">500+</span>
+      <h4>brands driving bill savings</h4>
+      <p>from groceries to travel, fashion to eating out — customers earn cashback across 500+ partner brands, all feeding directly into their energy account.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TECH -->
+<section class="tech-section">
+  <div class="tech-inner">
+    <span class="section-tag reveal">the technical bit</span>
+    <h2 class="section-title reveal">built to plug in,<br>not disrupt.</h2>
+    <p style="font-size: 17px; font-weight: 300; color: var(--off-white); max-width: 580px; line-height: 1.7; margin-bottom: 0;" class="reveal">
+      charged is designed to work with your existing infrastructure — not replace it. the integration is lightweight, compliant, and built around how modern energy platforms already operate.
+    </p>
+    <div class="tech-grid">
+      <div class="tech-pill reveal">
+        <span class="icon">🔁</span>
+        <div>
+          <h4>kraken api compatible</h4>
+          <p>cashback is distributed via your existing Kraken infrastructure. <strong>no new integration required</strong> for Kraken-powered suppliers.</p>
+        </div>
+      </div>
+      <div class="tech-pill reveal">
+        <span class="icon">🔐</span>
+        <div>
+          <h4>pci-dss compliant card-linking</h4>
+          <p>powered by Fidel — a <strong>PCI-DSS Level 1 certified</strong> card-linking platform. we never see card data. you never need to.</p>
+        </div>
+      </div>
+      <div class="tech-pill reveal">
+        <span class="icon">💸</span>
+        <div>
+          <h4>non-refundable credit model</h4>
+          <p>cashback lands as <strong>non-refundable bill credit</strong> — not cash, not vouchers. it sits on the energy account and reduces what's owed.</p>
+        </div>
+      </div>
+      <div class="tech-pill reveal">
+        <span class="icon">📦</span>
+        <div>
+          <h4>batch processing, clean transfers</h4>
+          <p>payments are processed in batches — <strong>no micro-transactions, no payment noise</strong>, no reconciliation headache for your team.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <span class="section-tag reveal" style="display:block;text-align:center;">let's talk</span>
+  <h2 class="cta-title reveal">your customers<br>are waiting for <span style="color:var(--gold);">this.</span></h2>
+  <p class="cta-sub reveal">we'd love to show you how charged could work for your customers. drop us a line and let's find a time to chat.</p>
+  <a class="apply-btn reveal"
+     href="mailto:providers@getcharged.energy?subject=provider%20enquiry%20%E2%80%94%20charged%20%E2%9A%A1&body=hi%20charged%E2%9A%A1%2C%0A%0Awe%27d%20like%20to%20find%20out%20more%20about%20how%20charged%20could%20work%20for%20our%20customers.%0A%0Ahere%27s%20a%20bit%20about%20us%3A%0A%0Acompany%20name%3A%20%0Aenergy%20platform%20(e.g.%20kraken%2C%20other)%3A%20%0Aapprox.%20customer%20base%3A%20%0Acontact%20name%3A%20%0Acontact%20email%3A%20%0Aphone%3A%20%0A%0Alook%20forward%20to%20speaking%20with%20you.">
+    ✉️ get in touch
+  </a>
+  <p class="apply-note reveal">opens your email with everything pre-filled. we aim to respond within 48 hours.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="https://getcharged.energy" class="nav-logo">
+    <img src="https://raw.githubusercontent.com/megans832/charged/main/charged%20horizontal%20logo-2.png" alt="charged logo" style="height: 36px; width: auto;">
+  </a>
+  <div class="links">
+    <a href="https://getcharged.energy">home</a>
+    <a href="https://getcharged.energy/demo">demo</a>
+    <a href="https://getcharged.energy/merchants">merchants</a>
+    <a href="#">privacy policy</a>
+    <a href="#">contact</a>
+  </div>
+  <p class="copy">© 2026 charged. all rights reserved.</p>
+</footer>
+
+<script>
+  /* ── NAV ── */
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobileDrawer').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobileDrawer').classList.remove('open');
+  }
+  document.addEventListener('click', function(e) {
+    var h = document.getElementById('hamburger');
+    var d = document.getElementById('mobileDrawer');
+    if (h && d && !h.contains(e.target) && !d.contains(e.target)) closeMenu();
+  });
+
+  /* ── SCROLL REVEAL ── */
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+</script>
+</body>
+</html>
