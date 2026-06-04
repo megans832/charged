@@ -36,6 +36,96 @@
     line-height: 1.6;
   }
 
+  /* -- NAV -- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 40px; display: flex; justify-content: space-between;
+    align-items: center; background: #000000;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .nav-left { display: flex; align-items: center; gap: 24px; }
+
+  .nav-logo { text-decoration: none; display: flex; align-items: center; }
+
+  /* -- NAV MENU -- */
+  .nav-menu { display: flex; align-items: center; gap: 4px; }
+  .nav-menu a {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--grey); font-family: 'Figtree', sans-serif;
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    padding: 7px 12px; border-radius: 6px;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .nav-menu a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+  .nav-menu a.active { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold); color: var(--black);
+    font-family: 'Figtree', sans-serif; font-weight: 800;
+    font-size: 13px; letter-spacing: 0.5px; text-transform: uppercase;
+    padding: 11px 22px; border-radius: 4px; text-decoration: none; transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-bright); transform: translateY(-1px); }
+
+  /* -- HAMBURGER -- */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px; height: 36px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 200;
+  }
+  .hamburger span {
+    display: block; width: 100%; height: 2px;
+    background: var(--white); border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* -- MOBILE DRAWER -- */
+  .mobile-drawer {
+    display: none;
+    position: fixed;
+    top: 65px; left: 0; right: 0;
+    background: #0A0A0A;
+    border-bottom: 1px solid rgba(245,166,35,0.15);
+    z-index: 99;
+    padding: 12px 20px 20px;
+    flex-direction: column;
+    gap: 4px;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: all 0.25s ease;
+  }
+  .mobile-drawer.open {
+    display: flex;
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .mobile-drawer a {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--off-white); font-family: 'Figtree', sans-serif;
+    font-size: 15px; font-weight: 600; text-decoration: none;
+    padding: 12px 16px; border-radius: 8px;
+    transition: all 0.2s;
+  }
+  .mobile-drawer a:hover { background: rgba(255,255,255,0.06); color: var(--gold); }
+
+  /* -- RESPONSIVE NAV -- */
+  @media (max-width: 900px) {
+    .nav-menu { display: none; }
+    .hamburger { display: flex; }
+  }
+
   /* LOGO */
   .logo-img {
     height: 44px;
@@ -53,34 +143,6 @@
     .logo-img { height: 38px; }
     .footer-logo { height: 38px; }
   }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 16px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #000;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  .nav-logo { text-decoration: none; display: flex; align-items: center; }
-  .nav-cta {
-    background: var(--gold);
-    color: var(--black);
-    font-family: 'Figtree', sans-serif;
-    font-weight: 800;
-    font-size: 13px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    padding: 11px 22px;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-  .nav-cta:hover { background: var(--gold-bright); transform: translateY(-1px); }
 
   /* HERO */
   .demo-hero {
@@ -308,8 +370,32 @@
 
 <!-- NAV -->
 <nav>
-  <img src="https://raw.githubusercontent.com/megans832/charged/main/charged%20horizontal%20logo-2.png" alt="charged logo" style="height: 36px; width: auto;">  <a class="nav-cta" href="https://wa.me/447763375105?text=I%27d%20like%20to%20join%20the%20charged%20waitlist%20as%20a%20founding%20tester%20%E2%9A%A1" target="_blank">join waitlist</a>
+  <div class="nav-left">
+    <a href="https://getcharged.energy" class="nav-logo">
+      <img src="https://raw.githubusercontent.com/megans832/charged/main/charged%20horizontal%20logo-2.png" alt="charged logo" style="height: 36px; width: auto;">
+    </a>
+    <nav class="nav-menu">
+      <a href="https://getcharged.energy/demo" class="active">🎮 demo</a>
+      <a href="https://getcharged.energy/timeline">📅 timeline</a>
+      <a href="https://getcharged.energy/merchants">🛍️ merchants</a>
+      <a href="https://getcharged.energy/providers">⚡ providers</a>
+    </nav>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="menu">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="nav-cta" href="https://wa.me/447763375105?text=I%27d%20like%20to%20join%20the%20charged%20waitlist%20as%20a%20founding%20tester%20%E2%9A%A1" target="_blank">join waitlist</a>
+  </div>
 </nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <a href="https://getcharged.energy/demo" onclick="closeMenu()">🎮 demo</a>
+  <a href="https://getcharged.energy/timeline" onclick="closeMenu()">📅 timeline</a>
+  <a href="https://getcharged.energy/merchants" onclick="closeMenu()">🛍️ merchants</a>
+  <a href="https://getcharged.energy/providers" onclick="closeMenu()">⚡ providers</a>
+</div>
 
 <!-- HERO -->
 <div class="demo-hero">
@@ -351,12 +437,15 @@
 
 <!-- FOOTER -->
 <footer>
-  <img src="https://raw.githubusercontent.com/megans832/charged/main/charged%20horizontal%20logo-2.png" alt="charged logo" style="height: 36px; width: auto;">  <div class="links">
+  <a href="https://getcharged.energy" class="nav-logo">
+    <img src="https://raw.githubusercontent.com/megans832/charged/main/charged%20horizontal%20logo-2.png" alt="charged logo" style="height: 36px; width: auto;">
+  </a>
+  <div class="links">
     <a href="https://getcharged.energy">home</a>
     <a href="#">privacy policy</a>
     <a href="#">contact</a>
   </div>
-  <p class="copy">© 2025 charged. all rights reserved.</p>
+  <p class="copy">© 2026 charged. all rights reserved.</p>
 </footer>
 
 <script>
@@ -627,7 +716,6 @@ function startAddCard() {
   botSay('let\'s link your card 🔗\n\nthis is the only time you\'ll ever need to do this. once it\'s linked, cashback tracks automatically every time you spend — no codes, no clicking, no faff.', 900, function() {
     botSay('we use fidel to link your card securely 🔒\n\nfidel is pci-dss compliant — we never see your full card number. it just sits in the background and spots when you spend at a partner brand.', 1000, function() {
       botSay('tap below to link your card — takes about 60 seconds 👇', 700, function() {
-        // card link bubble
         var m = document.getElementById('msgs');
         var d = document.createElement('div');
         d.className = 'bubble in';
@@ -691,6 +779,23 @@ function addCardReply(r) {
     botSay('tap the link above to get started — takes about 60 seconds 🔗', 600);
   }
 }
+
+/* -- NAV: hamburger -- */
+function toggleMenu() {
+  var h = document.getElementById('hamburger');
+  var d = document.getElementById('mobileDrawer');
+  h.classList.toggle('open');
+  d.classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobileDrawer').classList.remove('open');
+}
+document.addEventListener('click', function(e) {
+  var h = document.getElementById('hamburger');
+  var d = document.getElementById('mobileDrawer');
+  if (h && d && !h.contains(e.target) && !d.contains(e.target)) closeMenu();
+});
 
 document.getElementById('inp').addEventListener('keydown', function(e) {
   if (e.key==='Enter') doSend();
