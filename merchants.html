@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+<title>charged ⚡ — for merchants</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Figtree:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<style>
+  :root {
+    --black: #000000;
+    --black-2: #0A0A0A;
+    --black-3: #111111;
+    --black-4: #1A1A1A;
+    --gold: #F5A623;
+    --gold-bright: #FFD166;
+    --gold-dim: #B87A10;
+    --white: #FFFFFF;
+    --off-white: #E8E8E8;
+    --grey: #777777;
+    --electric: #4FC3F7;
+    --green: #00E676;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; background-color: #000; overflow-x: hidden; }
+  body { background-color: #000; color: var(--white); font-family: 'Figtree', sans-serif; font-size: 16px; line-height: 1.6; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 40px; display: flex; justify-content: space-between;
+    align-items: center; background: #000000;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-left { display: flex; align-items: center; gap: 24px; }
+  .nav-logo { text-decoration: none; display: flex; align-items: center; }
+  .nav-menu { display: flex; align-items: center; gap: 4px; }
+  .nav-menu a {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--grey); font-family: 'Figtree', sans-serif;
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    padding: 7px 12px; border-radius: 6px;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .nav-menu a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+  .nav-menu a.active { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold); color: var(--black);
+    font-family: 'Figtree', sans-serif; font-weight: 800;
+    font-size: 13px; letter-spacing: 0.5px; text-transform: uppercase;
+    padding: 11px 22px; border-radius: 4px; text-decoration: none; transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-bright); transform: translateY(-1px); }
+
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none; flex-direction: column; justify-content: center; gap: 5px;
+    width: 36px; height: 36px; background: transparent;
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 6px;
+    cursor: pointer; padding: 8px; z-index: 200;
+  }
+  .hamburger span { display: block; width: 100%; height: 2px; background: var(--white); border-radius: 2px; transition: all 0.3s ease; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── MOBILE DRAWER ── */
+  .mobile-drawer {
+    display: none; position: fixed; top: 65px; left: 0; right: 0;
+    background: #0A0A0A; border-bottom: 1px solid rgba(245,166,35,0.15);
+    z-index: 99; padding: 12px 20px 20px; flex-direction: column; gap: 4px;
+    transform: translateY(-10px); opacity: 0; transition: all 0.25s ease;
+  }
+  .mobile-drawer.open { display: flex; transform: translateY(0); opacity: 1; }
+  .mobile-drawer a {
+    display: flex; align-items: center; gap: 10px; color: var(--off-white);
+    font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 600;
+    text-decoration: none; padding: 12px 16px; border-radius: 8px; transition: all 0.2s;
+  }
+  .mobile-drawer a:hover { background: rgba(255,255,255,0.06); color: var(--gold); }
+
+  @media (max-width: 900px) { .nav-menu { display: none; } .hamburger { display: flex; } }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; padding: 120px 40px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute; top: -20%; right: -10%; width: 700px; height: 700px;
+    background: radial-gradient(ellipse, rgba(245,166,35,0.08) 0%, rgba(245,166,35,0.02) 40%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-glow-2 {
+    position: absolute; bottom: 10%; left: -15%; width: 500px; height: 500px;
+    background: radial-gradient(ellipse, rgba(79,195,247,0.04) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 24px;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(72px, 12vw, 140px);
+    line-height: 0.92; letter-spacing: 2px; text-transform: uppercase;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.35s;
+  }
+  .hero h1 .gold { color: var(--gold); }
+  .hero h1 .outline { -webkit-text-stroke: 2px var(--white); color: transparent; }
+
+  /* ── STATS TICKER ── */
+  .stats-ticker {
+    margin-top: 52px; display: flex; flex-direction: column; gap: 14px;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.5s;
+    max-width: 620px;
+  }
+  .stat-row {
+    display: flex; align-items: center; gap: 16px;
+    background: var(--black-3); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px; padding: 16px 22px;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: default;
+  }
+  .stat-row:hover { border-color: rgba(245,166,35,0.3); transform: translateX(6px); }
+  .stat-arrow { color: var(--gold); font-size: 18px; flex-shrink: 0; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--gold); line-height: 1; flex-shrink: 0; min-width: 80px; }
+  .stat-label { font-size: 15px; font-weight: 500; color: var(--off-white); line-height: 1.4; }
+
+  /* ── TAGLINE ── */
+  .tagline-block {
+    margin-top: 56px; max-width: 640px;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.65s;
+  }
+  .tagline-block p {
+    font-size: clamp(18px, 2.5vw, 22px); font-weight: 300; color: var(--off-white); line-height: 1.6; margin-bottom: 12px;
+  }
+  .tagline-block p strong { color: var(--gold); font-weight: 700; }
+  .tagline-block .emoji-line { font-size: 22px; }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: linear-gradient(to right, transparent, rgba(245,166,35,0.25), transparent); margin: 0 40px; }
+
+  /* ── HOW IT WORKS ── */
+  .steps-section { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
+  .section-tag { font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 7vw, 88px); line-height: 0.95; text-transform: uppercase; margin-bottom: 48px; }
+
+  .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: rgba(255,255,255,0.06); border-radius: 14px; overflow: hidden; }
+  .step-card {
+    background: #111; padding: 40px 32px; position: relative;
+    transition: background 0.3s; cursor: default;
+  }
+  .step-card:hover { background: #1a1a1a; }
+  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 72px; color: rgba(245,166,35,0.08); line-height: 1; position: absolute; top: 20px; right: 20px; }
+  .step-icon { font-size: 32px; margin-bottom: 20px; display: block; }
+  .step-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 8px; color: var(--white); }
+  .step-card p { font-size: 13px; color: var(--grey); line-height: 1.6; }
+
+  /* ── WHY CHARGED ── */
+  .why-section { padding: 100px 40px; background: var(--black-2); position: relative; }
+  .why-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(245,166,35,0.3), transparent); }
+  .why-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .why-pills { display: flex; flex-direction: column; gap: 14px; margin-top: 40px; }
+  .why-pill {
+    display: flex; align-items: flex-start; gap: 16px;
+    background: var(--black-3); border: 1px solid rgba(255,255,255,0.05); border-radius: 10px;
+    padding: 20px 22px; transition: all 0.3s;
+  }
+  .why-pill:hover { border-color: rgba(245,166,35,0.25); transform: translateX(4px); }
+  .why-pill .icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+  .why-pill h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; color: var(--white); }
+  .why-pill p { font-size: 13px; color: var(--grey); line-height: 1.55; }
+  .why-pill p strong { color: var(--gold); }
+
+  /* counter widget */
+  .counter-widget {
+    background: var(--black-3); border: 1px solid rgba(245,166,35,0.15); border-radius: 16px; padding: 40px 36px;
+    text-align: center;
+  }
+  .counter-widget .label { font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .counter-big { font-family: 'Bebas Neue', sans-serif; font-size: 80px; color: var(--gold); line-height: 1; }
+  .counter-sub { font-size: 14px; color: var(--grey); margin-top: 8px; font-weight: 400; }
+  .counter-row { display: flex; justify-content: space-around; margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.06); gap: 16px; }
+  .c-stat .num { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: var(--white); line-height: 1; display: block; }
+  .c-stat .lbl { font-size: 11px; color: var(--grey); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 120px 40px; text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-glow {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 800px; height: 400px;
+    background: radial-gradient(ellipse, rgba(245,166,35,0.09) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-section .section-title { font-size: clamp(52px, 8vw, 96px); }
+  .cta-sub { font-size: 18px; color: var(--grey); max-width: 500px; margin: 16px auto 48px; font-weight: 300; }
+
+  /* apply btn */
+  .apply-btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--gold); color: var(--black);
+    font-family: 'Figtree', sans-serif; font-weight: 800; font-size: 17px;
+    padding: 22px 48px; border-radius: 8px; text-decoration: none;
+    transition: all 0.25s; position: relative; z-index: 1; border: none; cursor: pointer;
+  }
+  .apply-btn:hover { background: var(--gold-bright); transform: translateY(-3px); box-shadow: 0 16px 50px rgba(245,166,35,0.28); }
+  .apply-note { margin-top: 20px; font-size: 13px; color: var(--grey); font-style: italic; position: relative; z-index: 1; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 48px 40px; border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px; background: var(--black-2);
+  }
+  footer .links { display: flex; gap: 24px; flex-wrap: wrap; }
+  footer .links a { font-size: 13px; font-weight: 500; color: var(--grey); text-decoration: none; transition: color 0.2s; }
+  footer .links a:hover { color: var(--white); }
+  footer .copy { font-size: 12px; color: rgba(255,255,255,0.18); font-weight: 400; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* scroll reveal */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* number counter animation */
+  @keyframes countUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .why-inner { grid-template-columns: 1fr; gap: 48px; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .hero { padding: 100px 20px 60px; }
+    .steps-section, .why-section, .cta-section { padding: 72px 20px; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .divider { margin: 0 20px; }
+    footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <a href="https://getcharged.energy" class="nav-logo">
+      <img src="https://raw.githubusercontent.com/megans832/charged/main/charged%20horizontal%20logo-2.png" alt="charged logo" style="height: 36px; width: auto;">
+    </a>
+    <nav class="nav-menu">
+      <a href="https://getcharged.energy/demo">🎮 demo</a>
+      <a href="https://getcharged.energy/timeline">📅 timeline</a>
+      <a href="https://getcharged.energy/merchants" class="active">🛍️ merchants</a>
+      <a href="https://getcharged.energy/providers">⚡ providers</a>
+    </nav>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="menu">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="nav-cta" href="https://wa.me/447763375105?text=I%27d%20like%20to%20join%20the%20charged%20waitlist%20as%20a%20founding%20tester%20%E2%9A%A1" target="_blank">join waitlist</a>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <a href="https://getcharged.energy/demo" onclick="closeMenu()">🎮 demo</a>
+  <a href="https://getcharged.energy/timeline" onclick="closeMenu()">📅 timeline</a>
+  <a href="https://getcharged.energy/merchants" onclick="closeMenu()">🛍️ merchants</a>
+  <a href="https://getcharged.energy/providers" onclick="closeMenu()">⚡ providers</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+
+  <p class="hero-eyebrow">⚡ for merchants</p>
+  <h1>
+    meet your<br>
+    <span class="gold">customers</span><br>
+    <span class="outline">where they are.</span>
+  </h1>
+
+  <div class="stats-ticker">
+    <div class="stat-row">
+      <span class="stat-arrow">➡️</span>
+      <span class="stat-num" data-target="96">0</span>
+      <span class="stat-label">of millennials use WhatsApp every single day</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-arrow">➡️</span>
+      <span class="stat-num" data-target="68">0</span>
+      <span class="stat-label">are paying their own energy bills — and feeling every rise</span>
+    </div>
+  </div>
+
+  <div class="tagline-block">
+    <p class="emoji-line">it's time to meet your customers where they are 📱</p>
+    <p><strong>charged⚡ makes it super simple</strong> for you to build a new and loyal customer base.</p>
+    <p>your offers help real people pay their energy bills — and they'll love you for it.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="steps-section">
+  <p class="section-tag reveal">how it works for you</p>
+  <h2 class="section-title reveal">four steps.<br>you're live.</h2>
+  <div class="steps-grid">
+    <div class="step-card reveal">
+      <span class="step-num">01</span>
+      <span class="step-icon">👇</span>
+      <h3>drop in your details</h3>
+      <p>tell us about your company, your category, and who you want to reach. takes about 3 minutes.</p>
+    </div>
+    <div class="step-card reveal">
+      <span class="step-num">02</span>
+      <span class="step-icon">🔐</span>
+      <h3>get verified</h3>
+      <p>we do a quick check to make sure you're a legitimate UK business. straightforward and fast.</p>
+    </div>
+    <div class="step-card reveal">
+      <span class="step-num">03</span>
+      <span class="step-icon">🎁</span>
+      <h3>add your offer</h3>
+      <p>set your cashback rate. we'll show you what performs best in your category so you can compete smart.</p>
+    </div>
+    <div class="step-card reveal">
+      <span class="step-num">04</span>
+      <span class="step-icon">📅</span>
+      <h3>book your promo</h3>
+      <p>pick your go-live date. your offer starts appearing to charged users who match your audience.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHY CHARGED -->
+<section class="why-section">
+  <div class="why-inner">
+    <div>
+      <p class="section-tag reveal">why charged works</p>
+      <h2 class="section-title reveal">loyalty<br>built in.</h2>
+      <div class="why-pills">
+        <div class="why-pill reveal">
+          <span class="icon">⚡</span>
+          <div>
+            <h4>customers who earn, return</h4>
+            <p>when your offer directly reduces someone's energy bill, the goodwill is <strong>enormous</strong>. they remember you as the brand that helped.</p>
+          </div>
+        </div>
+        <div class="why-pill reveal">
+          <span class="icon">📲</span>
+          <div>
+            <h4>whatsapp-first reach</h4>
+            <p>offers land in the most-opened app on their phone. not an email inbox. not a forgotten app. <strong>whatsapp.</strong></p>
+          </div>
+        </div>
+        <div class="why-pill reveal">
+          <span class="icon">🎯</span>
+          <div>
+            <h4>no clicks, no codes, no friction</h4>
+            <p>card-linked offers mean customers just spend as normal. <strong>zero extra steps</strong> = higher conversion, naturally.</p>
+          </div>
+        </div>
+        <div class="why-pill reveal">
+          <span class="icon">📊</span>
+          <div>
+            <h4>real performance data</h4>
+            <p>see exactly how many transactions your offer drove, at what value. <strong>proper attribution</strong>, not guesswork.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- counter widget -->
+    <div class="counter-widget reveal">
+      <p class="label">charged audience</p>
+      <div class="counter-big" id="mainCounter">0</div>
+      <p class="counter-sub">uk millennials on the waitlist & growing</p>
+      <div class="counter-row">
+        <div class="c-stat">
+          <span class="num">18–35</span>
+          <span class="lbl">age range</span>
+        </div>
+        <div class="c-stat">
+          <span class="num">94%</span>
+          <span class="lbl">mobile-first</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <p class="section-tag reveal" style="display:block;text-align:center;">ready to join?</p>
+  <h2 class="section-title reveal">become a<br><span style="color:var(--gold);">charged⚡ merchant.</span></h2>
+  <p class="cta-sub reveal">early merchants get priority placement, reduced commission rates, and a direct line to our team. spots are limited.</p>
+
+  <a class="apply-btn reveal" id="applyBtn"
+     href="mailto:merchants@getcharged.energy?subject=new%20merchant%20enquiry&body=hi%20charged%E2%9A%A1%2C%0A%0Awe%20wanna%20help%20uk%20millennials%20save%20on%20their%20energy%20bills.%0A%0Ahere%27s%20our%20company%20details%3A%0A%0Acompany%20name%3A%20%0Acompany%20number%3A%20%0Aregistered%20address%3A%20%0Aannual%20turnover%3A%20%0AmerchantID%3A%20%0Acashback%20offer%3A%20%0Asocial%20handles%3A%20%0A%0Amobile%20number%3A%20%0A%0Alook%20forward%20to%20speaking%20to%20you%20shortly.">
+    ✉️ apply to become a merchant
+  </a>
+  <p class="apply-note reveal">opens your email with everything pre-filled. we aim to respond within 48 hours.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="https://getcharged.energy" class="nav-logo">
+    <img src="https://raw.githubusercontent.com/megans832/charged/main/charged%20horizontal%20logo-2.png" alt="charged logo" style="height: 36px; width: auto;">
+  </a>
+  <div class="links">
+    <a href="https://getcharged.energy">home</a>
+    <a href="https://getcharged.energy/demo">demo</a>
+    <a href="#">privacy policy</a>
+    <a href="#">contact</a>
+  </div>
+  <p class="copy">© 2026 charged. all rights reserved.</p>
+</footer>
+
+<script>
+  /* ── NAV ── */
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobileDrawer').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobileDrawer').classList.remove('open');
+  }
+  document.addEventListener('click', function(e) {
+    var h = document.getElementById('hamburger');
+    var d = document.getElementById('mobileDrawer');
+    if (h && d && !h.contains(e.target) && !d.contains(e.target)) closeMenu();
+  });
+
+  /* ── SCROLL REVEAL ── */
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+  /* ── STAT COUNTERS (hero) ── */
+  function animateCount(el, target, suffix) {
+    suffix = (suffix === undefined) ? '%' : suffix;
+    var start = 0;
+    var duration = 1400;
+    var startTime = null;
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(eased * target) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  var statObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        var target = parseInt(e.target.getAttribute('data-target'));
+        animateCount(e.target, target, '%');
+        statObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-target]').forEach(function(el) { statObserver.observe(el); });
+
+  /* ── MAIN COUNTER (widget) ── */
+  var counterDone = false;
+  var counterObs = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting && !counterDone) {
+      counterDone = true;
+      animateCount(document.getElementById('mainCounter'), 1247, '');
+      counterObs.disconnect();
+    }
+  }, { threshold: 0.3 });
+  counterObs.observe(document.getElementById('mainCounter'));
+</script>
+</body>
+</html>
