@@ -450,9 +450,14 @@
         <div class="fc-desc">fidel card-linking flow with security Q&A</div>
       </div>
       <div class="flow-card" id="fc-settlement" onclick="selectFlow('settlement')">
-        <div class="fc-icon">🏦</div>
-        <div class="fc-name">settlement run</div>
-        <div class="fc-desc">weekly batch — pending → sent to e.on</div>
+        <div class="fc-icon">📊</div>
+        <div class="fc-name">admin status updates</div>
+        <div class="fc-desc">e.on commercial team Q&A + weekly settlement</div>
+      </div>
+      <div class="flow-card" id="fc-tree" onclick="selectFlow('tree')">
+        <div class="fc-icon">🌱</div>
+        <div class="fc-name">£100 milestone — tree gift</div>
+        <div class="fc-desc">furthr.earth partnership moment</div>
       </div>
     </div>
 
@@ -654,7 +659,7 @@ function selectFlow(name) {
   flow = name; busy = false; obStage = 'idle';
   document.getElementById('msgs').innerHTML = '';
   clearQRs(); disableInp(); setHint('');
-  ['onboarding','cashback','balance','offers','addcard','settlement'].forEach(function(f) {
+  ['onboarding','cashback','balance','offers','addcard','settlement','tree'].forEach(function(f) {
     var el = document.getElementById('fc-'+f);
     if (el) el.classList.toggle('active', f === name);
   });
@@ -664,6 +669,7 @@ function selectFlow(name) {
   else if (name==='offers') startOffers();
   else if (name==='addcard') startAddCard();
   else if (name==='settlement') startSettlement();
+  else if (name==='tree') startTree();
 }
 
 // ─── ONBOARDING ───────────────────────────────────────────────────────────────
@@ -853,39 +859,152 @@ function addCardReply(r) {
   }
 }
 
-// ─── SETTLEMENT ───────────────────────────────────────────────────────────────
+// ─── ADMIN STATUS UPDATES ─────────────────────────────────────────────────────
 function startSettlement() {
-  addDivider('weekly cron · 1 jul 2026');
-  dbLog('read', 'cashback_ledger', 'status=pending | aggregate=true | cutoff=2026-06-30', '🔍');
-  setTimeout(function() {
-    dbLog('read', 'users', 'has_pending_balance=true | count=147', '🔍');
-    botSay('🏦 settlement run starting...\n\n147 users with pending balances\ntotal to distribute: £1,842.60\n\nbatching transfers to e.on via kraken API...', 1200, function() {
+  addDivider('e.on admin · charged ⚡');
+  dbLog('read', 'users', 'energy_provider=eon | aggregate=true', '🔍');
+  botSay('👋 hi — what would you like to know?', 700, function() {
+    setQRs([
+      'how many E.ON accounts have joined charged?',
+      'how many have registered their card?',
+      'how much has been saved?',
+      'send this week\'s settlement update'
+    ], adminReply);
+  });
+}
+
+function adminReply(r) {
+  clearQRs(); addBubble('user', r);
+  dbLog('insert', 'message_queue', 'body="'+r.slice(0,50)+'" | status=queued', '📨');
+
+  if (r === 'how many E.ON accounts have joined charged?') {
+    dbLog('read', 'users', 'energy_provider=eon | count=true', '🔍');
+    botSay('📊 E.ON accounts on charged\n\n👥 total joined: 1,284\n📈 joined this week: 47\n📅 joined this month: 203\n\ngrowth is up 18% week on week 🚀', 900, function() {
+      setQRs([
+        'how many have registered their card?',
+        'how much has been saved?',
+        'send this week\'s settlement update'
+      ], adminReply);
+    });
+
+  } else if (r === 'how many have registered their card?') {
+    dbLog('read', 'users', 'energy_provider=eon | card_linked=true | count=true', '🔍');
+    botSay('💳 card registration\n\n✅ cards linked: 978\n📊 activation rate: 76%\n⏳ joined but not yet linked: 306\n\n306 customers are one step away — they joined but haven\'t linked a card yet 👀', 900, function() {
+      setQRs([
+        'how many E.ON accounts have joined charged?',
+        'how much has been saved?',
+        'send this week\'s settlement update'
+      ], adminReply);
+    });
+
+  } else if (r === 'how much has been saved?') {
+    dbLog('read', 'cashback_ledger', 'energy_provider=eon | aggregate=true | group_by=period', '🔍');
+    botSay('💰 cashback saved — E.ON customers\n\nthis week: £4,210.80\nthis month: £14,883.40\nthis quarter: £38,220.15\nall time: £52,614.90\n\naverage per active customer: £12.53 / month 🙌', 1000, function() {
+      setQRs([
+        'how many E.ON accounts have joined charged?',
+        'how many have registered their card?',
+        'send this week\'s settlement update'
+      ], adminReply);
+    });
+
+  } else if (r === 'send this week\'s settlement update') {
+    dbLog('read', 'cashback_ledger', 'status=pending | aggregate=true | cutoff=2026-06-30', '🔍');
+    botSay('processing this week\'s cashback for 147 E.ON customers...\ntotal to transfer: £1,842.60\n\nbatching now — back in a moment 🏦', 1000, function() {
       dbLog('insert', 'settlement_runs', 'id=SET-001 | date=2026-07-01 | total=1842.60 | users=147 | status=processing', '🏦');
       setTimeout(function() {
         dbLog('update', 'cashback_ledger', 'status: pending → sent | batch=SET-001 | records=147', '✏️');
         setTimeout(function() {
           dbLog('insert', 'kraken_transfers', 'batch=SET-001 | api=creditAccount | status=submitted', '⚡');
           setTimeout(function() {
-            dbLog('update', 'settlement_runs', 'id=SET-001 | status=complete | kraken_ref=KRK-88421', '✅');
-            botSay('✅ settlement complete!\n\n⚡ £1,842.60 distributed across 147 e.on accounts\n🏦 kraken ref: KRK-88421\n📅 next settlement: 1 aug 2026\n\nall users notified via whatsapp', 1000, function() {
-              setQRs(['view settlement report','check ledger status'], settlementReply);
+            dbLog('update', 'settlement_runs', 'id=SET-001 | status=complete', '✅');
+            botSay('⚡ charged weekly update · Mon 1 Jul\n\n147 E.ON customers earned cashback this week\n£1,842.60 transferred to their energy accounts\nBatch completed: 08:17 ✅\n\nThat\'s 147 customers with a little less to worry about on their energy bill this month 🙌', 1000, function() {
+              setQRs([
+                'see the breakdown',
+                'how many E.ON accounts have joined charged?',
+                'how much has been saved?'
+              ], adminReply2);
             });
           }, 600);
         }, 600);
       }, 600);
     });
+  }
+}
+
+function adminReply2(r) {
+  clearQRs(); addBubble('user', r);
+  dbLog('insert', 'message_queue', 'body="'+r.slice(0,50)+'" | status=queued', '📨');
+  if (r === 'see the breakdown') {
+    dbLog('read', 'settlement_runs', 'id=SET-001 | detail=full', '🔍');
+    botSay('week ending 30 Jun 2026\n\n👥 E.ON customers earning cashback: 147\n💰 total transferred to energy accounts: £1,842.60\n📊 average per customer: £12.53\n⏱ batch completed in: 4m 32s\n\nno errors. all 147 accounts credited ✅', 900, function() {
+      setQRs([
+        'how many E.ON accounts have joined charged?',
+        'how much has been saved?'
+      ], adminReply);
+    });
+  } else {
+    adminReply(r);
+  }
+}
+
+
+
+// ─── £100 MILESTONE — TREE GIFT ────────────────────────────────────────────────
+function startTree() {
+  addDivider('today');
+  var txId = randId('TXN');
+  dbLog('insert', 'transactions', 'id='+txId+' | retailer=boots | amount=42.00 | status=confirmed', '🛒');
+  setTimeout(function() {
+    dbLog('insert', 'cashback_ledger', 'amount=5.80 | status=pending | running_total=100.40', '⚡');
+    setTimeout(function() {
+      dbLog('read', 'users', 'total_cashback_earned >= 100 | milestone_sent=false', '🔍');
+      setTimeout(function() {
+        dbLog('update', 'users', 'milestone_100_hit=true | milestone_100_date=2026-06-19', '✏️');
+        botSay('⚡ cashback confirmed. £5.80 from boots has been added to your energy credit. your total balance is now £100.40.', 1000, function() {
+          dbLog('insert', 'tree_gifts', 'user=CHG-00001 | status=requesting | partner=furthr.earth', '🌱');
+          setTimeout(function() {
+            botSay('hold on... 👀', 700, function() {
+              setTimeout(function() {
+                dbLog('insert', 'furthr_api_calls', 'endpoint=POST /trees | status=success | tree_id=FRT-88291', '🌍');
+                dbLog('update', 'tree_gifts', 'status=planted | tree_id=FRT-88291 | certificate=pending', '✅');
+                botSay('🎉 you just hit £100 cashback!\n\nyour energy account has been credited — and we\'ve planted a tree in your name 🌱\n\nit\'s growing in Kenya as part of the furthr.earth reforestation project. your certificate is on its way 📜\n\nthat\'s money back in your pocket and something good in the ground 🌍', 1300, function() {
+                  setQRs(['see my tree certificate','what is furthr.earth?','keep going — what\'s next?'], treeReply);
+                });
+              }, 1100);
+            });
+          }, 600);
+        });
+      }, 500);
+    }, 500);
   }, 500);
 }
-function settlementReply(r) {
+
+function treeReply(r) {
   clearQRs(); addBubble('user', r);
-  if (r==='view settlement report') {
-    dbLog('read', 'settlement_runs', 'id=SET-001 | detail=full', '🔍');
-    botSay('settlement run SET-001 · 1 jul 2026\n\n📊 users processed: 147\n💰 total distributed: £1,842.60\n✅ kraken transfers: 147/147\n⏱ duration: 4m 32s\n\nno errors recorded 🎉', 900, function() {
-      setQRs(['check ledger status'], settlementReply);
+  dbLog('insert', 'message_queue', 'body="'+r+'" | status=queued', '📨');
+  if (r === 'see my tree certificate') {
+    dbLog('read', 'tree_gifts', 'user=CHG-00001 | tree_id=FRT-88291', '🔍');
+    botSay('🌱 your tree certificate\n\ntree ID: FRT-88291\nproject: furthr.earth reforestation\nlocation: Kenya\nplanted: 19 jun 2026\nplanted in the name of: you ⚡\n\nyour certificate has been emailed — you can track this tree\'s growth anytime 📍', 1000, function() {
+      setQRs(['what is furthr.earth?','keep going — what\'s next?'], treeReply);
     });
-  } else if (r==='check ledger status') {
-    dbLog('read', 'cashback_ledger', 'status=sent | batch=SET-001 | count=147', '🔍');
-    botSay('ledger status post-settlement:\n\n✅ sent: 147 entries\n⏳ pending: 0\n🔄 processing: 0\n\nnext pending entries will start accumulating from today 🙌', 900);
+  } else if (r === 'what is furthr.earth?') {
+    botSay('furthr.earth are a reforestation partner who plant real, verified trees 🌍\n\nevery tree is geotagged, tracked, and supports local communities and biodiversity where it\'s planted.\n\nwe gift one every time you hit £100 in cashback — on us, not your energy account 🌱', 1100, function() {
+      setQRs(['see my tree certificate','keep going — what\'s next?'], treeReply);
+    });
+  } else if (r === 'keep going — what\'s next?') {
+    dbLog('read', 'cashback_ledger', 'user=CHG-00001 | next_milestone=200', '🔍');
+    botSay('next stop: £200 🌳\n\nyou\'ll earn your second tree when you hit that — keep spending at partner brands and we\'ll do the rest ⚡', 900, function() {
+      setQRs(['browse offers','check my balance'], function(r2) {
+        clearQRs(); addBubble('user', r2);
+        dbLog('insert', 'message_queue', 'body="'+r2+'" | status=queued', '📨');
+        if (r2 === 'browse offers') {
+          dbLog('read', 'offers', 'active=true | group_by=category', '🔍');
+          botSay('pick a category 👇', 700, function() { setQRs(CATS, catReply); });
+        } else {
+          showBalance();
+        }
+      });
+    });
   }
 }
 
