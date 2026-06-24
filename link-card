@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>link your card — charged ⚡</title>
+
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- fidel web sdk v3 -->
+  <script type="text/javascript" src="https://resources.fidel.uk/sdk/js/v3/fidel.js" data-id="fidel-sdk"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:    #F5A623;
+      --black:   #000000;
+      --surface: #111111;
+      --card:    #1A1A1A;
+      --border:  #2A2A2A;
+      --text:    #FFFFFF;
+      --muted:   #888888;
+      --green:   #00E676;
+      --red:     #FF4444;
+    }
+
+    html, body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'Figtree', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── nav ─────────────────────────────────────────── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Figtree', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: 0;
+      text-decoration: none;
+    }
+
+    .nav-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 12px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── main layout ─────────────────────────────────── */
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 73px);
+      padding: 40px 24px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+    }
+
+    .card-top-bar {
+      height: 4px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin-bottom: 32px;
+    }
+
+    /* ── default state ───────────────────────────────── */
+    #state-default { display: block; }
+    #state-success  { display: none; }
+    #state-error    { display: none; }
+    #state-loading  { display: none; }
+
+    .bolt {
+      font-size: 48px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      letter-spacing: 2px;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.1;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .subtitle strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ── how it works list ───────────────────────────── */
+    .steps {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 32px;
+    }
+
+    .steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .steps li:last-child { margin-bottom: 0; }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      background: var(--gold);
+      color: var(--black);
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    /* ── cta button ──────────────────────────────────── */
+    .btn-primary {
+      width: 100%;
+      padding: 16px;
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      border-radius: 10px;
+      font-family: 'Figtree', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-primary:hover { opacity: 0.9; }
+    .btn-primary:active { transform: scale(0.99); }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .btn-secondary {
+      width: 100%;
+      padding: 14px;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-family: 'Figtree', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: border-color 0.2s, color 0.2s;
+      text-decoration: none;
+      display: block;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--muted);
+      color: var(--text);
+    }
+
+    /* ── scheme badges ───────────────────────────────── */
+    .scheme-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .scheme-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 10px;
+    }
+
+    .security-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+
+    .security-note span {
+      color: var(--gold);
+    }
+
+    /* ── success state ───────────────────────────────── */
+    .success-icon {
+      font-size: 56px;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    h1.success {
+      color: var(--green);
+    }
+
+    .card-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 14px;
+      color: var(--text);
+      margin: 20px 0 28px;
+    }
+
+    .card-pill .scheme-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .btn-whatsapp {
+      width: 100%;
+      padding: 16px;
+      background: #25D366;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Figtree', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      text-decoration: none;
+      display: block;
+    }
+
+    .btn-whatsapp:hover { opacity: 0.9; }
+
+    /* ── error state ─────────────────────────────────── */
+    h1.error { color: var(--red); }
+
+    .error-msg {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 12px 0 28px;
+      line-height: 1.6;
+    }
+
+    /* ── loading state ───────────────────────────────── */
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── user pill ───────────────────────────────────── */
+    .user-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 12px 4px 8px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .user-pill .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── missing user warning ────────────────────────── */
+    .warn-box {
+      background: #1a1100;
+      border: 1px solid #664400;
+      border-radius: 10px;
+      padding: 16px;
+      font-size: 13px;
+      color: #cc8800;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    /* ── responsive ──────────────────────────────────── */
+    @media (max-width: 480px) {
+      .card { padding: 28px 20px; }
+      h1 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- nav -->
+  <nav>
+    <a href="https://getcharged.energy" class="nav-logo">charged ⚡</a>
+    <span class="nav-badge">secure card linking</span>
+  </nav>
+
+  <main>
+    <div class="card">
+      <div class="card-top-bar"></div>
+
+      <!-- ── loading state (shown while fetching SDK key) ── -->
+      <div id="state-loading">
+        <div class="spinner"></div>
+        <p class="subtitle">setting things up...</p>
+      </div>
+
+      <!-- ── default / ready state ── -->
+      <div id="state-default">
+        <span class="bolt">⚡</span>
+        <h1>link your card</h1>
+
+        <!-- user identifier pill — populated by JS -->
+        <div id="user-pill-wrap" style="display:none">
+          <div class="user-pill">
+            <span class="dot"></span>
+            <span id="user-pill-text"></span>
+          </div>
+        </div>
+
+        <!-- warning if no charged_id in URL -->
+        <div id="warn-no-user" class="warn-box" style="display:none">
+          ⚠️ no account found — please open this link from your charged whatsapp message
+        </div>
+
+        <p class="subtitle">
+          link once and cashback tracks <strong>automatically</strong> every time you spend at a partner brand — straight to your energy bill 🔋
+        </p>
+
+        <ul class="steps">
+          <li>
+            <span class="step-num">1</span>
+            <span>tap the button below — a secure form opens</span>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <span>enter your card number and expiry date</span>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <span>done — we'll ping you on whatsapp the moment cashback lands ⚡</span>
+          </li>
+        </ul>
+
+        <button id="link-card-btn" class="btn-primary" onclick="openFidelForm()">
+          link my card now 🔐
+        </button>
+
+        <div class="scheme-row">
+          <span class="scheme-badge">visa</span>
+          <span class="scheme-badge">mastercard</span>
+          <span class="scheme-badge">debit + credit</span>
+        </div>
+
+        <p class="security-note">
+          <span>🔒 bank-grade security.</span> your card details go directly to fidel's PCI-compliant system — charged never sees your card number.
+        </p>
+      </div>
+
+      <!-- ── success state ── -->
+      <div id="state-success">
+        <span class="success-icon">🎉</span>
+        <h1 class="success">you're all charged up</h1>
+        <p class="subtitle">card linked successfully — cashback now tracks automatically whenever you spend at a partner brand</p>
+
+        <div class="card-pill">
+          <span class="scheme-dot"></span>
+          <span id="success-card-detail">card linked</span>
+        </div>
+
+        <p class="subtitle" style="margin-bottom: 0">
+          we'll send you a whatsapp the moment your first cashback clears ⚡
+        </p>
+
+        <div style="margin-top: 28px">
+          <a href="https://wa.me/447763375105" class="btn-whatsapp">
+            back to charged whatsapp 💬
+          </a>
+        </div>
+      </div>
+
+      <!-- ── error state ── -->
+      <div id="state-error">
+        <span class="bolt" style="font-size:40px">😬</span>
+        <h1 class="error">card didn't link</h1>
+        <p class="error-msg" id="error-detail">
+          something went wrong — please try again or use a different card. we support visa and mastercard debit/credit (no amex or prepaid).
+        </p>
+
+        <button class="btn-primary" onclick="openFidelForm()">
+          try again
+        </button>
+
+        <a href="https://wa.me/447763375105" class="btn-secondary">
+          contact support on whatsapp
+        </a>
+      </div>
+
+    </div><!-- /.card -->
+  </main>
+
+  <script>
+    // ── config ────────────────────────────────────────────────
+    const RAILWAY_URL  = 'https://charged-railway-chatbot-production.up.railway.app'
+    const PROGRAM_ID   = 'fd4bf5fb-a4d4-4b0c-ba31-f91a0fa5d18f'  // ← swap in your Fidel program ID
+
+    // ── state helpers ─────────────────────────────────────────
+    function showState(name) {
+      ;['loading', 'default', 'success', 'error'].forEach(s => {
+        document.getElementById('state-' + s).style.display = (s === name) ? 'block' : 'none'
+      })
+    }
+
+    // ── get charged_id from URL ───────────────────────────────
+    const params    = new URLSearchParams(window.location.search)
+    const chargedId = params.get('user') || null
+
+    if (chargedId) {
+      document.getElementById('user-pill-wrap').style.display = 'block'
+      document.getElementById('user-pill-text').textContent   = chargedId
+    } else {
+      document.getElementById('warn-no-user').style.display = 'block'
+      document.getElementById('link-card-btn').disabled     = true
+    }
+
+    // ── fetch SDK key securely from Railway ───────────────────
+    let sdkKey = null
+
+    async function init() {
+      showState('loading')
+      try {
+        const res  = await fetch(RAILWAY_URL + '/config')
+        const data = await res.json()
+        if (!data.sdkKey) throw new Error('no sdk key returned')
+        sdkKey = data.sdkKey
+        showState('default')
+      } catch (err) {
+        console.error('[charged] failed to load config:', err)
+        // still show the page — button disabled below if no key
+        showState('default')
+        document.getElementById('link-card-btn').disabled = true
+        document.getElementById('warn-no-user').style.display = 'block'
+        document.getElementById('warn-no-user').textContent =
+          '⚠️ unable to load — please refresh or try again in a moment'
+      }
+    }
+
+    // ── open fidel form ───────────────────────────────────────
+    function openFidelForm() {
+      if (!sdkKey) return
+
+      Fidel.openForm({
+        companyName:  'charged',
+        sdkKey:       sdkKey,
+        programId:    PROGRAM_ID,
+        countries:    ['GBR'],
+        closeOnSuccess: false,
+
+        // pass charged_id through so the webhook can look up the user
+        metadata: {
+          id:         chargedId || 'unknown',
+          charged_id: chargedId || 'unknown'
+        },
+
+        // sdk ui — dark theme matching charged brand
+        custom: {
+          overlay: {
+            style: { background: 'rgba(0,0,0,0.85)' }
+          },
+          form: {
+            style: {
+              background: '#1A1A1A',
+              border:     '1px solid #2A2A2A',
+              borderRadius: '16px'
+            }
+          },
+          title: {
+            text: 'link your card ⚡',
+            style: {
+              color:      '#FFFFFF',
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: '700'
+            }
+          },
+          cardNumber: {
+            input: {
+              style: { background: '#111', color: '#fff', border: '1px solid #2A2A2A', borderRadius: '8px' },
+              focusStyle: { borderColor: '#F5A623' },
+              placeholderColor: '#555'
+            }
+          },
+          expiryDate: {
+            input: {
+              style: { background: '#111', color: '#fff', border: '1px solid #2A2A2A', borderRadius: '8px' },
+              focusStyle: { borderColor: '#F5A623' },
+              placeholderColor: '#555'
+            }
+          },
+          country: {
+            input: {
+              style: { background: '#111', color: '#fff', border: '1px solid #2A2A2A', borderRadius: '8px' },
+              focusStyle: { borderColor: '#F5A623' }
+            }
+          },
+          submit: {
+            style: {
+              background:   '#F5A623',
+              color:        '#000000',
+              borderRadius: '8px',
+              fontWeight:   '700'
+            },
+            hoverStyle:   { opacity: '0.9' },
+            defaultText:  'link my card',
+            loadingText:  'linking...',
+            successText:  'linked ✓'
+          },
+          terms: {
+            privacyUrl: 'https://getcharged.energy/privacy',
+            termsUrl:   'https://getcharged.energy/terms',
+            deleteInstructions: 'messaging us on WhatsApp'
+          },
+          close: { location: 'form', color: '#888' }
+        },
+
+        // ── success callback ──────────────────────────────────
+        onCardEnrolledCallback(card) {
+          console.log('[charged] card enrolled:', card)
+          const scheme = card.scheme || 'card'
+          const last   = card.lastNumbers && card.lastNumbers !== '****'
+            ? `ending ${card.lastNumbers}`
+            : ''
+          document.getElementById('success-card-detail').textContent =
+            `${scheme} ${last}`.trim()
+          showState('success')
+        },
+
+        // ── failure callback ──────────────────────────────────
+        onCardEnrollFailedCallback(error) {
+          console.error('[charged] card enrol failed:', error)
+          let msg = 'something went wrong — please try a different card.'
+
+          if (error?.type === 'item-exists') {
+            msg = "that card's already linked to your account 👍"
+            showState('success')
+            return
+          }
+          if (error?.type === 'credential') {
+            msg = 'there was a configuration issue — please contact support.'
+          }
+
+          document.getElementById('error-detail').textContent = msg
+          showState('error')
+        },
+
+        // ── user cancelled ────────────────────────────────────
+        onUserCancelledCallback() {
+          console.log('[charged] user cancelled')
+          showState('default')
+        }
+      })
+    }
+
+    // ── boot ──────────────────────────────────────────────────
+    init()
+  </script>
+
+</body>
+</html>
