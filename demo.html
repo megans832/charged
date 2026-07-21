@@ -409,7 +409,7 @@
 <div class="prototype-wrap">
   <div class="tabs" id="tabs">
     <button class="tab active" onclick="loadFlow('onboarding')">onboarding</button>
-    <button class="tab" onclick="loadFlow('cashback')">cashback notification</button>
+    <button class="tab" onclick="loadFlow('energybillcredit')">energy bill credit notification</button>
     <button class="tab" onclick="loadFlow('balance')">balance check</button>
     <button class="tab" onclick="loadFlow('offers')">browse offers</button>
     <button class="tab" onclick="loadFlow('addcard')">add card</button>
@@ -557,11 +557,11 @@ function loadFlow(name) {
   document.getElementById('msgs').innerHTML = '';
   clearQRs(); disableInp(); setHint('');
   document.querySelectorAll('.tab').forEach(function(tb) {
-    var map = {onboarding:'onboarding',cashback:'cashback notification',balance:'balance check',offers:'browse offers',addcard:'add card'};
+    var map = {onboarding:'onboarding',energybillcredit:'energy bill credit notification',balance:'balance check',offers:'browse offers',addcard:'add card'};
     tb.classList.toggle('active', tb.textContent.trim() === map[name]);
   });
   if (name==='onboarding') startOnboarding();
-  else if (name==='cashback') startCashback();
+  else if (name==='energybillcredit') startEnergyBillCredit();
   else if (name==='balance') startBalance();
   else if (name==='offers') startOffers();
   else if (name==='addcard') startAddCard();
@@ -569,7 +569,7 @@ function loadFlow(name) {
 
 function startOnboarding() {
   addDivider('today');
-  botSay('you made it 👏 welcome to the charged inner circle\n\nyou\'re in early & we want to build with you 🧰\n\nwhy we were born 👶:\nenergy bills are rising and cashback tools are a faff. we\'re fixing both 🔧\n\nnative to whatsapp 📱\ncharged lives in whatsapp — just message us before any big spend and we\'ll tell you how much you can save 👀\n\nenergy transfer ⚡:\ncashback goes straight to your energy account as non-refundable credit 💸\n\nthe finished article:\n🔗 link your card once\n🛍️ spend as normal\n⚡ credit lands in your energy account\n\nstart building with us — reply and tell us:\n⚡ who is your energy provider?\n🛒 top 5 brands you spend with?\n\nwe\'ll keep you updated with our build and launch 🚀 (no spam here)', 1200, function() {
+  botSay('you made it 👏 welcome to the charged inner circle\n\nyou\'re in early & we want to build with you 🧰\n\nwhy we were born 👶:\nenergy bills are rising and energy bill credit tools are a faff. we\'re fixing both 🔧\n\nnative to whatsapp 📱\ncharged lives in whatsapp — just message us before any big spend and we\'ll tell you how much you can save 👀\n\nenergy transfer ⚡:\nenergy bill credit goes straight to your energy account as non-refundable credit 💸\n\nthe finished article:\n🔗 link your card once\n🛍️ spend as normal\n⚡ credit lands in your energy account\n\nstart building with us — reply and tell us:\n⚡ who is your energy provider?\n🛒 top 5 brands you spend with?\n\nwe\'ll keep you updated with our build and launch 🚀 (no spam here)', 1200, function() {
     botSay('first up — who\'s your energy provider? 👇', 700, function() {
       setQRs(PROVIDERS, function(p) {
         clearQRs(); addBubble('user', p);
@@ -582,16 +582,16 @@ function startOnboarding() {
   });
 }
 
-function startCashback() {
+function startEnergyBillCredit() {
   addDivider('today');
-  botSay('⚡ cashback confirmed. £4.20 from tesco has been added to your energy credit. your total balance is now £11.60.', 800, function() {
+  botSay('⚡ energy bill credit confirmed. £4.20 from tesco has been added to your energy credit. your total balance is now £11.60.', 800, function() {
     botSay('that\'s £11.60 heading straight to your e.on bill 🙌\n\nkeep it up and you\'ll clear over £100 this year at your current pace', 700, function() {
-      setQRs(['see my full balance','what other offers do i have?','nice one 👏'], cashbackReply);
+      setQRs(['see my full balance','what other offers do i have?','nice one 👏'], energyBillCreditReply);
     });
   });
 }
 
-function cashbackReply(r) {
+function energyBillCreditReply(r) {
   clearQRs(); addBubble('user', r);
   if (r==='see my full balance') {
     showBalance();
@@ -601,7 +601,7 @@ function cashbackReply(r) {
     });
   } else if (r==='nice one 👏') {
     botSay('you\'re doing the work — we\'re just sending it where it matters ⚡', 800, function() {
-      setQRs(['see my full balance','what other offers do i have?'], cashbackReply);
+      setQRs(['see my full balance','what other offers do i have?'], energyBillCreditReply);
     });
   }
 }
@@ -667,7 +667,7 @@ function startOffers() {
   botSay('⚡ 3 new offers just dropped — say yes to see them', 800, function() {
     setQRs(['yes'], function() {
       clearQRs(); addBubble('user','yes');
-      botSay('here\'s what\'s live for you:\n\n1️⃣ tesco — 4% cashback\n2️⃣ boots — 6% cashback\n3️⃣ amazon — 3% cashback\n\nall auto-activated on your linked card 👌', 900, function() {
+      botSay('here\'s what\'s live for you:\n\n1️⃣ tesco — 4% energy bill credit\n2️⃣ boots — 6% energy bill credit\n3️⃣ amazon — 3% energy bill credit\n\nall auto-activated on your linked card 👌', 900, function() {
         setQRs(['choose a category','find me a brand','check my balance'], offersReply);
       });
     });
@@ -702,7 +702,7 @@ function doSend() {
     disableInp(); addBubble('user', v);
     var lv = v.toLowerCase();
     if (lv==='nike' || lv==='asos' || lv==='next' || lv==='zara') {
-      botSay(v + ' isn\'t a card-linked partner yet — but we have an affiliate link with 5% cashback 🙌\n\nhead to getcharged.energy/offers to grab your tracked link', 900, function() {
+      botSay(v + ' isn\'t a card-linked partner yet — but we have an affiliate link with 5% energy bill credit 🙌\n\nhead to getcharged.energy/offers to grab your tracked link', 900, function() {
         setQRs(['find another brand','check my balance'], offersReply);
       });
     } else {
@@ -716,7 +716,7 @@ function doSend() {
 
 function startAddCard() {
   addDivider('today');
-  botSay('let\'s link your card 🔗\n\nthis is the only time you\'ll ever need to do this. once it\'s linked, cashback tracks automatically every time you spend — no codes, no clicking, no faff.', 900, function() {
+  botSay('let\'s link your card 🔗\n\nthis is the only time you\'ll ever need to do this. once it\'s linked, energy bill credit tracks automatically every time you spend — no codes, no clicking, no faff.', 900, function() {
     botSay('we use fidel to link your card securely 🔒\n\nfidel is pci-dss compliant — we never see your full card number. it just sits in the background and spots when you spend at a partner brand.', 1000, function() {
       botSay('tap below to link your card — takes about 60 seconds 👇', 700, function() {
         var m = document.getElementById('msgs');
@@ -744,7 +744,7 @@ function startAddCard() {
 function addCardReply(r) {
   clearQRs(); addBubble('user', r);
   if (r === 'i\'ve linked my card ✅') {
-    botSay('yeah baby ⚡⚡ you\'re live!\n\njust spend as normal at any partner brand and we\'ll handle the rest. cashback lands on your e.on account automatically.\n\nyou\'ll get a whatsapp notification the moment a transaction confirms 🙌', 1000, function() {
+    botSay('yeah baby ⚡⚡ you\'re live!\n\njust spend as normal at any partner brand and we\'ll handle the rest. energy bill credit lands on your e.on account automatically.\n\nyou\'ll get a whatsapp notification the moment a transaction confirms 🙌', 1000, function() {
       setQRs(['what offers do i have?', 'check my balance'], function(r2) {
         clearQRs(); addBubble('user', r2);
         if (r2 === 'what offers do i have?') {
@@ -765,7 +765,7 @@ function addCardReply(r) {
       setQRs(['link my card 🔗', 'can i link more than one?'], function(r2) {
         clearQRs(); addBubble('user', r2);
         if (r2 === 'can i link more than one?') {
-          botSay('yes! you can link up to 3 cards 💳\n\nuseful if you use one card for groceries and another for everything else — cashback tracks across all of them automatically.', 800, function() {
+          botSay('yes! you can link up to 3 cards 💳\n\nuseful if you use one card for groceries and another for everything else — energy bill credit tracks across all of them automatically.', 800, function() {
             setQRs(['link my card 🔗'], function() {
               clearQRs(); addBubble('user', 'link my card 🔗');
               botSay('tap the link below to get started 👇', 600, function() {

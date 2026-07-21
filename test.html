@@ -429,9 +429,9 @@
         <div class="fc-name">onboarding</div>
         <div class="fc-desc">new user signs up, selects provider & brands</div>
       </div>
-      <div class="flow-card" id="fc-cashback" onclick="selectFlow('cashback')">
+      <div class="flow-card" id="fc-energybillcredit" onclick="selectFlow('energybillcredit')">
         <div class="fc-icon">⚡</div>
-        <div class="fc-name">cashback notification</div>
+        <div class="fc-name">energy bill credit notification</div>
         <div class="fc-desc">transaction confirmed, credit posted to ledger</div>
       </div>
       <div class="flow-card" id="fc-balance" onclick="selectFlow('balance')">
@@ -660,12 +660,12 @@ function selectFlow(name) {
   flow = name; busy = false; obStage = 'idle';
   document.getElementById('msgs').innerHTML = '';
   clearQRs(); disableInp(); setHint('');
-  ['onboarding','cashback','balance','offers','addcard','settlement','tree'].forEach(function(f) {
+  ['onboarding','energybillcredit','balance','offers','addcard','settlement','tree'].forEach(function(f) {
     var el = document.getElementById('fc-'+f);
     if (el) el.classList.toggle('active', f === name);
   });
   if (name==='onboarding') startOnboarding();
-  else if (name==='cashback') startCashback();
+  else if (name==='energybillcredit') startEnergyBillCredit();
   else if (name==='balance') startBalance();
   else if (name==='offers') startOffers();
   else if (name==='addcard') startAddCard();
@@ -681,7 +681,7 @@ function startOnboarding() {
   setTimeout(function() {
     dbLog('insert', 'users', 'charged_id='+uid+' | wa_id=447700000001 | status=onboarding', '👤');
   }, 600);
-  botSay('you made it 👏 welcome to the charged inner circle\n\nyou\'re in early — we want to build with you 🧰\n\nenergy bills rising, cashback tools are a faff. we\'re fixing both.\n\nnative to whatsapp 📱 · cashback straight to your energy account ⚡\n\nfirst up — who\'s your energy provider? 👇', 1400, function() {
+  botSay('you made it 👏 welcome to the charged inner circle\n\nyou\'re in early — we want to build with you 🧰\n\nenergy bills rising, energy bill credit tools are a faff. we\'re fixing both.\n\nnative to whatsapp 📱 · energy bill credit straight to your energy account ⚡\n\nfirst up — who\'s your energy provider? 👇', 1400, function() {
     setQRs(PROVIDERS, function(p) {
       clearQRs(); addBubble('user', p);
       dbLog('insert', 'message_queue', 'wa_id=447700000001 | body="'+p+'" | status=queued', '📨');
@@ -694,29 +694,29 @@ function startOnboarding() {
   });
 }
 
-// ─── CASHBACK ─────────────────────────────────────────────────────────────────
-function startCashback() {
+// ─── ENERGY BILL CREDIT ─────────────────────────────────────────────────────────────────
+function startEnergyBillCredit() {
   addDivider('today');
   var txId = randId('TXN');
   var ledgerId = randId('LDG');
   dbLog('insert', 'transactions', 'id='+txId+' | retailer=tesco | amount=105.00 | status=confirmed', '🛒');
   setTimeout(function() {
-    dbLog('insert', 'cashback_ledger', 'id='+ledgerId+' | user=CHG-00001 | amount=4.20 | status=pending', '⚡');
+    dbLog('insert', 'energy_bill_credit_ledger', 'id='+ledgerId+' | user=CHG-00001 | amount=4.20 | status=pending', '⚡');
     setTimeout(function() {
-      dbLog('update', 'users', 'total_cashback_earned=23.40 | pending_balance=4.20', '✏️');
+      dbLog('update', 'users', 'total_energy_bill_credit_earned=23.40 | pending_balance=4.20', '✏️');
     }, 400);
   }, 500);
-  botSay('⚡ cashback confirmed. £4.20 from tesco has been added to your energy credit. your total balance is now £11.60.', 900, function() {
+  botSay('⚡ energy bill credit confirmed. £4.20 from tesco has been added to your energy credit. your total balance is now £11.60.', 900, function() {
     botSay('that\'s £11.60 heading straight to your e.on bill 🙌\n\nkeep it up and you\'ll clear over £100 this year at your current pace', 700, function() {
-      setQRs(['see my full balance','what other offers do i have?','nice one 👏'], cashbackReply);
+      setQRs(['see my full balance','what other offers do i have?','nice one 👏'], energyBillCreditReply);
     });
   });
 }
-function cashbackReply(r) {
+function energyBillCreditReply(r) {
   clearQRs(); addBubble('user', r);
   dbLog('insert', 'message_queue', 'body="'+r+'" | status=queued', '📨');
   if (r==='see my full balance') {
-    dbLog('read', 'cashback_ledger', 'user=CHG-00001 | filter=all', '🔍');
+    dbLog('read', 'energy_bill_credit_ledger', 'user=CHG-00001 | filter=all', '🔍');
     showBalance();
   } else if (r==='what other offers do i have?') {
     dbLog('read', 'offers', 'user=CHG-00001 | active=true', '🔍');
@@ -725,14 +725,14 @@ function cashbackReply(r) {
     });
   } else if (r==='nice one 👏') {
     botSay('you\'re doing the work — we\'re just sending it where it matters ⚡', 800, function() {
-      setQRs(['see my full balance','what other offers do i have?'], cashbackReply);
+      setQRs(['see my full balance','what other offers do i have?'], energyBillCreditReply);
     });
   }
 }
 
 // ─── BALANCE ──────────────────────────────────────────────────────────────────
 function showBalance() {
-  dbLog('read', 'cashback_ledger', 'user=CHG-00001 | aggregate=true', '🔍');
+  dbLog('read', 'energy_bill_credit_ledger', 'user=CHG-00001 | aggregate=true', '🔍');
   botSay('here\'s where you\'re at ⚡\n\n💰 total earned: £23.40\n✅ sent to e.on: £12.00\n⏳ pending: £4.20\n📊 next transfer: 1 jul\n\nyou\'re on track for £280 this year 🙌', 900, function() {
     setQRs(['see recent transactions','when does it hit my bill?'], balanceReply);
   });
@@ -741,7 +741,7 @@ function balanceReply(r) {
   clearQRs(); addBubble('user', r);
   dbLog('insert', 'message_queue', 'body="'+r+'" | status=queued', '📨');
   if (r==='see recent transactions') {
-    dbLog('read', 'cashback_ledger', 'user=CHG-00001 | limit=5 | order=desc', '🔍');
+    dbLog('read', 'energy_bill_credit_ledger', 'user=CHG-00001 | limit=5 | order=desc', '🔍');
     botSay('your last 5 transactions:\n\n🛒 tesco — £4.20 — 2 jun\n💄 boots — £1.80 — 29 may\n📦 amazon — £3.60 — 27 may\n🛒 tesco — £2.10 — 21 may\n👗 m&s — £0.90 — 18 may\n\ntotal this month: £12.60 🎉', 900, function() {
       setQRs(['when does it hit my bill?'], balanceReply);
     });
@@ -767,7 +767,7 @@ function startOffers() {
     setQRs(['yes — show me'], function() {
       clearQRs(); addBubble('user','yes — show me');
       dbLog('insert', 'message_queue', 'body="yes" | status=queued', '📨');
-      botSay('here\'s what\'s live for you:\n\n1️⃣ tesco — 4% cashback\n2️⃣ boots — 6% cashback\n3️⃣ amazon — 3% cashback\n\nall auto-activated on your linked card 👌', 900, function() {
+      botSay('here\'s what\'s live for you:\n\n1️⃣ tesco — 4% energy bill credit\n2️⃣ boots — 6% energy bill credit\n3️⃣ amazon — 3% energy bill credit\n\nall auto-activated on your linked card 👌', 900, function() {
         setQRs(['browse by category','find a specific brand','check my balance'], offersReply);
       });
     });
@@ -815,7 +815,7 @@ function catReply(r) {
 function startAddCard() {
   addDivider('today');
   dbLog('read', 'users', 'wa_id=447700000001 | check=card_linked', '🔍');
-  botSay('let\'s link your card 🔗\n\nonce it\'s linked, cashback tracks automatically every time you spend — no codes, no clicking, no faff.', 900, function() {
+  botSay('let\'s link your card 🔗\n\nonce it\'s linked, energy bill credit tracks automatically every time you spend — no codes, no clicking, no faff.', 900, function() {
     botSay('we use fidel to link your card securely 🔒\n\nfidel is pci-dss compliant — we never see your full card number. it sits in the background and spots when you spend at a partner brand.', 1000, function() {
       botSay('tap below to link your card — takes about 60 seconds 👇\n\n🔐 securely link your card → getcharged.energy/link', 700, function() {
         setQRs(['i\'ve linked my card ✅','how is my card data protected?','which cards work?'], addCardReply);
@@ -829,7 +829,7 @@ function addCardReply(r) {
   if (r==="i've linked my card ✅") {
     dbLog('update', 'users', 'card_linked=true | fidel_token=tok_xxxx | status=active', '✏️');
     dbLog('insert', 'linked_cards', 'user=CHG-00001 | scheme=visa | last4=4242 | status=active', '💳');
-    botSay('yeah baby ⚡⚡ you\'re live!\n\njust spend as normal at any partner brand and we\'ll handle the rest. cashback lands on your e.on account automatically.\n\nyou\'ll get a whatsapp notification the moment a transaction confirms 🙌', 1000, function() {
+    botSay('yeah baby ⚡⚡ you\'re live!\n\njust spend as normal at any partner brand and we\'ll handle the rest. energy bill credit lands on your e.on account automatically.\n\nyou\'ll get a whatsapp notification the moment a transaction confirms 🙌', 1000, function() {
       setQRs(['what offers do i have?','check my balance'], function(r2) {
         clearQRs(); addBubble('user', r2);
         dbLog('insert', 'message_queue', 'body="'+r2+'" | status=queued', '📨');
@@ -849,7 +849,7 @@ function addCardReply(r) {
         clearQRs(); addBubble('user', r2);
         dbLog('insert', 'message_queue', 'body="'+r2+'" | status=queued', '📨');
         if (r2==='can i link more than one?') {
-          botSay('yes! up to 3 cards 💳\n\nuseful if you use one card for groceries and another for everything else — cashback tracks across all of them automatically.', 800, function() {
+          botSay('yes! up to 3 cards 💳\n\nuseful if you use one card for groceries and another for everything else — energy bill credit tracks across all of them automatically.', 800, function() {
             setQRs(['link my card 🔗'], addCardReply);
           });
         } else { addCardReply('link my card 🔗'); }
@@ -899,8 +899,8 @@ function adminReply(r) {
     });
 
   } else if (r === 'how much has been saved?') {
-    dbLog('read', 'cashback_ledger', 'energy_provider=eon | aggregate=true | group_by=period', '🔍');
-    botSay('💰 cashback saved — E.ON customers\n\nthis week: £4,210.80\nthis month: £14,883.40\nthis quarter: £38,220.15\nall time: £52,614.90\n\naverage per active customer: £12.53 / month 🙌', 1000, function() {
+    dbLog('read', 'energy_bill_credit_ledger', 'energy_provider=eon | aggregate=true | group_by=period', '🔍');
+    botSay('💰 energy bill credit saved — E.ON customers\n\nthis week: £4,210.80\nthis month: £14,883.40\nthis quarter: £38,220.15\nall time: £52,614.90\n\naverage per active customer: £12.53 / month 🙌', 1000, function() {
       setQRs([
         'how many E.ON accounts have joined charged?',
         'how many have registered their card?',
@@ -909,16 +909,16 @@ function adminReply(r) {
     });
 
   } else if (r === 'send this week\'s settlement update') {
-    dbLog('read', 'cashback_ledger', 'status=pending | aggregate=true | cutoff=2026-06-30', '🔍');
-    botSay('processing this week\'s cashback for 147 E.ON customers...\ntotal to transfer: £1,842.60\n\nbatching now — back in a moment 🏦', 1000, function() {
+    dbLog('read', 'energy_bill_credit_ledger', 'status=pending | aggregate=true | cutoff=2026-06-30', '🔍');
+    botSay('processing this week\'s energy bill credit for 147 E.ON customers...\ntotal to transfer: £1,842.60\n\nbatching now — back in a moment 🏦', 1000, function() {
       dbLog('insert', 'settlement_runs', 'id=SET-001 | date=2026-07-01 | total=1842.60 | users=147 | status=processing', '🏦');
       setTimeout(function() {
-        dbLog('update', 'cashback_ledger', 'status: pending → sent | batch=SET-001 | records=147', '✏️');
+        dbLog('update', 'energy_bill_credit_ledger', 'status: pending → sent | batch=SET-001 | records=147', '✏️');
         setTimeout(function() {
           dbLog('insert', 'kraken_transfers', 'batch=SET-001 | api=creditAccount | status=submitted', '⚡');
           setTimeout(function() {
             dbLog('update', 'settlement_runs', 'id=SET-001 | status=complete', '✅');
-            botSay('⚡ charged weekly update · Mon 1 Jul\n\n147 E.ON customers earned cashback this week\n£1,842.60 transferred to their energy accounts\nBatch completed: 08:17 ✅\n\nThat\'s 147 customers with a little less to worry about on their energy bill this month 🙌', 1000, function() {
+            botSay('⚡ charged weekly update · Mon 1 Jul\n\n147 E.ON customers earned energy bill credit this week\n£1,842.60 transferred to their energy accounts\nBatch completed: 08:17 ✅\n\nThat\'s 147 customers with a little less to worry about on their energy bill this month 🙌', 1000, function() {
               setQRs([
                 'see the breakdown',
                 'how many E.ON accounts have joined charged?',
@@ -937,7 +937,7 @@ function adminReply2(r) {
   dbLog('insert', 'message_queue', 'body="'+r.slice(0,50)+'" | status=queued', '📨');
   if (r === 'see the breakdown') {
     dbLog('read', 'settlement_runs', 'id=SET-001 | detail=full', '🔍');
-    botSay('week ending 30 Jun 2026\n\n👥 E.ON customers earning cashback: 147\n💰 total transferred to energy accounts: £1,842.60\n📊 average per customer: £12.53\n⏱ batch completed in: 4m 32s\n\nno errors. all 147 accounts credited ✅', 900, function() {
+    botSay('week ending 30 Jun 2026\n\n👥 E.ON customers earning energy bill credit: 147\n💰 total transferred to energy accounts: £1,842.60\n📊 average per customer: £12.53\n⏱ batch completed in: 4m 32s\n\nno errors. all 147 accounts credited ✅', 900, function() {
       setQRs([
         'how many E.ON accounts have joined charged?',
         'how much has been saved?'
@@ -956,19 +956,19 @@ function startTree() {
   var txId = randId('TXN');
   dbLog('insert', 'transactions', 'id='+txId+' | retailer=boots | amount=42.00 | status=confirmed', '🛒');
   setTimeout(function() {
-    dbLog('insert', 'cashback_ledger', 'amount=5.80 | status=pending | running_total=100.40', '⚡');
+    dbLog('insert', 'energy_bill_credit_ledger', 'amount=5.80 | status=pending | running_total=100.40', '⚡');
     setTimeout(function() {
-      dbLog('read', 'users', 'total_cashback_earned >= 100 | milestone_sent=false', '🔍');
+      dbLog('read', 'users', 'total_energy_bill_credit_earned >= 100 | milestone_sent=false', '🔍');
       setTimeout(function() {
         dbLog('update', 'users', 'milestone_100_hit=true | milestone_100_date=2026-06-19', '✏️');
-        botSay('⚡ cashback confirmed. £5.80 from boots has been added to your energy credit. your total balance is now £100.40.', 1000, function() {
+        botSay('⚡ energy bill credit confirmed. £5.80 from boots has been added to your energy credit. your total balance is now £100.40.', 1000, function() {
           dbLog('insert', 'tree_gifts', 'user=CHG-00001 | status=requesting | partner=furthr.earth', '🌱');
           setTimeout(function() {
             botSay('hold on... 👀', 700, function() {
               setTimeout(function() {
                 dbLog('insert', 'furthr_api_calls', 'endpoint=POST /trees | status=success | tree_id=FRT-88291', '🌍');
                 dbLog('update', 'tree_gifts', 'status=planted | tree_id=FRT-88291 | certificate=pending', '✅');
-                botSay('🎉 you just hit £100 cashback!\n\nyour energy account has been credited — and we\'ve planted a tree in your name 🌱\n\nit\'s growing in Kenya as part of the furthr.earth reforestation project. your certificate is on its way 📜\n\nthat\'s money back in your pocket and something good in the ground 🌍', 1300, function() {
+                botSay('🎉 you just hit £100 energy bill credit!\n\nyour energy account has been credited — and we\'ve planted a tree in your name 🌱\n\nit\'s growing in Kenya as part of the furthr.earth reforestation project. your certificate is on its way 📜\n\nthat\'s money back in your pocket and something good in the ground 🌍', 1300, function() {
                   setQRs(['see my tree certificate','what is furthr.earth?','keep going — what\'s next?'], treeReply);
                 });
               }, 1100);
@@ -989,11 +989,11 @@ function treeReply(r) {
       setQRs(['what is furthr.earth?','keep going — what\'s next?'], treeReply);
     });
   } else if (r === 'what is furthr.earth?') {
-    botSay('furthr.earth are a reforestation partner who plant real, verified trees 🌍\n\nevery tree is geotagged, tracked, and supports local communities and biodiversity where it\'s planted.\n\nwe gift one every time you hit £100 in cashback — on us, not your energy account 🌱', 1100, function() {
+    botSay('furthr.earth are a reforestation partner who plant real, verified trees 🌍\n\nevery tree is geotagged, tracked, and supports local communities and biodiversity where it\'s planted.\n\nwe gift one every time you hit £100 in energy bill credit — on us, not your energy account 🌱', 1100, function() {
       setQRs(['see my tree certificate','keep going — what\'s next?'], treeReply);
     });
   } else if (r === 'keep going — what\'s next?') {
-    dbLog('read', 'cashback_ledger', 'user=CHG-00001 | next_milestone=200', '🔍');
+    dbLog('read', 'energy_bill_credit_ledger', 'user=CHG-00001 | next_milestone=200', '🔍');
     botSay('next stop: £200 🌳\n\nyou\'ll earn your second tree when you hit that — keep spending at partner brands and we\'ll do the rest ⚡', 900, function() {
       setQRs(['browse offers','check my balance'], function(r2) {
         clearQRs(); addBubble('user', r2);
@@ -1032,7 +1032,7 @@ function doSend() {
     dbLog('read', 'offers', 'retailer_name ILIKE "'+v+'" | active=true', '🔍');
     var lv = v.toLowerCase();
     if (['nike','asos','next','zara'].indexOf(lv) >= 0) {
-      botSay(v+' isn\'t a card-linked partner yet — but we have an affiliate link with 5% cashback 🙌\n\nhead to getcharged.energy/offers to grab your tracked link', 900, function() {
+      botSay(v+' isn\'t a card-linked partner yet — but we have an affiliate link with 5% energy bill credit 🙌\n\nhead to getcharged.energy/offers to grab your tracked link', 900, function() {
         setQRs(['browse by category','check my balance'], offersReply);
       });
     } else {
