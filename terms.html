@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+<title>charged ⚡ — terms &amp; conditions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Figtree:wght@300;400;500;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Figtree:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<style>
+  :root {
+    --black: #000000;
+    --black-2: #0A0A0A;
+    --black-3: #111111;
+    --black-4: #1A1A1A;
+    --gold: #F5A623;
+    --gold-bright: #FFD166;
+    --gold-dim: #B87A10;
+    --white: #FFFFFF;
+    --off-white: #E8E8E8;
+    --grey: #777777;
+    --electric: #4FC3F7;
+    --green: #00E676;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; background-color: #000; overflow-x: hidden; }
+
+  body {
+    background-color: #000;
+    color: var(--white);
+    font-family: 'Figtree', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* -- NAV -- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 40px; display: flex; justify-content: space-between;
+    align-items: center; background: #000000;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .nav-left { display: flex; align-items: center; gap: 24px; }
+
+  .nav-logo { text-decoration: none; display: flex; align-items: center; }
+
+  /* -- NAV MENU -- */
+  .nav-menu { display: flex; align-items: center; gap: 4px; }
+  .nav-menu a {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--grey); font-family: 'Figtree', sans-serif;
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    padding: 7px 12px; border-radius: 6px;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .nav-menu a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+  .nav-menu a.active { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold); color: var(--black);
+    font-family: 'Figtree', sans-serif; font-weight: 800;
+    font-size: 13px; letter-spacing: 0.5px; text-transform: uppercase;
+    padding: 11px 22px; border-radius: 4px; text-decoration: none; transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-bright); transform: translateY(-1px); }
+
+  /* -- HAMBURGER -- */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px; height: 36px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 200;
+  }
+  .hamburger span {
+    display: block; width: 100%; height: 2px;
+    background: var(--white); border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* -- MOBILE DRAWER -- */
+  .mobile-drawer {
+    display: none;
+    position: fixed;
+    top: 65px; left: 0; right: 0;
+    background: #0A0A0A;
+    border-bottom: 1px solid rgba(245,166,35,0.15);
+    z-index: 99;
+    padding: 12px 20px 20px;
+    flex-direction: column;
+    gap: 4px;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: all 0.25s ease;
+  }
+  .mobile-drawer.open {
+    display: flex;
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .mobile-drawer a {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--off-white); font-family: 'Figtree', sans-serif;
+    font-size: 15px; font-weight: 600; text-decoration: none;
+    padding: 12px 16px; border-radius: 8px;
+    transition: all 0.2s;
+  }
+  .mobile-drawer a:hover { background: rgba(255,255,255,0.06); color: var(--gold); }
+
+  /* -- RESPONSIVE NAV -- */
+  @media (max-width: 900px) {
+    .nav-menu { display: none; }
+    .hamburger { display: flex; }
+  }
+
+  /* LOGO */
+  .logo-img { height: 44px; width: auto; display: block; object-fit: contain; }
+  .footer-logo { height: 44px; width: auto; display: block; object-fit: contain; }
+  @media (max-width: 768px) {
+    .logo-img { height: 38px; }
+    .footer-logo { height: 38px; }
+  }
+
+  /* HERO */
+  .legal-hero {
+    padding: 140px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .legal-hero::before {
+    content: '';
+    position: absolute;
+    top: -10%; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 500px;
+    background: radial-gradient(ellipse, rgba(245,166,35,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .legal-eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+  .legal-hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(44px, 8vw, 84px);
+    line-height: 0.95; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 18px;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.35s;
+  }
+  .legal-hero h1 span { color: var(--gold); }
+  .legal-hero p.effective-date {
+    font-size: 14px; font-weight: 600; color: var(--grey);
+    letter-spacing: 0.5px; text-transform: uppercase;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.5s;
+  }
+
+  /* LEGAL DOC WRAPPER */
+  .legal-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 40px 120px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.65s;
+  }
+
+  /* TOC */
+  .toc {
+    background: var(--black-3);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 28px 30px;
+    margin-bottom: 56px;
+  }
+  .toc-title {
+    font-family: 'Figtree', sans-serif;
+    font-size: 12px; font-weight: 800; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+  }
+  .toc ol {
+    columns: 2;
+    column-gap: 32px;
+    list-style: none;
+    counter-reset: toc-counter;
+  }
+  .toc li {
+    counter-increment: toc-counter;
+    font-size: 13px; margin-bottom: 10px; break-inside: avoid;
+  }
+  .toc li a {
+    color: var(--off-white); text-decoration: none;
+    transition: color 0.15s;
+  }
+  .toc li a:before {
+    content: counter(toc-counter) ". ";
+    color: var(--gold-dim); font-weight: 700;
+  }
+  .toc li a:hover { color: var(--gold); }
+  @media (max-width: 640px) { .toc ol { columns: 1; } }
+
+  /* NOTICE BOX */
+  .notice-box {
+    background: rgba(245,166,35,0.06);
+    border: 1px solid rgba(245,166,35,0.25);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 48px;
+    font-size: 14px;
+    color: var(--off-white);
+    line-height: 1.65;
+  }
+  .notice-box strong { color: var(--gold-bright); }
+
+  /* SECTIONS */
+  .legal-part-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 4vw, 38px);
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    margin: 72px 0 8px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(245,166,35,0.25);
+  }
+  .legal-part-title:first-of-type { margin-top: 0; }
+
+  .legal-section { margin-top: 44px; scroll-margin-top: 100px; }
+  .legal-section h2 {
+    font-family: 'Figtree', sans-serif;
+    font-size: 19px; font-weight: 800;
+    color: var(--white);
+    margin-bottom: 14px;
+    letter-spacing: 0.2px;
+  }
+  .legal-section h3 {
+    font-family: 'Figtree', sans-serif;
+    font-size: 15px; font-weight: 700;
+    color: var(--gold-bright);
+    margin: 22px 0 10px;
+  }
+  .legal-section p {
+    font-size: 14.5px;
+    color: var(--off-white);
+    margin-bottom: 14px;
+    font-weight: 300;
+  }
+  .legal-section p strong, .legal-section li strong { color: var(--white); font-weight: 700; }
+  .legal-section ul, .legal-section ol.legal-list {
+    margin: 0 0 16px 0;
+    padding-left: 22px;
+  }
+  .legal-section ul li, .legal-section ol.legal-list li {
+    font-size: 14.5px;
+    color: var(--off-white);
+    font-weight: 300;
+    margin-bottom: 9px;
+    padding-left: 4px;
+  }
+  .legal-section ol.legal-list { list-style: decimal; }
+  .legal-section a.inline-link { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
+  .legal-section a.inline-link:hover { color: var(--gold-bright); }
+
+  .caps-warning {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold-bright);
+    letter-spacing: 0.2px;
+    display: block;
+    margin-bottom: 14px;
+    line-height: 1.7;
+  }
+
+  .def-term {
+    font-size: 14.5px;
+    color: var(--white);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .def-block { margin-bottom: 16px; }
+  .def-block p { margin-bottom: 0; }
+
+  .back-to-top {
+    display: inline-block;
+    margin-top: 60px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--grey);
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 10px 18px;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .back-to-top:hover { color: var(--gold); border-color: rgba(245,166,35,0.4); }
+
+  /* FOOTER */
+  footer {
+    padding: 48px 40px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    background: var(--black-2);
+  }
+  footer .links { display: flex; gap: 24px; flex-wrap: wrap; }
+  footer .links a { font-size: 13px; font-weight: 500; color: var(--grey); text-decoration: none; transition: color 0.2s; }
+  footer .links a:hover { color: var(--white); }
+  footer .copy { font-size: 12px; color: rgba(255,255,255,0.18); font-weight: 400; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .legal-hero { padding: 110px 20px 50px; }
+    .legal-wrap { padding: 0 20px 100px; }
+    footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body id="top">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <a href="https://getcharged.energy" class="nav-logo">
+      <span style="font-family:'Figtree',sans-serif;font-size:20px;font-weight:700;color:#FFFFFF;letter-spacing:0;">charged ⚡</span>
+    </a>
+    <nav class="nav-menu">
+      <a href="https://getcharged.energy">🏠 home</a>
+      <a href="https://getcharged.energy/demo">🎮 demo</a>
+      <a href="https://getcharged.energy/timeline">📅 timeline</a>
+      <a href="https://getcharged.energy/merchants">🛍️ merchants</a>
+      <a href="https://getcharged.energy/providers">⚡ providers</a>
+    </nav>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="menu">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="nav-cta" href="https://wa.me/447763375105?text=I%27d%20like%20to%20join%20the%20charged%20waitlist%20as%20a%20founding%20tester%20%E2%9A%A1" target="_blank">join waitlist</a>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <a href="https://getcharged.energy/demo" onclick="closeMenu()">🎮 demo</a>
+  <a href="https://getcharged.energy/timeline" onclick="closeMenu()">📅 timeline</a>
+  <a href="https://getcharged.energy/merchants" onclick="closeMenu()">🛍️ merchants</a>
+  <a href="https://getcharged.energy/providers" onclick="closeMenu()">⚡ providers</a>
+</div>
+
+<!-- HERO -->
+<div class="legal-hero">
+  <p class="legal-eyebrow">legal</p>
+  <h1>terms &amp;<br><span>conditions</span></h1>
+  <p class="effective-date">Last updated: July 2026</p>
+</div>
+
+<!-- LEGAL DOCUMENT -->
+<div class="legal-wrap">
+
+  <div class="notice-box">
+    <strong>Please read these Terms carefully.</strong> They form a legally binding contract between you and us, and include important limitations on our liability, restrictions on how Energy Bill Credit works, and your responsibilities when using the Service. If anything is unclear, contact us at <a class="inline-link" href="mailto:help@getcharged.energy">help@getcharged.energy</a> before you accept them, or speak to your own legal or financial adviser.
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">contents</div>
+    <ol>
+      <li><a href="#about-us">About Us</a></li>
+      <li><a href="#changes-terms">Changes to these Terms</a></li>
+      <li><a href="#changes-service">Changes to the Service</a></li>
+      <li><a href="#contacting-us">Contacting Us</a></li>
+      <li><a href="#how-we-communicate">How We Will Communicate With You</a></li>
+      <li><a href="#service-requirements">Service Requirements</a></li>
+      <li><a href="#general">General</a></li>
+      <li><a href="#interpretation">Interpretation &amp; Definitions</a></li>
+      <li><a href="#third-party-content">Third Party Content</a></li>
+      <li><a href="#third-party-terms">Third Party Terms</a></li>
+      <li><a href="#licence">Licence</a></li>
+      <li><a href="#disclaimers">Our Disclaimers</a></li>
+      <li><a href="#acceptable-use">Acceptable Use Restrictions</a></li>
+      <li><a href="#ip-rights">Intellectual Property Rights</a></li>
+      <li><a href="#liability">Our Responsibility for Loss or Damage</a></li>
+      <li><a href="#your-liability">Your Liability to Us</a></li>
+      <li><a href="#fees">Fees and Charges</a></li>
+      <li><a href="#inactivity">Consequences of Inactivity</a></li>
+      <li><a href="#termination">Termination and Cancellation</a></li>
+      <li><a href="#written-comms">Written Communication</a></li>
+      <li><a href="#disputes">Dispute Resolution</a></li>
+      <li><a href="#miscellaneous">Miscellaneous Legal Provisions</a></li>
+      <li><a href="#governing-law">Governing Law</a></li>
+      <li><a href="#how-it-works">How the Charged Programme Works</a></li>
+      <li><a href="#registration">Registration</a></li>
+      <li><a href="#energy-provider">Your Energy Provider</a></li>
+      <li><a href="#earning-credit">Earning Energy Bill Credit</a></li>
+      <li><a href="#energy-vault">The Energy Vault &amp; Applying Credit</a></li>
+      <li><a href="#missing-credit">Missing Energy Bill Credit</a></li>
+      <li><a href="#unsupported">Changing or Unsupported Energy Providers</a></li>
+    </ol>
+  </div>
+
+  <!-- ============ PART 1: GENERAL ============ -->
+  <h2 class="legal-part-title">Part 1 — General</h2>
+
+  <div class="legal-section" id="about-us">
+    <h2>About Us</h2>
+    <p>We are <strong>Charged Energy Ltd</strong>, a company registered in England and Wales under company number <strong>17277080</strong>, with our registered office at 71–75 Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ (<strong>"we"</strong>, <strong>"our"</strong> or <strong>"us"</strong>). We operate the Service, delivered primarily via the WhatsApp Channel, and the Website.</p>
+  </div>
+
+  <div class="legal-section" id="changes-terms">
+    <h2>Changes to these Terms</h2>
+    <p>We may need to change these Terms, including to reflect changes to our business, our products and services, changes in law or regulatory guidance, or to deal with additional features which we introduce.</p>
+    <p>Unless it is an emergency, or a change is required to comply with law, regulation, or the reasonable requirements of a Payment Service Provider, Energy Provider, or Card-Linking Provider, we will give you at least 14 days' notice of any material change, which may be by sending you a WhatsApp message, SMS, or email, or by notifying you via the Website.</p>
+    <p>If you do not accept the changes, you must stop using the Service. Any continued use of the Service after the notice period will signify your acceptance of the changes.</p>
+  </div>
+
+  <div class="legal-section" id="changes-service">
+    <h2>Changes to the Service</h2>
+    <p>From time to time we may change, suspend, or discontinue any part of the Service, including the WhatsApp Channel, the Website, the Energy Providers we support, the Merchants we partner with, or the way Energy Bill Credit is earned or applied — for any reason, including to improve performance, reflect changes to the WhatsApp platform, address security issues, or comply with legal or regulatory requirements. We will use reasonable efforts to notify you of material changes but are not obliged to do so where the change does not materially and adversely affect your accrued Energy Bill Credit.</p>
+  </div>
+
+  <div class="legal-section" id="contacting-us">
+    <h2>Contacting Us</h2>
+    <p><strong>Support.</strong> If you have questions about the Service or experience any problems using it, message us via the WhatsApp Channel or email <a class="inline-link" href="mailto:help@getcharged.energy">help@getcharged.energy</a>.</p>
+    <p><strong>Complaints.</strong> If you wish to make a complaint, please contact us at <a class="inline-link" href="mailto:help@getcharged.energy">help@getcharged.energy</a>. See "Dispute Resolution" below for how we handle complaints.</p>
+  </div>
+
+  <div class="legal-section" id="how-we-communicate">
+    <h2>How We Will Communicate With You</h2>
+    <p>We will communicate with you primarily via the WhatsApp Channel, using the mobile number associated with your Account, and may also contact you by email or SMS using the contact details you have provided to us. By agreeing to these Terms, you authorise us to send you messages relating to your Account and the Service. We will never spam you with unwanted marketing — see "Marketing" in Part 3 for how to manage your preferences.</p>
+  </div>
+
+  <div class="legal-section" id="service-requirements">
+    <h2>Service Requirements</h2>
+    <p>The Service is delivered through WhatsApp. To use it, you need a compatible smartphone or device, an active WhatsApp account, and a valid UK mobile phone number. The Website is provided solely as a fallback for secure account management purposes (such as managing your linked Card or exercising your data protection rights) and does not itself constitute the primary means of accessing the Service.</p>
+    <p>We do not accept users with mobile phone numbers registered outside of the United Kingdom, and you must not use the Service if you are not resident in the United Kingdom. We are not liable to you for any losses experienced if you attempt to do so.</p>
+  </div>
+
+  <h2 class="legal-part-title">Part 2 — Legal Terms &amp; Conditions</h2>
+  <p style="font-size:14.5px;color:var(--off-white);font-weight:300;margin-bottom:14px;">These Terms create a contract upon which we intend to rely. They contain important information, including limitations and exclusions on our liability. If you have any questions about the Terms or what they mean, please contact us before you accept them, or speak to your local consumer advice centre or your own legal or financial adviser.</p>
+
+  <div class="legal-section" id="general">
+    <h2>General</h2>
+    <ul>
+      <li>You must have an Account to use the Service. By creating an Account, you consent to the use of electronic records to store information relating to these Terms and your use of the Service.</li>
+      <li>You will only be able to use the Service if your Energy Provider is supported by us. We will check this on registration and periodically thereafter, and we will not be liable in any way if your Energy Provider is not, or is no longer, supported.</li>
+      <li>By agreeing to these Terms and using the Service, you confirm that you are at least 18 years of age. If you are not at least 18 years old, you must not use the Service.</li>
+      <li>By agreeing to these Terms, you authorise us to send WhatsApp messages, SMS, and/or emails to the contact details you provide. You are not required to provide marketing consent as a condition of using the Service, and may opt out at any time.</li>
+      <li>Your privacy is important to us. You should read our <a class="inline-link" href="https://getcharged.energy/privacy">Privacy Policy</a> to understand how we collect, use, and share your personal data, including with our sub-processors.</li>
+      <li>We reserve the right to make certain charges in respect of your use of the Service — see "Fees and Charges" below.</li>
+      <li>Your use of the Service, and any Card you link, may also be governed by the terms of WhatsApp/Meta, your Card issuer, our Card-Linking Provider, and your Energy Provider. Where relevant, those third-party terms apply in addition to, and in the event of conflict take precedence over, these Terms in respect of the specific service they provide.</li>
+      <li>You are responsible for maintaining the accuracy of the contact, Card, and Energy Account information associated with your Account.</li>
+    </ul>
+  </div>
+
+  <div class="legal-section" id="interpretation">
+    <h2>Interpretation &amp; Definitions</h2>
+    <p>In these Terms, the following defined terms apply:</p>
+
+    <div class="def-block"><div class="def-term">Account</div><p>the account you register with us via the WhatsApp Channel and/or Website in order to access the Service.</p></div>
+    <div class="def-block"><div class="def-term">Card</div><p>any credit or debit card, issued by a card network we support, which you link to your Account via our Card-Linking Provider.</p></div>
+    <div class="def-block"><div class="def-term">Card-Linking Provider</div><p>Fidel API Limited (or its group companies), and/or such other card-linking or transaction-monitoring provider(s) as we may appoint from time to time.</p></div>
+    <div class="def-block"><div class="def-term">Energy Account</div><p>the account you hold with your Energy Provider, to which Energy Bill Credit may be applied in accordance with these Terms.</p></div>
+    <div class="def-block"><div class="def-term">Energy Bill Credit</div><p>the value which may accrue to your Account as part of the Service, as described in Part 3, and which we may apply to your Energy Account in accordance with these Terms. For the avoidance of doubt, Energy Bill Credit is never referred to by us as "cashback," a "reward," or a "discount," and is not a form of cash, e-money, or refund.</p></div>
+    <div class="def-block"><div class="def-term">Energy Provider</div><p>the energy supply company or companies which we work with from time to time to provide the Service, details of which are available via the WhatsApp Channel and/or Website.</p></div>
+    <div class="def-block"><div class="def-term">Energy Vault</div><p>the internal record we maintain of Energy Bill Credit which has accrued to your Account but has not yet been applied to your Energy Account.</p></div>
+    <div class="def-block"><div class="def-term">Merchant</div><p>any online or in-store retailer or brand we partner with from time to time as part of the Service.</p></div>
+    <div class="def-block"><div class="def-term">Payment Service Provider(s)</div><p>card networks, card issuers, our Card-Linking Provider, and our payment services provider(s) (currently including Modulr Finance Limited and/or its group companies, an entity authorised and regulated in the United Kingdom), together with any other third-party payment infrastructure providers we use from time to time to move our own funds.</p></div>
+    <div class="def-block"><div class="def-term">Service / Programme</div><p>the WhatsApp-based service operated by us, as described in these Terms and in Part 3, accessible via the WhatsApp Channel and, for certain account management purposes, the Website.</p></div>
+    <div class="def-block"><div class="def-term">Terms</div><p>these terms and conditions, as set out in this document, as amended from time to time.</p></div>
+    <div class="def-block"><div class="def-term">WhatsApp Channel</div><p>our official WhatsApp Business number and account through which the Service is delivered.</p></div>
+    <div class="def-block"><div class="def-term">Website</div><p>getcharged.energy and any subdomains.</p></div>
+
+    <p style="margin-top:18px;">Also: you will be referred to in these Terms as <strong>"you"</strong> or <strong>"your"</strong>; and where we use the words <strong>including</strong>, <strong>include</strong>, <strong>in particular</strong>, <strong>for example</strong>, or any similar expression, we are giving examples and those words do not limit the sense of the words, description, or term that follows.</p>
+  </div>
+
+  <div class="legal-section" id="third-party-content">
+    <h2>We Are Not Responsible for Third Party Content the Service Links To</h2>
+    <p>The Service may contain links to independent websites, apps, products, or services which are not provided by us, including Merchant websites, our Card-Linking Provider's secure card-linking pages, and WhatsApp/Meta itself. Such independent sites and services are not under our control, and we are not responsible for, and have not checked or approved, their content, terms, privacy policies, or goods and services. You must make your own independent judgement about whether to use them.</p>
+  </div>
+
+  <div class="legal-section" id="third-party-terms">
+    <h2>Third Party Terms</h2>
+    <p>Using the Service involves third party elements, including our Card-Linking Provider, our Payment Service Provider(s), your Energy Provider, Merchants, and WhatsApp/Meta. Where relevant, you will comply with such third parties' own terms and policies, including, for example, any card network privacy notices applicable to your linked Card.</p>
+  </div>
+
+  <div class="legal-section" id="licence">
+    <h2>Licence</h2>
+    <p>In consideration of you agreeing to abide by these Terms, we grant you a non-transferable, non-exclusive, revocable, personal licence to use the Service for your personal, non-commercial use, subject to these Terms. We reserve all other rights. Except as expressly permitted by these Terms or applicable law, you agree not to: copy, reverse engineer, decompile, or attempt to derive the source code of any part of the Service; rent, lease, sub-license, or otherwise make the Service available to any third party; or combine or interfere with the Service in a way not authorised by us.</p>
+  </div>
+
+  <div class="legal-section" id="disclaimers">
+    <h2>Our Disclaimers</h2>
+    <ul>
+      <li>We do not guarantee that the Service will be available at any time, that it will be error-free, or that any errors will be corrected.</li>
+      <li>We are not liable, and you are solely responsible, for any data or messaging charges applied by your mobile network in connection with your use of WhatsApp or the Service.</li>
+      <li>We are not responsible for: incorrect or inaccurate information provided to us by a Card-Linking Provider, Payment Service Provider, Merchant, or Energy Provider; problems with any equipment, software, or network not operated by us; or any interruption, delay, or failure of WhatsApp, Meta's infrastructure, or any telecommunications or payment network outside our reasonable control.</li>
+      <li>We reserve the right to change, add, or remove the methods by which Energy Bill Credit is earned or applied, for any reason and without notice, at our sole discretion.</li>
+      <li>The Service and any information provided through it are provided "as is" without warranty of any kind, whether express or implied, including implied warranties of merchantability, fitness for a particular purpose, or non-infringement.</li>
+      <li>We do not provide financial, tax, or energy-switching advice. Nothing in the Service constitutes a recommendation that you take, or refrain from taking, any particular action in relation to your finances, your Card, or your Energy Account.</li>
+    </ul>
+  </div>
+
+  <div class="legal-section" id="acceptable-use">
+    <h2>Acceptable Use Restrictions</h2>
+    <p>You must not:</p>
+    <ul>
+      <li>use the Service in any unlawful manner, for any unlawful purpose, or in any manner inconsistent with these Terms, or act fraudulently or maliciously in connection with the Service;</li>
+      <li>infringe our intellectual property rights or those of any third party in connection with your use of the Service;</li>
+      <li>use the Service for any commercial purpose;</li>
+      <li>use the Service if we have previously suspended or banned you from using it;</li>
+      <li>create more than one Account, provide false or misleading information, impersonate any other person, or misrepresent your identity or your Energy Account details;</li>
+      <li>link a Card that does not belong to you, or link an Energy Account that is not your own;</li>
+      <li>misuse the Service to increase the Energy Bill Credit you (or any other user) receive, or otherwise seek to manipulate, interfere with, or exploit the Service, the Energy Vault, or the way Energy Bill Credit accrues or is applied;</li>
+      <li>attempt to claim Energy Bill Credit, or an equivalent reward, from a similar programme on the same transaction; and/or</li>
+      <li>collect or harvest data from the Service, or attempt to decipher transmissions to or from the systems running the Service.</li>
+    </ul>
+    <p>Breach of these rules is a serious breach of these Terms and may result in us, with or without notice: forfeiting or clawing back any Energy Bill Credit accrued or applied in connection with the breach; immediately suspending or terminating your Account; taking legal action against you, including for reimbursement of our costs; and/or disclosing relevant information to law enforcement authorities.</p>
+  </div>
+
+  <div class="legal-section" id="ip-rights">
+    <h2>Intellectual Property Rights</h2>
+    <p>All intellectual property rights in the Service throughout the world belong to us (or our licensors) and are licensed, not sold, to you. You have no rights in or to the Service other than the limited licence granted above.</p>
+  </div>
+
+  <div class="legal-section" id="liability">
+    <h2>Our Responsibility for Loss or Damage Suffered by You</h2>
+    <span class="caps-warning">THIS SECTION CONTAINS IMPORTANT LEGAL PROVISIONS — PLEASE READ IT CAREFULLY. IF YOU ARE UNSURE, OR IF ANYTHING IS UNCLEAR, PLEASE SPEAK TO US BEFORE YOU ACCEPT THESE TERMS, OR TO YOUR OWN LEGAL OR FINANCIAL ADVISER.</span>
+    <p><strong>We do not exclude or limit in any way our liability where it would be unlawful to do so.</strong> This includes liability for death or personal injury caused by our negligence, or for fraud or fraudulent misrepresentation.</p>
+    <p><strong>We do not accept any responsibility or liability for any loss or damage you may incur:</strong></p>
+    <ul>
+      <li>where you use the Service in breach of these Terms, including for any commercial purpose;</li>
+      <li>resulting from any transaction with a Merchant — purchases from Merchants are transactions between you and that Merchant, and we are not the seller of the relevant goods or services;</li>
+      <li>arising from your Energy Provider's handling, timing, or application of Energy Bill Credit once we have transferred the corresponding value to them;</li>
+      <li>arising from any act, omission, error, delay, or failure of WhatsApp/Meta, our Card-Linking Provider, our Payment Service Provider(s), or any Energy Provider; and/or</li>
+      <li>arising from an inability to access the Service, or from reliance on data transmitted using the Service, where caused by an event beyond our reasonable control.</li>
+    </ul>
+    <p>If we do not receive the expected value of a transaction from a Merchant for any reason, we will not be liable to accrue or apply the corresponding Energy Bill Credit. If Energy Bill Credit has already been applied to your Energy Account in such circumstances, we reserve the right to recover the value of that credit from your Account balance or, where already applied, to adjust future accruals accordingly.</p>
+    <p><strong>We are responsible to you for foreseeable loss and damage caused by us.</strong> If we fail to comply with these Terms, we are responsible for loss or damage you suffer that is a foreseeable result of our breach or of our failing to use reasonable care and skill, but we are not responsible for any loss or damage that is not foreseeable.</p>
+    <p><strong>We are not liable for business losses.</strong> The Service is for domestic and private, non-business use only. If you use the Service for any commercial, business, or resale purpose, we will have no liability to you for any related loss or damage, whether in contract, tort (including negligence), breach of statutory duty, or otherwise.</p>
+    <p><strong>Maximum aggregate liability.</strong> To the maximum extent permitted by law, and save where such liability cannot lawfully be excluded or limited, our total aggregate liability to you arising out of or in connection with these Terms and your use of the Service, whether in contract, tort (including negligence), or otherwise, shall not exceed the total value of Energy Bill Credit actually applied to your Energy Account in the 12 months preceding the event giving rise to the claim.</p>
+    <p><strong>No liability for indirect losses.</strong> We shall not be liable for any indirect or consequential loss, loss of profit, loss of savings, or loss of opportunity, whether arising in contract, tort, or otherwise, and whether or not such loss was foreseeable.</p>
+    <p><strong>Energy Bill Credit has no cash value and is not your property.</strong> Energy Bill Credit is not your property, has no cash value whatsoever, does not constitute a deposit, e-money, or any other regulated financial product, is not held by us on trust or in any segregated or safeguarded account for you, does not earn interest, and is not covered by the Financial Services Compensation Scheme or any equivalent scheme. It cannot be sold, transferred, gifted, exchanged, withdrawn as cash, or assigned other than by application to your Energy Account in accordance with these Terms. Until applied, accrued Energy Bill Credit represents an unsecured, non-transferable, revocable contractual entitlement only, and does not represent a claim against any specific fund, account, or asset held by us or by any Payment Service Provider. We may revoke, reduce, adjust, or reverse Energy Bill Credit at any time, in our sole discretion, in accordance with these Terms — including where a transaction is disputed, reversed, returned, or found to be fraudulent or made in breach of these Terms. All applications of Energy Bill Credit to your Energy Account are final.</p>
+  </div>
+
+  <div class="legal-section" id="your-liability">
+    <h2>Your Liability to Us</h2>
+    <p>The Service is for personal use only, and any use by you must be genuine and solely in a personal capacity. If you intentionally misuse the Service, provide false information, or mislead us as to your purpose for using it, we will not be liable to you under these Terms or otherwise.</p>
+    <p>You agree to indemnify us and hold us harmless against any and all liabilities, costs, expenses, damages, and losses (including direct, indirect, and consequential losses, loss of profit, and loss of reputation) and all interest, penalties, and legal costs, arising out of or in connection with your breach of these Terms, your fraudulent or unlawful use of the Service, or your provision of false or misleading information to us.</p>
+  </div>
+
+  <div class="legal-section" id="fees">
+    <h2>Fees and Charges</h2>
+    <p>Use of the Service is currently provided free of charge. We reserve the right to introduce a fee for using the Service at any time. If we begin charging a fee for continued access to the Service, we will give you at least 14 days' prior notice so you may opt out if you do not wish to pay it.</p>
+    <p>We may, at any time and no more than once per year, deduct up to £2.50 from your accrued Energy Bill Credit balance for account administration purposes, and by accepting these Terms you consent to this. You are responsible for any applicable taxes arising from your participation in the Service.</p>
+  </div>
+
+  <div class="legal-section" id="inactivity">
+    <h2>Consequences of Inactivity</h2>
+    <p>We may deem your Account inactive if you have not actively used the Service for 180 days or more. Once deemed inactive, any Energy Bill Credit balance held in your Energy Vault will automatically expire and will no longer be available to be applied to your Energy Account. We do not have any liability or responsibility if your Energy Bill Credit expires as a result of inactivity.</p>
+  </div>
+
+  <div class="legal-section" id="termination">
+    <h2>Termination and Cancellation</h2>
+    <h3>How you may cancel your Account</h3>
+    <p>You may terminate your Account at any time by messaging us via the WhatsApp Channel or emailing <a class="inline-link" href="mailto:help@getcharged.energy">help@getcharged.energy</a> with the subject "Please cancel my Charged Account." Your Account will be terminated, and any unapplied Energy Bill Credit will be immediately revoked, within 30 days of your request. Once your Account has been deleted, this is irreversible.</p>
+    <h3>We may end your right to use the Service</h3>
+    <p>We may end your right to use the Service at any time if you have broken these Terms in a serious way. Where reasonably possible, we will give you an opportunity to put things right first.</p>
+    <h3>Consequences of termination</h3>
+    <ul>
+      <li>all unapplied Energy Bill Credit will immediately be voided, and you will have no right to it;</li>
+      <li>all licences and rights granted to you under these Terms will immediately cease;</li>
+      <li>we will have no obligation to maintain, or forward to you, information relating to your Account, except as required by law — all data we continue to hold will be handled in accordance with our <a class="inline-link" href="https://getcharged.energy/privacy">Privacy Policy</a>;</li>
+      <li>you must stop using the WhatsApp Channel and Website in connection with the Service; and</li>
+      <li>we may disqualify you from future participation in the Service or any related programme.</li>
+    </ul>
+    <p>We will not be liable to you or any other person for termination of your Account, including where Energy Bill Credit is revoked or voided as a result.</p>
+  </div>
+
+  <div class="legal-section" id="written-comms">
+    <h2>Written Communication</h2>
+    <p>When using the Service, you accept that communication will be mainly electronic, via WhatsApp, email, or SMS. For contractual purposes, you agree to this electronic means of communication.</p>
+  </div>
+
+  <div class="legal-section" id="disputes">
+    <h2>Dispute Resolution</h2>
+    <p>If you have a dispute with us relating to these Terms or the Service, please contact us in the first instance at <a class="inline-link" href="mailto:help@getcharged.energy">help@getcharged.energy</a> and we will attempt to resolve it informally within a reasonable timeframe. Details of any alternative dispute resolution provider we use will be provided to you as part of our complaints process.</p>
+  </div>
+
+  <div class="legal-section" id="miscellaneous">
+    <h2>Miscellaneous Legal Provisions</h2>
+    <h3>Events outside our control</h3>
+    <p>If our provision of the Service is delayed by an event outside our reasonable control, we will contact you as soon as reasonably possible and will not be liable for delays caused by that event.</p>
+    <h3>We may transfer this contract</h3>
+    <p>We may transfer our rights and obligations under these Terms to another person or organisation, and will tell you in writing if this happens. This will not affect your rights under these Terms.</p>
+    <h3>You need our consent to transfer your rights</h3>
+    <p>You may only transfer your rights or obligations under these Terms to another person if we agree in writing.</p>
+    <h3>No rights for third parties</h3>
+    <p>These Terms do not give rise to any rights under the Contracts (Rights of Third Parties) Act 1999 for any third party to enforce any part of them.</p>
+    <h3>Severability</h3>
+    <p>Each paragraph of these Terms operates separately. If any court or authority decides that any of them is unlawful, the remaining paragraphs will remain in full force and effect.</p>
+    <h3>No waiver</h3>
+    <p>Even if we delay in enforcing these Terms, we can still enforce them later. A failure or delay by us in exercising any right does not waive that right.</p>
+    <h3>Suitability</h3>
+    <p>The Service has not been developed to meet your individual requirements. Please check that its facilities and functions meet your needs before relying on it.</p>
+  </div>
+
+  <div class="legal-section" id="governing-law">
+    <h2>Governing Law</h2>
+    <p>These Terms are governed by the law of England and Wales, and you can bring legal proceedings in respect of the Service in the courts of England and Wales. If you live in Scotland, you can bring proceedings in either the Scottish or the English courts. If you live in Northern Ireland, you can bring proceedings in either the Northern Irish or the English courts.</p>
+  </div>
+
+  <!-- ============ PART 3: HOW IT WORKS ============ -->
+  <h2 class="legal-part-title" id="how-it-works">Part 3 — How the Charged Programme Works</h2>
+
+  <div class="legal-section">
+    <h2>What We Do, In a Nutshell</h2>
+    <p>We operate the Service in accordance with these Terms, allowing you to easily join, manage, and accrue Energy Bill Credit via the WhatsApp Channel. You do this by:</p>
+    <ul>
+      <li>linking your Card to your Account via our Card-Linking Provider; and</li>
+      <li>spending as normal at participating Merchants.</li>
+    </ul>
+    <p>Where a qualifying transaction is identified, Energy Bill Credit accrues to your Account. Once accrued and no longer pending, that Energy Bill Credit is periodically applied by us to your Energy Account, as described below. We reserve the right to change, add, or remove the methods by which Energy Bill Credit is earned or applied, for any reason and without notice, at our sole discretion.</p>
+  </div>
+
+  <div class="legal-section" id="registration">
+    <h2>Registration</h2>
+    <p>To use the Service, you must create an Account by messaging our WhatsApp Channel and following the registration process, which requires a valid UK mobile number. By creating an Account, you confirm you are at least 18 years old and agree that the information you provide is true, accurate, and complete.</p>
+    <p>You are solely responsible for any activity on your Account, whether or not authorised by you, and must notify us immediately of any unauthorised use by emailing <a class="inline-link" href="mailto:help@getcharged.energy">help@getcharged.energy</a>.</p>
+    <h3>Marketing (optional)</h3>
+    <p>We may send you marketing messages via the WhatsApp Channel, SMS, or email, based on information available to us through your Account. You can opt out at any time by following the unsubscribe instructions provided, or by messaging us via the WhatsApp Channel.</p>
+  </div>
+
+  <div class="legal-section" id="energy-provider">
+    <h2>Your Energy Provider</h2>
+    <p>You will only be able to use the Service if your Energy Provider is supported by us. We will check this on registration and periodically thereafter. Details of currently supported Energy Providers are available via the WhatsApp Channel and/or Website. We accept no responsibility for any losses you may experience as a result of your choice of Energy Provider or any change to it — see "Changing or Unsupported Energy Providers" below.</p>
+  </div>
+
+  <div class="legal-section" id="earning-credit">
+    <h2>Earning Energy Bill Credit</h2>
+    <h3>Linking and unlinking your Card</h3>
+    <p>You may only link a Card that belongs to you and that you are authorised to use. When you choose to link a Card, we will direct you to a secure page operated by our Card-Linking Provider, where you will provide your Card details directly to them. We do not store or have access to your full Card number. Our Card-Linking Provider will monitor transactions on your linked Card to identify qualifying purchases at participating Merchants, and will share relevant transaction data with us solely to operate the Service, calculate Energy Bill Credit, and provide aggregated, anonymised reporting to participating Merchants.</p>
+    <p>By linking a Card, you authorise us and our Card-Linking Provider to collect, process, and share your payment card transaction information for these purposes. We may not be able to provide the Service to you without this consent. You may unlink your Card at any time via the WhatsApp Channel or Website, though our Card-Linking Provider may continue to deliver information about returns at participating Merchants for a limited period after unlinking, for the purposes described above.</p>
+    <h3>Where Energy Bill Credit won't be earned</h3>
+    <p>Energy Bill Credit currently cannot be earned on transactions made through digital wallets (such as PayPal), Buy Now Pay Later platforms, retailer store cards, cards not bearing a supported card network symbol, or where a Merchant or card network otherwise excludes the transaction from qualifying. We are not liable for the unavailability of earning opportunities in any particular case.</p>
+  </div>
+
+  <div class="legal-section" id="energy-vault">
+    <h2>The Energy Vault &amp; Applying Credit to Your Energy Account</h2>
+    <p>Energy Bill Credit which has accrued to your Account, but which has not yet been applied to your Energy Account, is held as a record in your Energy Vault. As set out in "Our Responsibility for Loss or Damage" above, Energy Bill Credit in your Energy Vault is not your property, has no cash value, is not held on trust or in any segregated account for you, and does not represent a claim against any specific fund or asset.</p>
+    <p>We periodically apply accrued Energy Bill Credit to your Energy Account (currently on a monthly cycle) by making a payment to your Energy Provider, as a commercial creditor of that Energy Provider, using the services of our Payment Service Provider(s). Your Energy Provider then applies the corresponding value as a credit to your Energy Account, under separate commercial arrangements between us and your Energy Provider.</p>
+    <p><strong>We are not your payment service provider.</strong> We do not execute payment transactions on your instruction or on your behalf, and we do not, at any time, hold funds belonging to you. Our Payment Service Provider(s) act on our instruction, using our own funds, to discharge our own commercial obligations to your Energy Provider — they do not provide payment services to you, and you have no direct relationship with them in connection with the Service.</p>
+    <h3>When Energy Bill Credit can be applied</h3>
+    <p>Energy Bill Credit is typically subject to a pending period before it becomes eligible for application to your Energy Account, to allow for returns, disputes, or transaction reversals at the relevant Merchant. This period varies by Merchant and offer and will be indicated in the Service where relevant.</p>
+    <p>If we do not receive the expected value from a Merchant, if you return a purchase, or if a transaction is invalidated, disputed, or otherwise does not settle, some or all of the associated pending Energy Bill Credit will be removed from your Energy Vault, at our sole discretion.</p>
+    <h3>Energy Bill Credit may change or be revoked</h3>
+    <p>We may modify the way Energy Bill Credit is calculated or applied at any time, for any reason, at our sole discretion. Once applied to your Energy Account, an application of Energy Bill Credit is final and cannot be reversed, exchanged, or refunded by us — however, we reserve the right to recover the value of any Energy Bill Credit we later determine was applied in error, fraudulently, or in breach of these Terms, whether by adjusting future accruals or by other lawful means.</p>
+  </div>
+
+  <div class="legal-section" id="missing-credit">
+    <h2>Missing Energy Bill Credit</h2>
+    <p>Please check your Account regularly to confirm Energy Bill Credit has properly accrued. If you believe Energy Bill Credit has not been correctly credited, please allow 14 days from the date of the transaction before raising it with us. If it is still missing after this period, contact us within 45 days of the transaction date via the WhatsApp Channel or at <a class="inline-link" href="mailto:help@getcharged.energy">help@getcharged.energy</a>.</p>
+    <p>Please allow 30 days for any claim to be investigated — we may request evidence of a valid qualifying purchase. Our determination will be final. We cannot guarantee that Energy Bill Credit you believe should have accrued can be credited later if we are unable to verify the underlying transaction, including due to technical issues with transaction monitoring or Merchant reporting.</p>
+  </div>
+
+  <div class="legal-section" id="unsupported">
+    <h2>Changing or Unsupported Energy Providers</h2>
+    <p>If you switch to an Energy Provider that is not supported by us, or if your Energy Provider ceases to be supported, your ability to earn further Energy Bill Credit and to have existing Energy Bill Credit applied will be limited. Any Energy Bill Credit already held in your Energy Vault at that point will be retained for up to 90 days, pending confirmation of a new, supported Energy Account. If no supported Energy Account is confirmed within that period, the relevant Energy Bill Credit will expire, and no compensation of any kind will be payable. Energy Bill Credit cannot, in any circumstances, be paid or withdrawn to you as cash or applied to an account other than a supported Energy Account in your name.</p>
+    <p>We accept no responsibility for any losses you may experience as a result of a change to your Energy Provider, including any resulting expiry of Energy Bill Credit under this section.</p>
+  </div>
+
+  <a href="#top" class="back-to-top">back to top ↑</a>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="https://getcharged.energy" class="nav-logo">
+    <span style="font-family:'Figtree',sans-serif;font-size:20px;font-weight:700;color:#FFFFFF;letter-spacing:0;">charged ⚡</span>
+  </a>
+  <div class="links">
+    <a href="https://getcharged.energy">home</a>
+    <a href="https://getcharged.energy/privacy">privacy policy</a>
+    <a href="https://getcharged.energy/terms">terms</a>
+    <a href="mailto:help@getcharged.energy">contact</a>
+  </div>
+  <p class="copy">© 2026 Charged Energy Ltd. Company No. 17277080. All rights reserved.</p>
+</footer>
+
+<script>
+function toggleMenu() {
+  var h = document.getElementById('hamburger');
+  var d = document.getElementById('mobileDrawer');
+  h.classList.toggle('open');
+  d.classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobileDrawer').classList.remove('open');
+}
+document.addEventListener('click', function(e) {
+  var h = document.getElementById('hamburger');
+  var d = document.getElementById('mobileDrawer');
+  if (h && d && !h.contains(e.target) && !d.contains(e.target)) closeMenu();
+});
+</script>
+</body>
+</html>
