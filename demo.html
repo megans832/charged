@@ -561,7 +561,7 @@ function loadFlow(name) {
     tb.classList.toggle('active', tb.textContent.trim() === map[name]);
   });
   if (name==='onboarding') startOnboarding();
-  else if (name==='energybillcredit') startEnergyBillCredit();
+  else if (name==='energybillcredit') startCashback();
   else if (name==='balance') startBalance();
   else if (name==='offers') startOffers();
   else if (name==='addcard') startAddCard();
@@ -569,7 +569,7 @@ function loadFlow(name) {
 
 function startOnboarding() {
   addDivider('today');
-  botSay('you made it 👏 welcome to the charged inner circle\n\nyou\'re in early & we want to build with you 🧰\n\nwhy we were born 👶:\nenergy bills are rising and energy bill credit tools are a faff. we\'re fixing both 🔧\n\nnative to whatsapp 📱\ncharged lives in whatsapp — just message us before any big spend and we\'ll tell you how much you can save 👀\n\nenergy transfer ⚡:\nenergy bill credit goes straight to your energy account as non-refundable credit 💸\n\nthe finished article:\n🔗 link your card once\n🛍️ spend as normal\n⚡ credit lands in your energy account\n\nstart building with us — reply and tell us:\n⚡ who is your energy provider?\n🛒 top 5 brands you spend with?\n\nwe\'ll keep you updated with our build and launch 🚀 (no spam here)', 1200, function() {
+  botSay('you made it 👏 welcome to the charged inner circle\n\nyou\'re in early & we want to build with you 🧰\n\nwhy we were born 👶:\nenergy bills are rising and savings tools are a faff. we\'re fixing both 🔧\n\nnative to whatsapp 📱\ncharged lives in whatsapp — just message us before any big spend and we\'ll tell you how much you can save 👀\n\nenergy transfer ⚡:\nenergy bill credit goes straight to your energy account as non-refundable credit 💸\n\nthe finished article:\n🔗 link your card once\n🛍️ spend as normal\n⚡ credit lands in your energy account\n\nstart building with us — reply and tell us:\n⚡ who is your energy provider?\n🛒 top 5 brands you spend with?\n\nwe\'ll keep you updated with our build and launch 🚀 (no spam here)', 1200, function() {
     botSay('first up — who\'s your energy provider? 👇', 700, function() {
       setQRs(PROVIDERS, function(p) {
         clearQRs(); addBubble('user', p);
@@ -582,16 +582,16 @@ function startOnboarding() {
   });
 }
 
-function startEnergyBillCredit() {
+function startCashback() {
   addDivider('today');
   botSay('⚡ energy bill credit confirmed. £4.20 from tesco has been added to your energy credit. your total balance is now £11.60.', 800, function() {
     botSay('that\'s £11.60 heading straight to your e.on bill 🙌\n\nkeep it up and you\'ll clear over £100 this year at your current pace', 700, function() {
-      setQRs(['see my full balance','what other offers do i have?','nice one 👏'], energyBillCreditReply);
+      setQRs(['see my full balance','what other offers do i have?','nice one 👏'], cashbackReply);
     });
   });
 }
 
-function energyBillCreditReply(r) {
+function cashbackReply(r) {
   clearQRs(); addBubble('user', r);
   if (r==='see my full balance') {
     showBalance();
@@ -601,7 +601,7 @@ function energyBillCreditReply(r) {
     });
   } else if (r==='nice one 👏') {
     botSay('you\'re doing the work — we\'re just sending it where it matters ⚡', 800, function() {
-      setQRs(['see my full balance','what other offers do i have?'], energyBillCreditReply);
+      setQRs(['see my full balance','what other offers do i have?'], cashbackReply);
     });
   }
 }

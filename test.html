@@ -665,7 +665,7 @@ function selectFlow(name) {
     if (el) el.classList.toggle('active', f === name);
   });
   if (name==='onboarding') startOnboarding();
-  else if (name==='energybillcredit') startEnergyBillCredit();
+  else if (name==='energybillcredit') startCashback();
   else if (name==='balance') startBalance();
   else if (name==='offers') startOffers();
   else if (name==='addcard') startAddCard();
@@ -681,7 +681,7 @@ function startOnboarding() {
   setTimeout(function() {
     dbLog('insert', 'users', 'charged_id='+uid+' | wa_id=447700000001 | status=onboarding', '👤');
   }, 600);
-  botSay('you made it 👏 welcome to the charged inner circle\n\nyou\'re in early — we want to build with you 🧰\n\nenergy bills rising, energy bill credit tools are a faff. we\'re fixing both.\n\nnative to whatsapp 📱 · energy bill credit straight to your energy account ⚡\n\nfirst up — who\'s your energy provider? 👇', 1400, function() {
+  botSay('you made it 👏 welcome to the charged inner circle\n\nyou\'re in early — we want to build with you 🧰\n\nenergy bills rising, savings tools are a faff. we\'re fixing both.\n\nnative to whatsapp 📱 · energy bill credit straight to your energy account ⚡\n\nfirst up — who\'s your energy provider? 👇', 1400, function() {
     setQRs(PROVIDERS, function(p) {
       clearQRs(); addBubble('user', p);
       dbLog('insert', 'message_queue', 'wa_id=447700000001 | body="'+p+'" | status=queued', '📨');
@@ -695,7 +695,7 @@ function startOnboarding() {
 }
 
 // ─── ENERGY BILL CREDIT ─────────────────────────────────────────────────────────────────
-function startEnergyBillCredit() {
+function startCashback() {
   addDivider('today');
   var txId = randId('TXN');
   var ledgerId = randId('LDG');
@@ -708,11 +708,11 @@ function startEnergyBillCredit() {
   }, 500);
   botSay('⚡ energy bill credit confirmed. £4.20 from tesco has been added to your energy credit. your total balance is now £11.60.', 900, function() {
     botSay('that\'s £11.60 heading straight to your e.on bill 🙌\n\nkeep it up and you\'ll clear over £100 this year at your current pace', 700, function() {
-      setQRs(['see my full balance','what other offers do i have?','nice one 👏'], energyBillCreditReply);
+      setQRs(['see my full balance','what other offers do i have?','nice one 👏'], cashbackReply);
     });
   });
 }
-function energyBillCreditReply(r) {
+function cashbackReply(r) {
   clearQRs(); addBubble('user', r);
   dbLog('insert', 'message_queue', 'body="'+r+'" | status=queued', '📨');
   if (r==='see my full balance') {
@@ -725,7 +725,7 @@ function energyBillCreditReply(r) {
     });
   } else if (r==='nice one 👏') {
     botSay('you\'re doing the work — we\'re just sending it where it matters ⚡', 800, function() {
-      setQRs(['see my full balance','what other offers do i have?'], energyBillCreditReply);
+      setQRs(['see my full balance','what other offers do i have?'], cashbackReply);
     });
   }
 }
