@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+<title>charged ⚡ — privacy policy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Figtree:wght@300;400;500;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Figtree:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<style>
+  :root {
+    --black: #000000;
+    --black-2: #0A0A0A;
+    --black-3: #111111;
+    --black-4: #1A1A1A;
+    --gold: #F5A623;
+    --gold-bright: #FFD166;
+    --gold-dim: #B87A10;
+    --white: #FFFFFF;
+    --off-white: #E8E8E8;
+    --grey: #777777;
+    --electric: #4FC3F7;
+    --green: #00E676;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; background-color: #000; overflow-x: hidden; }
+
+  body {
+    background-color: #000;
+    color: var(--white);
+    font-family: 'Figtree', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* -- NAV -- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 40px; display: flex; justify-content: space-between;
+    align-items: center; background: #000000;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .nav-left { display: flex; align-items: center; gap: 24px; }
+
+  .nav-logo { text-decoration: none; display: flex; align-items: center; }
+
+  /* -- NAV MENU -- */
+  .nav-menu { display: flex; align-items: center; gap: 4px; }
+  .nav-menu a {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--grey); font-family: 'Figtree', sans-serif;
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    padding: 7px 12px; border-radius: 6px;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .nav-menu a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+  .nav-menu a.active { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold); color: var(--black);
+    font-family: 'Figtree', sans-serif; font-weight: 800;
+    font-size: 13px; letter-spacing: 0.5px; text-transform: uppercase;
+    padding: 11px 22px; border-radius: 4px; text-decoration: none; transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-bright); transform: translateY(-1px); }
+
+  /* -- HAMBURGER -- */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px; height: 36px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 200;
+  }
+  .hamburger span {
+    display: block; width: 100%; height: 2px;
+    background: var(--white); border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* -- MOBILE DRAWER -- */
+  .mobile-drawer {
+    display: none;
+    position: fixed;
+    top: 65px; left: 0; right: 0;
+    background: #0A0A0A;
+    border-bottom: 1px solid rgba(245,166,35,0.15);
+    z-index: 99;
+    padding: 12px 20px 20px;
+    flex-direction: column;
+    gap: 4px;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: all 0.25s ease;
+  }
+  .mobile-drawer.open {
+    display: flex;
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .mobile-drawer a {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--off-white); font-family: 'Figtree', sans-serif;
+    font-size: 15px; font-weight: 600; text-decoration: none;
+    padding: 12px 16px; border-radius: 8px;
+    transition: all 0.2s;
+  }
+  .mobile-drawer a:hover { background: rgba(255,255,255,0.06); color: var(--gold); }
+
+  /* -- RESPONSIVE NAV -- */
+  @media (max-width: 900px) {
+    .nav-menu { display: none; }
+    .hamburger { display: flex; }
+  }
+
+  /* LOGO */
+  .logo-img { height: 44px; width: auto; display: block; object-fit: contain; }
+  .footer-logo { height: 44px; width: auto; display: block; object-fit: contain; }
+  @media (max-width: 768px) {
+    .logo-img { height: 38px; }
+    .footer-logo { height: 38px; }
+  }
+
+  /* HERO */
+  .legal-hero {
+    padding: 140px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .legal-hero::before {
+    content: '';
+    position: absolute;
+    top: -10%; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 500px;
+    background: radial-gradient(ellipse, rgba(245,166,35,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .legal-eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+  .legal-hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(44px, 8vw, 84px);
+    line-height: 0.95; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 18px;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.35s;
+  }
+  .legal-hero h1 span { color: var(--gold); }
+  .legal-hero p.effective-date {
+    font-size: 14px; font-weight: 600; color: var(--grey);
+    letter-spacing: 0.5px; text-transform: uppercase;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.5s;
+  }
+
+  /* LEGAL DOC WRAPPER */
+  .legal-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 40px 120px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.65s;
+  }
+
+  /* TOC */
+  .toc {
+    background: var(--black-3);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 28px 30px;
+    margin-bottom: 56px;
+  }
+  .toc-title {
+    font-family: 'Figtree', sans-serif;
+    font-size: 12px; font-weight: 800; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+  }
+  .toc ol {
+    columns: 2;
+    column-gap: 32px;
+    list-style: none;
+    counter-reset: toc-counter;
+  }
+  .toc li {
+    counter-increment: toc-counter;
+    font-size: 13px; margin-bottom: 10px; break-inside: avoid;
+  }
+  .toc li a {
+    color: var(--off-white); text-decoration: none;
+    transition: color 0.15s;
+  }
+  .toc li a:before {
+    content: counter(toc-counter) ". ";
+    color: var(--gold-dim); font-weight: 700;
+  }
+  .toc li a:hover { color: var(--gold); }
+  @media (max-width: 640px) { .toc ol { columns: 1; } }
+
+  /* NOTICE BOX */
+  .notice-box {
+    background: rgba(245,166,35,0.06);
+    border: 1px solid rgba(245,166,35,0.25);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 48px;
+    font-size: 14px;
+    color: var(--off-white);
+    line-height: 1.65;
+  }
+  .notice-box strong { color: var(--gold-bright); }
+
+  /* PRINCIPLE CARDS */
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 48px;
+  }
+  .principle-card {
+    background: var(--black-3);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .principle-card .num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .principle-card p {
+    font-size: 13px;
+    color: var(--off-white);
+    font-weight: 300;
+    line-height: 1.55;
+  }
+  @media (max-width: 700px) { .principles { grid-template-columns: 1fr; } }
+
+  /* SECTIONS */
+  .legal-part-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 4vw, 38px);
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    margin: 72px 0 8px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(245,166,35,0.25);
+  }
+  .legal-part-title:first-of-type { margin-top: 0; }
+
+  .legal-section { margin-top: 44px; scroll-margin-top: 100px; }
+  .legal-section h2 {
+    font-family: 'Figtree', sans-serif;
+    font-size: 19px; font-weight: 800;
+    color: var(--white);
+    margin-bottom: 14px;
+    letter-spacing: 0.2px;
+  }
+  .legal-section h3 {
+    font-family: 'Figtree', sans-serif;
+    font-size: 15px; font-weight: 700;
+    color: var(--gold-bright);
+    margin: 22px 0 10px;
+  }
+  .legal-section p {
+    font-size: 14.5px;
+    color: var(--off-white);
+    margin-bottom: 14px;
+    font-weight: 300;
+  }
+  .legal-section p strong, .legal-section li strong, .legal-section td strong { color: var(--white); font-weight: 700; }
+  .legal-section ul, .legal-section ol.legal-list {
+    margin: 0 0 16px 0;
+    padding-left: 22px;
+  }
+  .legal-section ul li, .legal-section ol.legal-list li {
+    font-size: 14.5px;
+    color: var(--off-white);
+    font-weight: 300;
+    margin-bottom: 9px;
+    padding-left: 4px;
+  }
+  .legal-section ol.legal-list { list-style: decimal; }
+  .legal-section a.inline-link { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
+  .legal-section a.inline-link:hover { color: var(--gold-bright); }
+
+  .def-term {
+    font-size: 14.5px;
+    color: var(--white);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .def-block { margin-bottom: 16px; }
+  .def-block p { margin-bottom: 0; }
+
+  /* TABLES */
+  .table-wrap {
+    overflow-x: auto;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+  }
+  table.legal-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    min-width: 560px;
+  }
+  table.legal-table th {
+    background: var(--black-4);
+    color: var(--gold-bright);
+    text-align: left;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(245,166,35,0.2);
+  }
+  table.legal-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    color: var(--off-white);
+    font-weight: 300;
+    vertical-align: top;
+  }
+  table.legal-table tr:last-child td { border-bottom: none; }
+  table.legal-table tr:nth-child(even) td { background: rgba(255,255,255,0.015); }
+
+  .back-to-top {
+    display: inline-block;
+    margin-top: 60px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--grey);
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 10px 18px;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .back-to-top:hover { color: var(--gold); border-color: rgba(245,166,35,0.4); }
+
+  /* FOOTER */
+  footer {
+    padding: 48px 40px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    background: var(--black-2);
+  }
+  footer .links { display: flex; gap: 24px; flex-wrap: wrap; }
+  footer .links a { font-size: 13px; font-weight: 500; color: var(--grey); text-decoration: none; transition: color 0.2s; }
+  footer .links a:hover { color: var(--white); }
+  footer .copy { font-size: 12px; color: rgba(255,255,255,0.18); font-weight: 400; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .legal-hero { padding: 110px 20px 50px; }
+    .legal-wrap { padding: 0 20px 100px; }
+    footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body id="top">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <a href="https://getcharged.energy" class="nav-logo">
+      <span style="font-family:'Figtree',sans-serif;font-size:20px;font-weight:700;color:#FFFFFF;letter-spacing:0;">charged ⚡</span>
+    </a>
+    <nav class="nav-menu">
+      <a href="https://getcharged.energy">🏠 home</a>
+      <a href="https://getcharged.energy/demo">🎮 demo</a>
+      <a href="https://getcharged.energy/timeline">📅 timeline</a>
+      <a href="https://getcharged.energy/merchants">🛍️ merchants</a>
+      <a href="https://getcharged.energy/providers">⚡ providers</a>
+    </nav>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="menu">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="nav-cta" href="https://wa.me/447763375105?text=I%27d%20like%20to%20join%20the%20charged%20waitlist%20as%20a%20founding%20tester%20%E2%9A%A1" target="_blank">join waitlist</a>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <a href="https://getcharged.energy/demo" onclick="closeMenu()">🎮 demo</a>
+  <a href="https://getcharged.energy/timeline" onclick="closeMenu()">📅 timeline</a>
+  <a href="https://getcharged.energy/merchants" onclick="closeMenu()">🛍️ merchants</a>
+  <a href="https://getcharged.energy/providers" onclick="closeMenu()">⚡ providers</a>
+</div>
+
+<!-- HERO -->
+<div class="legal-hero">
+  <p class="legal-eyebrow">legal</p>
+  <h1>privacy<br><span>policy</span></h1>
+  <p class="effective-date">Last updated: July 2026</p>
+</div>
+
+<!-- POLICY DOCUMENT -->
+<div class="legal-wrap">
+
+  <div class="notice-box">
+    <strong>This policy explains how we handle your personal data.</strong> We are Charged Energy Ltd, a company that operates entirely via WhatsApp — we have no native app. We work with a small number of carefully chosen sub-processors (listed below) to deliver the Service. If anything here is unclear, contact us at <a class="inline-link" href="mailto:help@getcharged.energy">help@getcharged.energy</a>.
+  </div>
+
+  <div class="principles">
+    <div class="principle-card">
+      <div class="num">01</div>
+      <p>Only those within Charged, and the sub-processors listed below, who need your data to do their job can access it — no one else.</p>
+    </div>
+    <div class="principle-card">
+      <div class="num">02</div>
+      <p>Where we use suppliers to help deliver the Service, we restrict their use of your data to what we instruct and bind them to comply with data protection law.</p>
+    </div>
+    <div class="principle-card">
+      <div class="num">03</div>
+      <p>Charged users must be 18 or over. If we find we've inadvertently collected data from someone under 18, we delete it as soon as we're made aware.</p>
+    </div>
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">contents</div>
+    <ol>
+      <li><a href="#who-we-are">Important Information &amp; Who We Are</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#controller-processor">Controller &amp; Processor</a></li>
+      <li><a href="#personal-data">What Is Personal Data?</a></li>
+      <li><a href="#how-collected">How Is Your Personal Data Collected?</a></li>
+      <li><a href="#how-we-use">How We Use Your Data</a></li>
+      <li><a href="#purposes">Purposes for Processing Data</a></li>
+      <li><a href="#automated">Automated Decision-Making</a></li>
+      <li><a href="#your-rights">Your Key Rights</a></li>
+      <li><a href="#storage-transfers">Storage, Security &amp; International Transfers</a></li>
+      <li><a href="#sharing">Sharing Your Personal Data</a></li>
+      <li><a href="#subprocessors">Our Sub-Processors</a></li>
+      <li><a href="#marketing">Marketing</a></li>
+      <li><a href="#aggregated">Aggregated Data</a></li>
+      <li><a href="#retention">How Long We Keep Your Data</a></li>
+      <li><a href="#cookies">Cookies</a></li>
+      <li><a href="#complaints">Complaints Process</a></li>
+      <li><a href="#third-party-links">Links to Third-Party Websites</a></li>
+      <li><a href="#changes">Changes to This Policy</a></li>
+    </ol>
+  </div>
+
+  <div class="legal-section" id="who-we-are">
+    <h2>Important Information &amp; Who We Are</h2>
+    <p>We are <strong>Charged Energy Ltd</strong> (referred to as <strong>"Charged," "we," "us"</strong> or <strong>"our"</strong> in this Privacy Policy), a company registered in England and Wales under company number <strong>17277080</strong>, with our registered office at 71–75 Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ. Charged is the controller and responsible for your personal data. Our ICO registration reference is <strong>ZC193602</strong>.</p>
+    <p>We created Charged to make it effortless to turn everyday spending into credit against your energy bill — delivered entirely through WhatsApp, with no app to download. To provide this, we need to process your personal data, and this Privacy Policy explains how and why we do that, and what rights you have in relation to it.</p>
+    <p>This Privacy Policy sets out how and on what basis Charged collects personal data and how you and your data are protected when you use the Service via the WhatsApp Channel and/or our Website, or otherwise interact with us.</p>
+    <p>Charged cannot provide the Service without access to your personal data. If you do not want us to use your data as described here, the Service will not be for you, and we won't be able to provide it if you choose to stop sharing the data we need.</p>
+    <p>The Service is not intended for children, and we do not knowingly collect data relating to anyone under 18.</p>
+  </div>
+
+  <div class="legal-section" id="contact">
+    <h2>Contact</h2>
+    <p>If you have any questions about this Privacy Policy or our collection, use, or storage of your personal data, please email <a class="inline-link" href="mailto:help@getcharged.energy">help@getcharged.energy</a>.</p>
+  </div>
+
+  <div class="legal-section" id="controller-processor">
+    <h2>Controller &amp; Processor</h2>
+    <p>A <strong>Data Controller</strong> is a company or organisation that collects or stores personal data and decides how it is used. Charged is a data controller in respect of your personal data as described in this Policy.</p>
+    <p>A <strong>Data Processor</strong> is a company or organisation that processes personal data on behalf of a controller, acting on that controller's instructions. Where any of our sub-processors act as a controller in their own right for a specific purpose (for example, WhatsApp/Meta in respect of its own platform operation), this Policy does not govern that processing — please refer to that organisation's own privacy policy.</p>
+  </div>
+
+  <div class="legal-section" id="personal-data">
+    <h2>What Is Personal Data?</h2>
+    <p>Personal data means any information relating to an identified or identifiable living individual — someone who can be identified, directly or indirectly, by reference to an identifier such as a name, phone number, an online identifier, or one or more factors specific to them.</p>
+    <p>We obtain your personal data when you use the Service, our Website, or otherwise interact with us. The categories we collect include:</p>
+    <div class="def-block"><div class="def-term">Identity Data</div><p>first name, last name, and date of birth (used to confirm you're 18 or over).</p></div>
+    <div class="def-block"><div class="def-term">Contact Data</div><p>your WhatsApp-registered mobile number, and email address if you provide one.</p></div>
+    <div class="def-block"><div class="def-term">Financial Data</div><p>information about your linked payment card (such as card scheme, last four digits, and expiry date — we never see or store your full card number), and details of the Account you hold with us.</p></div>
+    <div class="def-block"><div class="def-term">Energy Account Data</div><p>your Energy Provider, and the reference details needed to apply Energy Bill Credit to your Energy Account.</p></div>
+    <div class="def-block"><div class="def-term">Transaction Data</div><p>information about qualifying purchases made on your linked Card at participating Merchants, provided to us by our Card-Linking Provider.</p></div>
+    <div class="def-block"><div class="def-term">Communications Data</div><p>the content and metadata of messages you exchange with us via the WhatsApp Channel, needed to operate the Service and respond to you.</p></div>
+    <div class="def-block"><div class="def-term">Technical Data</div><p>IP address, browser type and version, device information, and similar data collected when you use our Website.</p></div>
+    <div class="def-block"><div class="def-term">Profile &amp; Usage Data</div><p>your preferences, category interests, how you interact with the Service, and your Energy Bill Credit balance and history.</p></div>
+    <div class="def-block"><div class="def-term">Marketing Data</div><p>your preferences in receiving marketing from us and your communication preferences.</p></div>
+    <p style="margin-top:18px;">We do not collect any special category personal data about you (such as race, ethnicity, religious beliefs, health data, or sexual orientation). It's important the personal data we hold is accurate and current — please let us know if your details change.</p>
+  </div>
+
+  <div class="legal-section" id="how-collected">
+    <h2>How Is Your Personal Data Collected?</h2>
+    <p>We collect your personal data in a few ways:</p>
+    <ul>
+      <li><strong>Your interactions with us.</strong> You give us personal data when you message our WhatsApp Channel to register, link a Card, select your Energy Provider, or otherwise use the Service, and when you contact us directly.</li>
+      <li><strong>Automated technologies.</strong> As you interact with our Website, we automatically collect Technical Data about your equipment and browsing actions — see "Cookies" below.</li>
+      <li><strong>Third parties.</strong> We receive Transaction Data from our Card-Linking Provider when a qualifying purchase is identified, and delivery/messaging metadata from WhatsApp/Meta and our messaging infrastructure provider as part of operating the WhatsApp Channel.</li>
+    </ul>
+  </div>
+
+  <div class="legal-section" id="how-we-use">
+    <h2>How We Use Your Data</h2>
+    <p>We will only use your personal data when we have a lawful basis to do so. Most commonly, this will be one of the following:</p>
+    <ul>
+      <li><strong>Performance of a contract</strong> — where we need to process your data to provide the Service under these Terms. If you don't provide the information we need, we may not be able to provide the Service.</li>
+      <li><strong>Consent</strong> — where you've freely given a specific, informed indication of what you want, such as opting in to marketing or linking your Card. You can withdraw consent at any time.</li>
+      <li><strong>Legitimate interests</strong> — where it's necessary for our legitimate interests (or a third party's), and doesn't override your interests and rights — for example, preventing fraud or improving the Service.</li>
+      <li><strong>Legal obligation</strong> — where we need to process your data to comply with the law, including financial crime and record-keeping obligations.</li>
+    </ul>
+  </div>
+
+  <div class="legal-section" id="purposes">
+    <h2>Purposes for Processing Data</h2>
+    <p>The table below sets out the main ways we use your personal data and the legal basis we rely on for each.</p>
+    <div class="table-wrap">
+      <table class="legal-table">
+        <tr><th>Purpose</th><th>Data used</th><th>Lawful basis</th></tr>
+        <tr><td>Register and operate your Account</td><td>Identity, Contact, Energy Account Data</td><td>Performance of a contract</td></tr>
+        <tr><td>Link and monitor your Card, calculate and apply Energy Bill Credit</td><td>Financial, Transaction, Energy Account Data</td><td>Performance of a contract; consent (card linking)</td></tr>
+        <tr><td>Respond to your messages via the WhatsApp Channel</td><td>Communications, Identity, Contact Data</td><td>Performance of a contract</td></tr>
+        <tr><td>Send you Service-related notifications (e.g. credit confirmations)</td><td>Contact, Communications Data</td><td>Performance of a contract</td></tr>
+        <tr><td>Send you optional marketing</td><td>Contact, Marketing, Profile Data</td><td>Consent</td></tr>
+        <tr><td>Detect and prevent fraud or misuse</td><td>Identity, Financial, Transaction, Technical Data</td><td>Legitimate interests; legal obligation</td></tr>
+        <tr><td>Improve and troubleshoot the Service</td><td>Technical, Usage Data</td><td>Legitimate interests</td></tr>
+        <tr><td>Comply with legal, tax, and regulatory obligations</td><td>Identity, Financial, Transaction Data</td><td>Legal obligation</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="legal-section" id="automated">
+    <h2>Automated Decision-Making</h2>
+    <p>Parts of the Service use automated logic and artificial intelligence. In particular:</p>
+    <ul>
+      <li>We use automated checks to determine whether your Energy Provider and meter type are currently supported by the Service, which affects whether you can register or must be waitlisted.</li>
+      <li>We use a conversational AI system to power responses in the WhatsApp Channel, drawing on your Account and Profile Data to answer questions and guide you through the Service.</li>
+    </ul>
+    <p>None of this automated processing makes decisions about you that produce legal effects, or similarly significantly affect you, without the possibility of human review. If you believe an automated check has produced an incorrect result (for example, incorrectly marking your Energy Provider as unsupported), you can contact us at <a class="inline-link" href="mailto:help@getcharged.energy">help@getcharged.energy</a> for a human to review it.</p>
+  </div>
+
+  <div class="legal-section" id="your-rights">
+    <h2>Your Key Rights</h2>
+    <p>Under UK data protection law, you have the right to:</p>
+    <ul>
+      <li><strong>Request access</strong> to your personal data (a "subject access request").</li>
+      <li><strong>Request correction</strong> of inaccurate or incomplete personal data we hold.</li>
+      <li><strong>Request erasure</strong> of your personal data in certain circumstances.</li>
+      <li><strong>Object to processing</strong> based on our legitimate interests, including profiling, and object at any time to processing for direct marketing.</li>
+      <li><strong>Request restriction</strong> of processing in certain circumstances.</li>
+      <li><strong>Request portability</strong> of data you've provided to us, where processing is based on consent or contract and carried out by automated means.</li>
+      <li><strong>Withdraw consent</strong> at any time, where we rely on consent — this won't affect processing carried out before withdrawal.</li>
+      <li><strong>Complain to the ICO</strong> — see "Complaints Process" below.</li>
+    </ul>
+    <p>To exercise any of these rights, email <a class="inline-link" href="mailto:help@getcharged.energy">help@getcharged.energy</a>. We aim to respond within one month; if your request is complex, this may take longer, and we'll keep you updated. There's usually no fee, though we may charge a reasonable fee or decline requests that are clearly unfounded, repetitive, or excessive. We may ask you to verify your identity before actioning a request.</p>
+  </div>
+
+  <div class="legal-section" id="storage-transfers">
+    <h2>Storage, Security &amp; International Transfers</h2>
+    <p>Your personal data is processed and stored on secure systems operated by us and our sub-processors, located in both the <strong>United Kingdom/European Economic Area (EEA)</strong> and the <strong>United States</strong>. Where personal data is transferred outside the UK, we ensure appropriate safeguards are in place, which may include:</p>
+    <ul>
+      <li>relying on a UK adequacy decision, where the destination country is recognised as providing an adequate level of protection;</li>
+      <li>the UK International Data Transfer Agreement or the UK Addendum to the EU Standard Contractual Clauses, which impose contractual data protection obligations on the recipient; and/or</li>
+      <li>reliance on a recipient's participation in a recognised transfer framework, such as the UK extension to the EU–US Data Privacy Framework, where applicable to that recipient.</li>
+    </ul>
+    <p>We use appropriate technical and organisational measures to protect your personal data, including encryption in transit and at rest, access controls, and regular review of our sub-processors' own security practices.</p>
+  </div>
+
+  <div class="legal-section" id="sharing">
+    <h2>Sharing Your Personal Data</h2>
+    <p>We require all third parties to respect the security of your personal data and treat it in accordance with the law. We will never sell or rent your personal data. We share your data in the following circumstances:</p>
+
+    <h3>Card-Linking &amp; Payment Service Providers</h3>
+    <p>When you link a Card, you authorise us and our Card-Linking Provider (Fidel API Limited) to collect, process, and share your card transaction data to identify qualifying purchases and calculate Energy Bill Credit. We may not be able to provide the Service without this. You may withdraw this consent at any time by unlinking your Card, though we won't be able to continue providing the Service to you if you do.</p>
+    <p>We also work with a payment services provider (currently Modulr Finance Limited and/or its group companies) to move our own funds when applying Energy Bill Credit to Energy Accounts, as described in our <a class="inline-link" href="https://getcharged.energy/terms">Terms &amp; Conditions</a>.</p>
+
+    <h3>Our Sub-Processors</h3>
+    <p>We share your data with the technology sub-processors listed in the table below, who help us run the WhatsApp Channel, Website, and underlying infrastructure. Each is bound by contract to only use your data as we instruct and to apply appropriate data protection safeguards.</p>
+
+    <h3>Energy Providers</h3>
+    <p>We share the minimum data needed with your Energy Provider — your account reference and the value of Energy Bill Credit being applied — to enable that credit to be applied to your Energy Account.</p>
+
+    <h3>Regulators &amp; Law Enforcement</h3>
+    <p>We may share data with regulators in connection with their duties, and with fraud prevention or law enforcement agencies where we're legally required to help them do their job.</p>
+
+    <h3>Business Transfers</h3>
+    <p>If we sell, transfer, or merge parts of our business, the new owner may use your personal data in the same way as set out in this Policy.</p>
+  </div>
+
+  <div class="legal-section" id="subprocessors">
+    <h2>Our Sub-Processors</h2>
+    <div class="table-wrap">
+      <table class="legal-table">
+        <tr><th>Sub-processor</th><th>Role</th><th>Data location</th></tr>
+        <tr><td><strong>Meta</strong> (WhatsApp Business Platform)</td><td>Delivers the WhatsApp Channel through which the Service operates; processes message content and metadata</td><td>United States</td></tr>
+        <tr><td><strong>360dialog</strong></td><td>WhatsApp Business Solution Provider; routes messages between our systems and the WhatsApp Business Platform</td><td>European Economic Area</td></tr>
+        <tr><td><strong>Supabase</strong></td><td>Database and Account storage — holds your Account, Profile, and Energy Bill Credit records</td><td>United States and European Economic Area</td></tr>
+        <tr><td><strong>Railway</strong></td><td>Application hosting for the systems that run the Service</td><td>United States and European Economic Area</td></tr>
+        <tr><td><strong>Fidel API Limited</strong></td><td>Card-linking and transaction monitoring — identifies qualifying purchases on your linked Card</td><td>United Kingdom</td></tr>
+        <tr><td><strong>Modulr Finance Limited</strong></td><td>Payment services provider — used to move our own funds when applying Energy Bill Credit</td><td>United Kingdom</td></tr>
+      </table>
+    </div>
+    <p>This list may change as we add or replace sub-processors from time to time — the current list will always be available on this page. If we make a material change to who processes your data, we'll notify you as set out in "Changes to This Policy" below.</p>
+  </div>
+
+  <div class="legal-section" id="marketing">
+    <h2>Marketing</h2>
+    <p>During registration, you can choose whether to receive marketing messages from us via the WhatsApp Channel, SMS, or email. You may also receive service-related communications (such as Energy Bill Credit confirmations or Terms updates) even if you've opted out of marketing, as these are necessary to operate the Service.</p>
+    <p>You can opt out of marketing at any time by messaging us via the WhatsApp Channel, using the unsubscribe link in any marketing email or SMS, or emailing <a class="inline-link" href="mailto:help@getcharged.energy">help@getcharged.energy</a>.</p>
+  </div>
+
+  <div class="legal-section" id="aggregated">
+    <h2>Aggregated Data</h2>
+    <p>We may disclose and use anonymised, aggregated statistics about use of the Service — for example, to report performance to Merchants or for our own marketing and industry analysis. Aggregated data of this kind can never be tracked back to you personally and does not constitute personal data.</p>
+  </div>
+
+  <div class="legal-section" id="retention">
+    <h2>How Long We Keep Your Data</h2>
+    <p>We only keep your personal data for as long as reasonably necessary for the purposes we collected it for, including to satisfy legal, regulatory, tax, or accounting requirements. Depending on the type of data, this ranges from <strong>90 days up to five years</strong>. We may keep data for longer if there's an ongoing complaint or a reasonable prospect of litigation.</p>
+    <p>When you close your Account, we anonymise and archive your personal data, which we then retain for <strong>six months</strong> to fulfil legal and regulatory requirements, unless we're required to keep it for longer.</p>
+  </div>
+
+  <div class="legal-section" id="cookies">
+    <h2>Cookies</h2>
+    <p>Our Website currently uses only cookies and similar technologies that are strictly necessary for it to function — we do not currently use non-essential cookies such as analytics or advertising cookies. If this changes, we will update this section and, where required, seek your consent before setting any non-essential cookies.</p>
+  </div>
+
+  <div class="legal-section" id="complaints">
+    <h2>Complaints Process</h2>
+    <p>If you're unhappy with how we process your personal data, please contact us first at <a class="inline-link" href="mailto:help@getcharged.energy">help@getcharged.energy</a> so we have the chance to put things right — we aim to respond within 30 days. You also have the right to complain to the UK's data protection regulator, the Information Commissioner's Office (ICO), at any time:</p>
+    <p style="margin-bottom:4px;">Information Commissioner's Office<br>Wycliffe House, Water Lane, Wilmslow, Cheshire, SK9 5AF<br>Phone: 0303 123 1113 · <a class="inline-link" href="https://ico.org.uk">ico.org.uk</a></p>
+  </div>
+
+  <div class="legal-section" id="third-party-links">
+    <h2>Links to Third-Party Websites</h2>
+    <p>The Service and Website may include links to third-party websites, including Merchant websites and our Card-Linking Provider's secure card-linking pages. We don't control these websites and aren't responsible for their privacy practices. We encourage you to read the privacy policy of any website you visit via a link from our Service.</p>
+  </div>
+
+  <div class="legal-section" id="changes">
+    <h2>Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page and, where the change is material, we'll notify you via the WhatsApp Channel or email. Continued use of the Service after a material change constitutes acceptance of the updated Policy.</p>
+  </div>
+
+  <a href="#top" class="back-to-top">back to top ↑</a>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="https://getcharged.energy" class="nav-logo">
+    <span style="font-family:'Figtree',sans-serif;font-size:20px;font-weight:700;color:#FFFFFF;letter-spacing:0;">charged ⚡</span>
+  </a>
+  <div class="links">
+    <a href="https://getcharged.energy">home</a>
+    <a href="https://getcharged.energy/privacy">privacy policy</a>
+    <a href="https://getcharged.energy/terms">terms</a>
+    <a href="mailto:help@getcharged.energy">contact</a>
+  </div>
+  <p class="copy">© 2026 Charged Energy Ltd. Company No. 17277080. ICO ref. ZC193602. All rights reserved.</p>
+</footer>
+
+<script>
+function toggleMenu() {
+  var h = document.getElementById('hamburger');
+  var d = document.getElementById('mobileDrawer');
+  h.classList.toggle('open');
+  d.classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobileDrawer').classList.remove('open');
+}
+document.addEventListener('click', function(e) {
+  var h = document.getElementById('hamburger');
+  var d = document.getElementById('mobileDrawer');
+  if (h && d && !h.contains(e.target) && !d.contains(e.target)) closeMenu();
+});
+</script>
+</body>
+</html>
