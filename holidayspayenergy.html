@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>charged ⚡ — your holiday can help pay your energy bill</title>
+<meta name="description" content="book with participating brands like expedia and get up to £200 off your energy bill. no app. no subscription. just whatsapp.">
+<meta property="og:title" content="yes. your holiday can help pay your energy bill. ⚡️">
+<meta property="og:description" content="they pay us commission. we turn it into energy credit for you. no app. no subscription. just whatsapp.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<style>
+  :root {
+    --black: #000000;
+    --black-2: #0A0A0A;
+    --black-3: #111111;
+    --black-4: #1A1A1A;
+    --gold: #F5A623;
+    --gold-bright: #FFD166;
+    --white: #FFFFFF;
+    --off-white: #E8E8E8;
+    --grey: #777777;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; background: #000; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: #000;
+    color: var(--white);
+    font-family: 'Figtree', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 14px 40px;
+    padding-top: max(14px, env(safe-area-inset-top));
+    display: flex; justify-content: space-between; align-items: center;
+    background: #000;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .logo { font-size: 20px; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0; }
+  .nav-cta {
+    background: var(--gold); color: var(--black);
+    font-weight: 800; font-size: 13px; letter-spacing: 0.5px; text-transform: uppercase;
+    padding: 11px 22px; border-radius: 4px; text-decoration: none; transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-bright); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    padding: 140px 24px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -10%; left: 50%;
+    transform: translateX(-50%);
+    width: 900px; max-width: 100vw; height: 560px;
+    background: radial-gradient(ellipse, rgba(245,166,35,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero > * { position: relative; }
+  .hero h1 {
+    font-size: clamp(38px, 9vw, 78px);
+    font-weight: 900;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    max-width: 880px;
+    margin: 0 auto 22px;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.15s;
+  }
+  .hero h1 .gold { color: var(--gold); }
+  .hero .sub {
+    font-size: clamp(17px, 2.4vw, 22px);
+    font-weight: 300;
+    color: var(--off-white);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.55;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.3s;
+  }
+  .hero .sub strong { font-weight: 700; color: var(--white); }
+
+  /* HOW IT WORKS */
+  .how { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px; text-align: center;
+  }
+  .steps {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.45s;
+  }
+  .step {
+    background: var(--black-3);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 22px 20px;
+  }
+  .step .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--gold); color: var(--black);
+    font-weight: 900; font-size: 14px; margin-bottom: 12px;
+  }
+  .step p { font-size: 19px; font-weight: 700; line-height: 1.3; }
+
+  .cta-block { text-align: center; opacity: 0; animation: fadeUp 0.7s ease forwards 0.6s; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 100%; max-width: 420px;
+    padding: 18px 26px;
+    background: var(--gold); color: var(--black);
+    font-family: 'Figtree', sans-serif; font-weight: 800;
+    font-size: 15px; letter-spacing: 0.5px; text-transform: uppercase;
+    border-radius: 4px; text-decoration: none; transition: all 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:hover { background: var(--gold-bright); transform: translateY(-1px); }
+  .btn:active { transform: scale(0.98); }
+  .btn:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
+  .cta-note { margin-top: 14px; font-size: 14px; color: var(--grey); font-weight: 500; }
+
+  /* DEMO */
+  .demo { padding: 88px 24px 24px; }
+  .demo h2 {
+    font-size: clamp(28px, 5vw, 40px); font-weight: 800; letter-spacing: -0.02em;
+    text-align: center; line-height: 1.1; margin-bottom: 10px;
+  }
+  .demo .demo-sub {
+    text-align: center; color: var(--off-white); font-weight: 300;
+    max-width: 440px; margin: 0 auto 32px; font-size: 17px;
+  }
+
+  .phone-outer { display: flex; justify-content: center; }
+  .phone {
+    width: 360px; border-radius: 28px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: #e5ddd5;
+    display: flex; flex-direction: column;
+    height: 680px; overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(245,166,35,0.08);
+  }
+
+  .wa-head { background: #075e54; padding: 12px 16px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .wa-back { color: rgba(255,255,255,0.8); font-size: 18px; padding: 2px 4px; }
+  .wa-av {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), #FF8C00);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 14px; color: var(--black); flex-shrink: 0;
+  }
+  .wa-name { font-size: 14px; font-weight: 600; color: #fff; }
+  .wa-sub { font-size: 11px; color: rgba(255,255,255,0.65); }
+
+  .messages {
+    flex: 1; overflow-y: auto; padding: 10px;
+    display: flex; flex-direction: column; gap: 5px;
+    scroll-behavior: smooth;
+  }
+  .messages::-webkit-scrollbar { width: 3px; }
+  .messages::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
+
+  .bubble {
+    max-width: 82%; padding: 8px 12px; border-radius: 10px;
+    font-size: 13px; line-height: 1.5; word-break: break-word;
+  }
+  .bubble.in  { background: #fff; align-self: flex-start; border-top-left-radius: 2px; color: #111; }
+  .bubble.out { background: #d9fdd3; align-self: flex-end; border-top-right-radius: 2px; color: #111; }
+  .btime { font-size: 10px; color: rgba(0,0,0,0.38); text-align: right; margin-top: 3px; }
+  .bubble.out .btime { color: rgba(0,90,40,0.55); }
+
+  .divider {
+    align-self: center; font-size: 11px; color: rgba(0,0,0,0.45);
+    background: rgba(255,255,255,0.55); padding: 3px 10px;
+    border-radius: 10px; margin: 3px 0;
+  }
+
+  .dot-wrap {
+    background: #fff; align-self: flex-start; border-radius: 10px;
+    border-top-left-radius: 2px; padding: 9px 13px;
+    display: flex; gap: 4px; align-items: center;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: #bbb; animation: bop 1.2s infinite; }
+  .dot:nth-child(2) { animation-delay: .2s; }
+  .dot:nth-child(3) { animation-delay: .4s; }
+  @keyframes bop { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-4px); } }
+
+  /* THE MONEY SHOT */
+  .bubble.money {
+    align-self: stretch; max-width: 100%;
+    background: radial-gradient(circle at 50% 0%, #2a1c00 0%, #0a0a0a 70%);
+    border: 1px solid var(--gold);
+    border-radius: 14px;
+    text-align: center;
+    padding: 22px 14px 14px;
+    color: var(--white);
+    box-shadow: 0 0 28px rgba(245,166,35,0.35);
+    animation: pop 0.45s cubic-bezier(.2,1.4,.4,1);
+  }
+  .money-amount {
+    font-size: 54px; font-weight: 900; letter-spacing: -0.03em; line-height: 1;
+    color: var(--gold-bright);
+    font-variant-numeric: tabular-nums;
+  }
+  .money-sub { margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--off-white); }
+  .bubble.money .btime { color: rgba(255,255,255,0.35); }
+  @keyframes pop { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+  /* HAND-OFF PILL */
+  .open-pill {
+    display: block; width: 100%; margin-top: 8px;
+    background: var(--gold); color: #000; border: none; border-radius: 8px;
+    padding: 10px 12px; font-family: 'Figtree', sans-serif;
+    font-size: 12px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;
+    cursor: pointer; transition: background 0.15s;
+  }
+  .open-pill:hover { background: var(--gold-bright); }
+  .open-pill:disabled { opacity: 0.45; cursor: default; }
+
+  .qr-area { background: #ebebeb; padding: 6px 10px; display: flex; flex-wrap: wrap; gap: 5px; min-height: 10px; flex-shrink: 0; }
+  .qr {
+    background: #fff; border: 1px solid #25d366; color: #075e54;
+    border-radius: 16px; padding: 6px 13px; font-size: 12px; cursor: pointer;
+    font-family: 'Figtree', sans-serif; font-weight: 600; transition: background 0.15s;
+  }
+  .qr:hover { background: #eafcea; }
+  .qr.hot { background: #075e54; color: #fff; border-color: #075e54; }
+  .qr.hot:hover { background: #0a7a6c; }
+  .input-row { background: #ebebeb; padding: 7px 10px; display: flex; gap: 7px; align-items: center; flex-shrink: 0; }
+  .inp {
+    flex: 1; background: #ddd; border: none; border-radius: 20px;
+    padding: 7px 12px; font-size: 13px; font-family: 'Figtree', sans-serif; color: #999;
+  }
+  .send-btn {
+    width: 34px; height: 34px; border-radius: 50%; background: #25d366; border: none;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 16px; flex-shrink: 0; opacity: 0.6;
+  }
+
+  .demo-cta { text-align: center; padding: 40px 24px 0; }
+  .fine {
+    max-width: 520px; margin: 28px auto 0; padding: 0 24px 80px;
+    text-align: center; font-size: 12px; color: rgba(255,255,255,0.3); line-height: 1.6;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 48px 40px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    background: var(--black-2);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+  }
+  footer .links { display: flex; gap: 24px; flex-wrap: wrap; }
+  footer .links a { font-size: 13px; font-weight: 500; color: var(--grey); text-decoration: none; transition: color 0.2s; }
+  footer .links a:hover { color: var(--white); }
+  footer .copy { font-size: 12px; color: rgba(255,255,255,0.18); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 640px) {
+    nav { padding: 14px 20px; }
+    .hero { padding: 110px 20px 44px; }
+    .how, .demo { padding-left: 20px; padding-right: 20px; }
+    .steps { grid-template-columns: 1fr; }
+    .phone { width: 100%; max-width: 360px; }
+    footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero h1, .hero .sub, .steps, .cta-block { animation: none; opacity: 1; }
+    .bubble.money { animation: none; }
+    .dot { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="https://getcharged.energy">charged ⚡</a>
+  <a class="nav-cta" href="https://wa.me/447763375105?text=my%20holiday%20can%20pay%20my%20energy%20bill" target="_blank" rel="noopener">start saving</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <h1>YES. YOUR HOLIDAY CAN HELP PAY <span class="gold">YOUR ENERGY BILL.</span> ⚡️</h1>
+  <p class="sub">book with participating brands like <strong>expedia</strong> and get up to <strong>£200</strong> off your energy bill.</p>
+</header>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <p class="eyebrow">how it works:</p>
+  <div class="steps">
+    <div class="step"><span class="num">1</span><p>they pay us commission.</p></div>
+    <div class="step"><span class="num">2</span><p>we turn it into energy credit for you.</p></div>
+  </div>
+  <div class="cta-block">
+    <a class="btn" href="https://wa.me/447763375105?text=my%20holiday%20can%20pay%20my%20energy%20bill" target="_blank" rel="noopener">start saving on whatsapp →</a>
+    <p class="cta-note">no app. no subscription. just whatsapp. why would you not.</p>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="demo" id="demo">
+  <p class="eyebrow">try it</p>
+  <h2>see it in action</h2>
+  <p class="demo-sub">this is exactly how it works, right inside whatsapp. tap through it.</p>
+
+  <div class="phone-outer">
+    <div class="phone">
+      <div class="wa-head">
+        <div class="wa-back">&#8592;</div>
+        <div class="wa-av">C</div>
+        <div style="flex:1">
+          <div class="wa-name">charged ⚡️</div>
+          <div class="wa-sub">online</div>
+        </div>
+      </div>
+      <div class="messages" id="msgs" aria-live="polite"></div>
+      <div class="qr-area" id="qrs"></div>
+      <div class="input-row">
+        <input class="inp" placeholder="tap a button 👆" disabled aria-hidden="true" tabindex="-1" />
+        <span class="send-btn" aria-hidden="true">&#10148;</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo-cta">
+    <a class="btn" href="https://wa.me/447763375105?text=my%20holiday%20can%20pay%20my%20energy%20bill" target="_blank" rel="noopener">start saving on whatsapp →</a>
+  </div>
+</section>
+
+<p class="fine">demo uses example figures for illustration only. energy credit is added to your charged balance once the booking qualifies. rates and offers vary by brand and may change.</p>
+
+<footer>
+  <a class="logo" href="https://getcharged.energy">charged ⚡</a>
+  <div class="links">
+    <a href="https://getcharged.energy">home</a>
+    <a href="https://getcharged.energy/privacy">privacy policy</a>
+    <a href="https://getcharged.energy/terms">terms</a>
+    <a href="mailto:help@getcharged.energy">contact</a>
+  </div>
+  <p class="copy">© 2026 charged. all rights reserved.</p>
+</footer>
+
+<script>
+var busy = false;
+var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var STARTERS = ['☀️ 7 nights in marbella', '🏨 find me a hotel', "✈️ i'm planning a trip"];
+
+function t() {
+  var n = new Date();
+  return ('0' + n.getHours()).slice(-2) + ':' + ('0' + n.getMinutes()).slice(-2);
+}
+function msgsEl() { return document.getElementById('msgs'); }
+function scrollDown() { var el = msgsEl(); el.scrollTop = el.scrollHeight; }
+
+function addDivider(txt) {
+  var d = document.createElement('div');
+  d.className = 'divider'; d.textContent = txt;
+  msgsEl().appendChild(d);
+}
+
+function stamp(parent) {
+  var ts = document.createElement('div');
+  ts.className = 'btime'; ts.textContent = t();
+  parent.appendChild(ts);
+}
+
+function addBubble(who, txt, pill) {
+  var d = document.createElement('div');
+  d.className = 'bubble ' + (who === 'user' ? 'out' : 'in');
+  var p = document.createElement('div');
+  p.style.whiteSpace = 'pre-wrap'; p.textContent = txt;
+  d.appendChild(p);
+  if (pill) {
+    var b = document.createElement('button');
+    b.className = 'open-pill'; b.textContent = pill.label;
+    b.onclick = function () { if (busy || b.disabled) return; b.disabled = true; pill.onClick(); };
+    d.appendChild(b);
+  }
+  stamp(d);
+  msgsEl().appendChild(d);
+  scrollDown();
+}
+
+/* the money shot: counts up to £91.00 */
+function addMoney() {
+  var d = document.createElement('div');
+  d.className = 'bubble money in';
+  var amt = document.createElement('div');
+  amt.className = 'money-amount'; amt.textContent = '£0.00';
+  var sub = document.createElement('div');
+  sub.className = 'money-sub'; sub.textContent = 'towards your energy bill ⚡️';
+  d.appendChild(amt); d.appendChild(sub);
+  stamp(d);
+  msgsEl().appendChild(d);
+  scrollDown();
+  var target = 91;
+  if (REDUCED) { amt.textContent = '£91.00'; return; }
+  var start = null, dur = 900;
+  function tick(ts) {
+    if (start === null) start = ts;
+    var p = Math.min((ts - start) / dur, 1);
+    var eased = 1 - Math.pow(1 - p, 3);
+    amt.textContent = '£' + (target * eased).toFixed(2);
+    if (p < 1) requestAnimationFrame(tick); else amt.textContent = '£91.00';
+  }
+  requestAnimationFrame(tick);
+}
+
+function showDots() {
+  var d = document.createElement('div');
+  d.className = 'dot-wrap'; d.id = 'dots';
+  d.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+  msgsEl().appendChild(d); scrollDown();
+}
+function hideDots() { var el = document.getElementById('dots'); if (el) el.remove(); }
+
+function setQRs(arr, handler, hot) {
+  var qr = document.getElementById('qrs');
+  qr.innerHTML = '';
+  (arr || []).forEach(function (label) {
+    var b = document.createElement('button');
+    b.className = 'qr' + (hot ? ' hot' : ''); b.textContent = label;
+    b.onclick = function () { if (!busy) handler(label); };
+    qr.appendChild(b);
+  });
+}
+function clearQRs() { document.getElementById('qrs').innerHTML = ''; }
+
+function botSay(txt, delay, cb, pill) {
+  busy = true; showDots();
+  setTimeout(function () {
+    hideDots(); busy = false;
+    addBubble('charged', txt, pill);
+    if (cb) cb();
+  }, delay);
+}
+
+/* ---------- THE FLOW ---------- */
+
+/* screen 1: intent */
+function startDemo() {
+  busy = false;
+  msgsEl().innerHTML = '';
+  clearQRs();
+  addDivider('today');
+  botSay("going somewhere nice? 👀\n\ntell me what you're looking for and i'll see if we can get some of it knocked off your energy bill.", 700, function () {
+    setQRs(STARTERS, screen1);
+  });
+}
+
+function screen1(label) {
+  clearQRs(); addBubble('user', label);
+  if (label === STARTERS[0]) { screen2(); return; }
+  botSay("good shout 👀 for this demo, tap ☀️ 7 nights in marbella and i'll show you how it works.", 700, function () {
+    setQRs(STARTERS, screen1);
+  });
+}
+
+/* screen 2: charged finds expedia */
+function screen2() {
+  botSay("oh hello 👀\n\nexpedia's currently giving charged users 10% back in energy credit on eligible hotel bookings.\n\ni've found a marbella stay for:\n🏨 7 nights\n💰 £130/night\n🧾 £910 total\n\nwhich means...", 500, function () {
+    setQRs(['⚡ show me what i earn'], screen3, true);
+  });
+}
+
+/* screen 3: the money shot */
+function screen3(label) {
+  clearQRs(); addBubble('user', label);
+  busy = true; showDots();
+  setTimeout(function () {
+    hideDots(); busy = false;
+    addMoney();
+    botSay("yep. ninety-one quid.\n\nfor booking the holiday you were going to book anyway.", 1100, function () {
+      setQRs(['🔥 get my £91'], screen4, true);
+    });
+  }, 700);
+}
+
+/* screen 4: explain the tracking */
+function screen4(label) {
+  clearQRs(); addBubble('user', label);
+  botSay("easy.\n\nbook expedia through charged and we'll track the eligible booking.\n\nyou pay expedia: £910\nexpedia rewards the booking: 10%\nyour energy credit: £91 ⚡️\n\nonce the booking qualifies, the credit gets added to your charged balance.", 1000, function () {
+    setQRs(['🏖️ book with expedia →'], screen5, true);
+  });
+}
+
+/* screen 5: expedia hand-off */
+function screen5(label) {
+  clearQRs(); addBubble('user', label);
+  botSay("off you go ✈️\n\njust make sure you book through this link so we can track it.\n\n£91 energy credit is a lot better than another loyalty point you'll forget exists.", 900, null, {
+    label: 'open expedia →',
+    onClick: function () {
+      botSay("come back when you've booked ⚡️", 600, function () {
+        setQRs(['↺ replay the demo'], startDemo);
+      });
+    }
+  });
+}
+
+startDemo();
+</script>
+</body>
+</html>
