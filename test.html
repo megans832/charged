@@ -767,7 +767,7 @@ function startOffers() {
     setQRs(['yes — show me'], function() {
       clearQRs(); addBubble('user','yes — show me');
       dbLog('insert', 'message_queue', 'body="yes" | status=queued', '📨');
-      botSay('here\'s what\'s live for you:\n\n1️⃣ tesco — 4% energy bill credit\n2️⃣ boots — 6% energy bill credit\n3️⃣ amazon — 3% energy bill credit\n\nall auto-activated on your linked card 👌', 900, function() {
+      botSay('here\'s what\'s live for you:\n\n1️⃣ tesco — 4% energy bill credit\n2️⃣ boots — 6% energy bill credit\n3️⃣ amazon — 3% energy bill credit\n\njust shop at these partner brands 👌', 900, function() {
         setQRs(['browse by category','find a specific brand','check my balance'], offersReply);
       });
     });
@@ -1032,11 +1032,11 @@ function doSend() {
     dbLog('read', 'offers', 'retailer_name ILIKE "'+v+'" | active=true', '🔍');
     var lv = v.toLowerCase();
     if (['nike','asos','next','zara'].indexOf(lv) >= 0) {
-      botSay(v+' isn\'t a card-linked partner yet — but we have an affiliate link with 5% energy bill credit 🙌\n\nhead to getcharged.energy/offers to grab your tracked link', 900, function() {
+      botSay(v+' isn\'t a partner brand yet — but we have an affiliate link with 5% energy bill credit 🙌\n\nhead to getcharged.energy/offers to grab your tracked link', 900, function() {
         setQRs(['browse by category','check my balance'], offersReply);
       });
     } else {
-      botSay('checking '+v+' for live offers... 🔍\n\nno card-linked deal for '+v+' right now — but it\'s been noted and we\'ll add it when we can 👌', 900, function() {
+      botSay('checking '+v+' for live offers... 🔍\n\nno partner brand deal for '+v+' right now — but it\'s been noted and we\'ll add it when we can 👌', 900, function() {
         dbLog('insert', 'user_brand_requests', 'user=CHG-00001 | brand="'+v+'" | source=chat', '✏️');
         setQRs(['browse by category','check my balance'], offersReply);
       });
