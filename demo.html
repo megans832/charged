@@ -571,7 +571,7 @@ function loadFlow(name) {
 
 function startOnboarding() {
   addDivider('today');
-  botSay('you made it 👏 welcome to the charged inner circle\n\nyou\'re in early & we want to build with you 🧰\n\nwhy we were born 👶:\nenergy bills are rising and savings tools are a faff. we\'re fixing both 🔧\n\nnative to whatsapp 📱\ncharged lives in whatsapp — just message us before any big spend and we\'ll tell you how much you can save 👀\n\nenergy transfer ⚡:\nenergy bill credit goes straight to your energy account as non-refundable credit 💸\n\nthe finished article:\n🔗 link your card once\n🛍️ spend as normal\n⚡ credit lands in your energy account\n\nstart building with us — reply and tell us:\n⚡ who is your energy provider?\n🛒 top 5 brands you spend with?\n\nwe\'ll keep you updated with our build and launch 🚀 (no spam here)', 1200, function() {
+  botSay('you made it 👏 welcome to the charged inner circle\n\nyou\'re in early & we want to build with you 🧰\n\nwhy we were born 👶:\nenergy bills are rising and savings tools are a faff. we\'re fixing both 🔧\n\nnative to whatsapp 📱\ncharged lives in whatsapp — just message us before any big spend and we\'ll tell you how much you can save 👀\n\nenergy transfer ⚡:\nenergy bill credit goes straight to your energy account as non-refundable credit 💸\n\nthe finished article:\n🛍️ shop at partner brands\n💸 spend as normal\n⚡ credit lands in your energy account\n\nstart building with us — reply and tell us:\n⚡ who is your energy provider?\n🛒 top 5 brands you spend with?\n\nwe\'ll keep you updated with our build and launch 🚀 (no spam here)', 1200, function() {
     botSay('first up — who\'s your energy provider? 👇', 700, function() {
       setQRs(PROVIDERS, function(p) {
         clearQRs(); addBubble('user', p);
@@ -669,7 +669,7 @@ function startOffers() {
   botSay('⚡ 3 new offers just dropped — say yes to see them', 800, function() {
     setQRs(['yes'], function() {
       clearQRs(); addBubble('user','yes');
-      botSay('here\'s what\'s live for you:\n\n1️⃣ tesco — 4% energy bill credit\n2️⃣ boots — 6% energy bill credit\n3️⃣ amazon — 3% energy bill credit\n\nall auto-activated on your linked card 👌', 900, function() {
+      botSay('here\'s what\'s live for you:\n\n1️⃣ tesco — 4% energy bill credit\n2️⃣ boots — 6% energy bill credit\n3️⃣ amazon — 3% energy bill credit\n\njust shop at these partner brands 👌', 900, function() {
         setQRs(['choose a category','find me a brand','check my balance'], offersReply);
       });
     });
@@ -704,11 +704,11 @@ function doSend() {
     disableInp(); addBubble('user', v);
     var lv = v.toLowerCase();
     if (lv==='nike' || lv==='asos' || lv==='next' || lv==='zara') {
-      botSay(v + ' isn\'t a card-linked partner yet — but we have an affiliate link with 5% energy bill credit 🙌\n\nhead to getcharged.energy/offers to grab your tracked link', 900, function() {
+      botSay(v + ' isn\'t a partner brand yet — but we have an affiliate link with 5% energy bill credit 🙌\n\nhead to getcharged.energy/offers to grab your tracked link', 900, function() {
         setQRs(['find another brand','check my balance'], offersReply);
       });
     } else {
-      botSay('checking ' + v + ' for live offers... 🔍\n\nwe don\'t have a card-linked deal for ' + v + ' right now — but it\'s been noted and we\'ll add it when we can 👌', 900, function() {
+      botSay('checking ' + v + ' for live offers... 🔍\n\nwe don\'t have a partner brand deal for ' + v + ' right now — but it\'s been noted and we\'ll add it when we can 👌', 900, function() {
         setQRs(['find another brand','check my balance'], offersReply);
       });
     }
